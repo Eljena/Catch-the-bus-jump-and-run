@@ -1,29 +1,59 @@
-body {
-  background-image: url("../images/palebluedot.jpg");
-  background-color: black;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: right top;
+/**Eigene Schriftart einbinden*/
+@font-face {
+    font-family: 'RetroGaming';
+    src: url("../fonts/RetroGaming.ttf") format('truetype');
+
 }
 
-div.poem {
-  display: inline-block;
-  width: 63%;
-  margin: 70px;
-  padding: 20px;
-  border:1px solid black;
-  background: rgba(255,255,255,0.4);
-  font-weight: bold;
+body{
+    font-family: 'RetroGaming', sans-serif;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: lightblue;
 }
 
-p {
-  text-align: center;
+/*****Start-Button stylen****/
+.centerContainer{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+#startButton{
+    /**Layout*/
+    width: 170px;
+    height: 50px;
+
+    /**Textstyle*/
+    font-family: 'RetroGaming', sans-serif;
+    font-weight: bold;
+    font-size: 32px;
+    color: white;
+    text-transform: uppercase;
+    background-color: #8a1a05;
+    border-radius: 10px;
+    box-shadow: 2px 3px 5px black;
+
 }
 
-p.attribution {
-  font-style: italic;
-  margin-top: 40px;
-  margin-right: 40px;
-  font-weight: normal;
-  text-align: right;
+#startButton:hover{
+    cursor: pointer;
+
+}
+
+/**Buttons links anordnen: Start-Szene*/
+.leftContainer{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+/**Buttons rechts anordnen: Start-Szene*/
+.rightContainer{
+    position: absolute;
+    top: 0;
+    right: 0;
 }
