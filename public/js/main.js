@@ -3,7 +3,7 @@
  */
 const config = {
     type: Phaser.AUTO,
-    width: 900,
+    width: 1000,
     height: 600,
     scene: [
         StartScene, // Füge die Startszene hinzu
@@ -14,7 +14,7 @@ const config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 300 },
+            gravity: { y: 300 },   //umso hoeher y, desto schneller faellt der Spieler auf den Boden
             debug: false
         }
     }
