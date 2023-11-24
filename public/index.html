@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/style.css">
-    <title>Jump and Run</title>
+    <title>RMA Game</title>
 </head>
 <body>
     <!--Der Canvas, auf dem das Spiel gerendert wird-->
@@ -13,36 +13,27 @@
     <script src="js/phaser.min.js"></script>
 
     <!--Einbinden der einzelnen Szenen-->
-    <script src="js/StartScene.js"></script>
-    <script src="js/GameScene.js"></script>
-    <script src="js/LevelScene.js"></script>
+    <script src="js/scenes/StartScene.js"></script>
+    <script src="js/scenes/GameScene.js"></script>
+    <script src="js/scenes/LevelScene.js"></script>
+    <script src="js/scenes/PauseScene.js"></script>
+    <script src="js/scenes/WinScene.js"></script>
+    <script src="js/scenes/LooseScene.js"></script>
 
 
     <!--Einbinden des Spielkonfigurationsskripts-->
     <script src="js/main.js"></script>
 
-    <div class="centerContainer">
-        <button id="startButton">Start</button>
-    </div>
-
-    <div class="leftContainer">
-        <!--Button zum Anzeigen von Informationen-->
-        <button id="infoButton">info</button>
-        <!--Button zum Anzeigen der Bedienung der Tasten-->
-        <button id="controllerButton">Controls</button>
-    </div>
-
-    <div class="rightContainer">
-        <!--Buttons zum Stummschalten der Musik/Sounds -->
-        <button id="soundButton">Sound</button>
-        <button id="musicButton">Music</button>
-    </div>
 
 
 
 
+
+    <!----------Controller-Klassen---------->
 
     <!--Einbinden der Scene-Controller Klasse-->
-    <script src="js/sceneController.js"></script>
+    <script src="js/controller/sceneController.js"></script>
+    <!--Einbinden der Input-Controller Klasse-->
+    <script src="js/controller/inputController.js"></script>
 </body>
 </html>

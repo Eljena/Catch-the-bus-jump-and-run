@@ -17,12 +17,6 @@ body{
 }
 
 /*****Start-Button stylen****/
-.centerContainer{
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-}
 #startButton{
     /**Layout*/
     width: 170px;
@@ -34,9 +28,10 @@ body{
     font-size: 32px;
     color: white;
     text-transform: uppercase;
-    background-color: #8a1a05;
+    background-color: #FD3636;
     border-radius: 10px;
-    box-shadow: 2px 3px 5px black;
+    border: none;
+    box-shadow: 2px 3px 10px black;
 
 }
 
@@ -45,15 +40,20 @@ body{
 
 }
 
+
+.centerContainer{
+
+}
+
 /**Buttons links anordnen: Start-Szene*/
 .leftContainer{
-    position: absolute;
-    top: 0;
-    left: 0;
+    top: 25%;
+    left: 25%;
+    transform: translateY(-50%);
 }
 /**Buttons rechts anordnen: Start-Szene*/
 .rightContainer{
-    position: absolute;
-    top: 0;
-    right: 0;
+    top: 25%;
+    right: 25%;
+    transform: translateY(-50%);
 }

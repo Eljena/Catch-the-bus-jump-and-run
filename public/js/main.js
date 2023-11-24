@@ -1,6 +1,7 @@
 /**
  * Hier werden die Grundelemente des Spiels definiert
  */
+
 const config = {
     type: Phaser.AUTO,
     width: 1000,
@@ -8,13 +9,16 @@ const config = {
     scene: [
         StartScene, // Füge die Startszene hinzu
         GameScene,  // Füge die GameScene hinzu
-        LevelScene  // Füge die LevelScene hinzu
+        LevelScene,  // Füge die LevelScene hinzu
+        PauseScene,  // Füge die PauseScene hinzu
+        WinScene,  // Füge die WinScene hinzu
+        LooseScene  // Füge die LooseScene hinzu
     ],
     backgroundColor: '#898080',
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 300 },   //umso hoeher y, desto schneller faellt der Spieler auf den Boden
+            gravity: { y: 400 },   //umso hoeher y, desto schneller faellt der Spieler auf den Boden
             debug: false
         }
     }

@@ -1,0 +1,91 @@
+update() {
+        /**Kamera*/
+        const cam = this.cameras.main;
+
+        /**Hintergrund*/
+            // zum Skalieren der Geschwindigkeit des Hintergrunds
+        const skySpeed = 3;
+        const treeSpeed = 6;
+
+        /**Steuerungselemente*/
+        const cursors = this.input.keyboard.createCursorKeys();
+        const keyboard = this.input.keyboard;
+        const moveSpeed = 160;
+        const jumpSpeed = 200;
+
+        if(this.moveCam) {
+            if(cursors.left.isDown || keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A).isDown) {
+                cam.scrollX -= 4;
+            } else if(cursors.right.isDown || keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D).isDown) {
+                cam.scrollX += 4;
+            } else if(cursors.up.isDown || keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W).isDown) {
+                cam.scrollY -= 4;
+            }
+        } else {
+            // Bewegung mit Pfeiltasten oder den WASD-Tasten
+            if(cursors.left.isDown || keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A).isDown) {
+                this.player.setVelocityX(-moveSpeed);  // Links
+                this.bg.tilePositionX -= skySpeed;
+                this.trees.tilePositionX -= treeSpeed;
+            } else if (cursors.right.isDown || keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D).isDown) {
+                this.player.setVelocityX(moveSpeed);   // Rechts
+                this.bg.tilePositionX += skySpeed;
+                this.trees.tilePositionX += treeSpeed;
+            } else {
+                this.player.setVelocityX(0);
+            }
+
+            // Springen und Doppel-Springen
+            if (this.player.body.onFloor()) {
+                canJump = true;
+            }
+
+            /**TO-DO Doppelsprung*/
+            if ((cursors.up.isDown || keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W).isDown) && canJump) {
+                this.player.setVelocityY(-jumpSpeed);  // Springen
+                canJump = false;
+            }
+        }
+
+
+
+        /**Kamera*/
+                //Hier wird die Begrenzung der Kamera festgelegt d.h. welcher Spielbereich durch die Kamera sichtbar ist
+                this.cameras.main.setBounds(0, 0, 720 * 2, 176);
+
+                //Hier wird festgelegt, dass die Kamera dem Player folgt (1. Argument)*
+                //Ebenso wird festgelegt, dass die Kamera das Zielobjekt in der Mitte des Bildschirms hält (2. Argument)
+                this.cameras.main.startFollow(this.player, true);
+
+                //Hier wird der Zoom der Kamera auf 2 festgelegt
+                //umso groesser der Wert, desto groesser der sichtbare Bereich der Kamera
+                this.cameras.main.setZoom(2);
+
+
+<div class="centerContainer">
+            <button id="startButton">Start</button>
+        </div>
+
+        <div class="leftContainer">
+            <!--Button zum Anzeigen von Informationen-->
+            <button id="infoButton">info</button>
+            <!--Button zum Anzeigen der Bedienung der Tasten-->
+            <button id="controllerButton">Controls</button>
+        </div>
+
+        <div class="rightContainer">
+            <!--Buttons zum Stummschalten der Musik/Sounds -->
+            <button id="soundButton">Sound</button>
+            <button id="musicButton">Music</button>
+        </div>
+
+
+/**Start Button TO DO andere Loesung?*/
+        //Start-button wird unsichtbar gemacht
+        const startButton = document.getElementById('startButton');
+        startButton.style.display = 'none';
+
+
+        document.getElementById('startButton').addEventListener('click', function(){
+            switchScene('GameScene');
+        });
