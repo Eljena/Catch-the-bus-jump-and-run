@@ -15,7 +15,7 @@ const config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 400 },   //umso hoeher y, desto schneller faellt der Spieler auf den Boden
+            gravity: { y: 300 },   //umso hoeher y, desto schneller faellt der Spieler auf den Boden
             debug: false
         }
     }

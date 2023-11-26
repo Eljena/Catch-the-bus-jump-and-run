@@ -21,21 +21,38 @@ const handleCamera = (cam, cursors, keyboard) => {
     const moveCam = true;
 
     if(moveCam){
-        //TODO
+        /**TODO Kamerabewegung -> Spieler soll immer in Mitte des Spielfeldes zu sehen sein*/
     }
 }
 
-const handlePlayerMovement = (player, cursors, keyboard,
-                              moveSpeed, skySpeed, treeSpeed, jumpSpeed) => {
-    if(cursors.left.isDown || keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A).isDown){
-        player.setVelocityX(-moveSpeed);    //Links
-        // weitere Bewegungen fuer Hintergrundelemente hier -> bg, sky, tree
-    } else if(cursors.right.isDown || keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D).isDown){
-        player.setVelocityX(moveSpeed); //Rechts
-        // weitere Bewegungen fuer Hintergrundelemente hier -> bg, sky, tree
-    } else if((cursors.up.isDown || keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W).isDown) && player.body.onFloor()){
-        player.setVelocityY(-jumpSpeed);  // Springen
+
+/**Tastatureingabe handeln*/
+const handlePlayerMovement = (player, cursors, keyboard) => {
+
+    const keys = {
+        left: cursors.left,
+        right: cursors.right,
+        up: cursors.up
+    };
+
+    const wasd = {
+        leftA: keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A),
+        rightD: keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D),
+        upW: keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W)
+    };
+
+    const { left, right, up } = keys;
+    const { leftA, rightD, upW } = wasd;
+
+    if (left.isDown || leftA.isDown) {
+        player.setVelocityX(-160);
+    } else if (right.isDown || rightD.isDown) {
+        player.setVelocityX(160);
     } else {
         player.setVelocityX(0);
+    }
+
+    if ((up.isDown || upW.isDown) && player.body.touching.down) {
+        player.setVelocityY(-330);
     }
 }

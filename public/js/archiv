@@ -89,3 +89,28 @@ update() {
         document.getElementById('startButton').addEventListener('click', function(){
             switchScene('GameScene');
         });
+
+
+
+// Hintergrundklick zum Schließen des Modals
+       this.modalBackground.on('pointerdown', () => {
+           console.log("Hintergrund geklickt");
+           this.hideModal();
+
+       });
+
+
+
+
+
+if(cursors.left.isDown || keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A).isDown){
+        player.setVelocityX(-moveSpeed);    //Links
+        // weitere Bewegungen fuer Hintergrundelemente hier -> bg, sky, tree
+    } else if(cursors.right.isDown || keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D).isDown){
+        player.setVelocityX(moveSpeed); //Rechts
+        // weitere Bewegungen fuer Hintergrundelemente hier -> bg, sky, tree
+    } else if((cursors.up.isDown || keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W).isDown) && player.body.onFloor()){
+        player.setVelocityY(-jumpSpeed);  // Springen
+    } else {
+        player.setVelocityX(0);
+    }
