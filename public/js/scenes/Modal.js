@@ -15,6 +15,22 @@ class Modal extends Phaser.GameObjects.Container {
         this.modalBackground.on('pointerdown', () => {
             this.setVisible(false);
         });
+
+        //Modal-Fenster
+        this.modalWindow = scene.add.graphics();
+        this.modalWindow.fillStyle(0xFD3636, 1);
+        this.modalWindow.fillRect(200, 100, 600, 400);
+        this.add(this.modalWindow);
+
+        //Schliessen Schaltflaeche
+        this.closeButton = scene.add.text(750, 120, 'X', {fontSize: '24px', fill: '#ffffff'});
+        this.closeButton.setInteractive({useHandCursor: true});
+        this.add(this.closeButton);
+
+        // Schliessen EventHandler
+        this.closeButton.on('pointerdown', () => {
+            this.hideModal();
+        });
     }
 
     showModal(){
