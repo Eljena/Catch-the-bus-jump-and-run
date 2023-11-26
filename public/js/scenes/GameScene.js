@@ -29,6 +29,7 @@ class GameScene extends Phaser.Scene {
         this.bg = this.add.tileSprite(0, -100, 1000, 600, 'sky').setOrigin(0, 0);
         this.trees = this.add.tileSprite(0, 140, 1000, 600, 'trees').setOrigin(0, 0);
 
+
         /**Spieler*/
         //Spielfigur erstellen
         player = this.physics.add.sprite(100, 400, 'player');  //"player" (Name des Bildes fuer Player)

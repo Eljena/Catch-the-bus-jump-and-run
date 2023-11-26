@@ -9,10 +9,7 @@ const config = {
     scene: [
         StartScene, // Füge die Startszene hinzu
         GameScene,  // Füge die GameScene hinzu
-        LevelScene,  // Füge die LevelScene hinzu
-        PauseScene,  // Füge die PauseScene hinzu
-        WinScene,  // Füge die WinScene hinzu
-        LooseScene  // Füge die LooseScene hinzu
+        LevelScene  // Füge die LevelScene hinzu
     ],
     backgroundColor: '#898080',
     physics: {

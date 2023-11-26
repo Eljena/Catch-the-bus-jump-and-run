@@ -1,5 +1,3 @@
-//import {switchScene} from "../controller/sceneController";
-
 class StartScene extends Phaser.Scene{
     constructor() {
         super({key: 'StartScene'});
@@ -25,6 +23,12 @@ class StartScene extends Phaser.Scene{
         const height = this.sys.game.config.height;
         background.setDisplaySize(width, height);
 
+        //const style = { font: "bold 32px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" };
+
+        /**Spielueberschrift*/
+        //const title = this.add.text(100, 100, "Test", { fontSize: '32px', fill: '#fff' }); // Beispiel-Stil
+
+
         /*****Menue Buttons ***/
         //Start Button
         const startButton = this.add.image(500, 300, 'startButton').setInteractive({useHandCursor: true});
@@ -36,12 +40,20 @@ class StartScene extends Phaser.Scene{
         //Info Button
         const infoButton = this.add.image(100,50, 'infoButton');
         handleButtons(infoButton, () => {
+            const infoModal = new InfoModal(this,10,10);
+            this.add.existing(infoModal);
+            infoModal.showModal();
+
             console.log('Info-button wurde geklickt');
         });
 
         //Control Button
         const controlButton = this.add.image(200,50, 'controlButton');
         handleButtons(controlButton, () =>{
+            const controlModal = new ControlModal(this,10,10);
+            this.add.existing(controlModal);
+            controlModal.showModal();
+
             console.log('Control-button wurde geklickt');
         });
 
