@@ -18,6 +18,9 @@ class StartScene extends Phaser.Scene{
         this.load.image('controlButton', 'images/controlBtn.png');
         this.load.image('soundButton', 'images/soundBtn.png');
         this.load.image('musicButton', 'images/musicBtn.png');
+
+        this.load.image('noMusicButton', 'images/noMusicBtn.png');
+        this.load.image('noSoundButton', 'images/noSoundBtn.png');
     }
 
     //Hier wird die Logik fuer die Startszene initiliasiert
@@ -44,7 +47,8 @@ class StartScene extends Phaser.Scene{
         const startButton = this.add.image(500, 300, 'startButton').setInteractive({useHandCursor: true});
         handleButtons(startButton, () => {
             if(!modalActive){
-                switchScene('GameScene');
+                this.scene.start('GameScene');
+                //switchScene('GameScene');
                 console.log('Start-button wurde geklickt');
             }
 
@@ -87,9 +91,21 @@ class StartScene extends Phaser.Scene{
         });
 
         //Music Button
-        const musicButton = this.add.image(900,50, 'musicButton');
+        //const musicButton = this.add.image(900,50, 'musicButton');
+
+        const buttonImages = ['musicButton', 'noMusicBtn'];
+        let currentButtonImageIndex = 0;
+
+        const musicButton = this.add.image(900, 50, buttonImages[currentButtonImageIndex]);
+
         handleButtons(musicButton, () =>{
             if(!modalActive){
+                // Toggle zwischen den Bildern
+                currentButtonImageIndex = (currentButtonImageIndex + 1) % buttonImages.length;
+
+                // Setze das Bild des Buttons entsprechend dem Index im Array
+                musicButton.setTexture(buttonImages[currentButtonImageIndex]);
+
                 console.log('Musik Button wurde geklickt')
             }
 

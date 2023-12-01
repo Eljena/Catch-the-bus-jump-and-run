@@ -7,7 +7,12 @@
 function switchScene(sceneName){
     if(sceneName === 'GameScene'){
         game.scene.start('GameScene');
-    } else {
+    } else if(sceneName === 'StartScene') {
+        console.log("Wechsel zu Startszene");
+    } else if(sceneName === 'LevelScene'){
+        console.log("Wechsel zu Levelszene");
+    }
+    else{
         console.log('Wird zu andere Szene geswitcht...');
     }
 }

@@ -1,9 +1,10 @@
-let player = this.player;
-class GameScene extends Phaser.Scene {
-
+/**
+ * In dieser Szene wird das Spiel dargestellt*/
+class GameScene extends Phaser.Scene{
     constructor() {
         super({ key: 'GameScene' });
         this.moveCam = false;
+
     }
 
     // Hier werden die Ressourcen für die Startszene geladen
@@ -42,10 +43,10 @@ class GameScene extends Phaser.Scene {
 
         /**Spieler*/
         //Spielfigur erstellen
-        player = this.physics.add.sprite(100, 400, 'player');  //"player" (Name des Bildes fuer Player)
-        player.setScale(5);   //Hier wird die Grosse des Spielers veraendert/gesetzt -> 1 = urspruengliche Groesse
-        player.setBounce(0.2);  //sorgt dafuer, dass etwas abprallt beim Springen
-        player.setCollideWorldBounds(true); //sorgt dafuer, dass der Spieler mit der Spielfeldgrenze kollidiert
+        this.player = this.physics.add.sprite(100, 400, 'player');  //"player" (Name des Bildes fuer Player)
+        this.player.setScale(5);   //Hier wird die Grosse des Spielers veraendert/gesetzt -> 1 = urspruengliche Groesse
+        this.player.setBounce(0.2);  //sorgt dafuer, dass etwas abprallt beim Springen
+        this.player.setCollideWorldBounds(true); //sorgt dafuer, dass der Spieler mit der Spielfeldgrenze kollidiert
 
         /**Pause Button*/
         const pauseButton = this.add.image(950, 55,'pauseButton');
@@ -82,7 +83,5 @@ class GameScene extends Phaser.Scene {
         handlePlayerMovement(player, cursors, keyboard, moveSpeed, skySpeed, treeSpeed, jumpSpeed);
     }
 
-
-    
 
 }
