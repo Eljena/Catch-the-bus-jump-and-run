@@ -17,15 +17,6 @@ const handleButtons = (button, onClick) =>{
     });
 }
 
-const handleCamera = (cam, cursors, keyboard) => {
-    const moveCam = true;
-
-    if(moveCam){
-        /**TODO Kamerabewegung -> Spieler soll immer in Mitte des Spielfeldes zu sehen sein*/
-    }
-}
-
-
 /**Tastatureingabe handeln*/
 const handlePlayerMovement = (player, cursors, keyboard) => {
 
@@ -52,7 +43,7 @@ const handlePlayerMovement = (player, cursors, keyboard) => {
         player.setVelocityX(0);
     }
 
-    if ((up.isDown || upW.isDown) && player.body.touching.down) {
+    if ((up.isDown || upW.isDown) && player.body.onFloor()) {
         player.setVelocityY(-330);
     }
 }

@@ -18,9 +18,10 @@ class StartScene extends Phaser.Scene{
         this.load.image('controlButton', 'images/controlBtn.png');
         this.load.image('soundButton', 'images/soundBtn.png');
         this.load.image('musicButton', 'images/musicBtn.png');
-
         this.load.image('noMusicButton', 'images/noMusicBtn.png');
         this.load.image('noSoundButton', 'images/noSoundBtn.png');
+
+        this.load.image('controllerInfo', 'images/controller.png');
     }
 
     //Hier wird die Logik fuer die Startszene initiliasiert
@@ -44,7 +45,7 @@ class StartScene extends Phaser.Scene{
         /*****Menue Buttons ***/
 
         //Start Button
-        const startButton = this.add.image(500, 300, 'startButton').setInteractive({useHandCursor: true});
+        const startButton = this.add.image(500, 300, 'startButton');
         handleButtons(startButton, () => {
             if(!modalActive){
                 this.scene.start('GameScene');
@@ -82,33 +83,52 @@ class StartScene extends Phaser.Scene{
         });
 
         //Sound Button
+        let soundButtonActive = true;
+        //let soundButton;
+
+
         const soundButton = this.add.image(800,50, 'soundButton');
+        function toggleSoundButton(){
+            soundButtonActive = !soundButtonActive;
+            if(soundButtonActive){
+                soundButton.setTexture('soundButton');
+                console.log('Sound Button wurde geklickt');
+                //TODO Logik Sounds
+            }else{
+                soundButton.setTexture('noSoundButton');
+                console.log("Ohne Sound Button wurde geklickt");
+                //TODO Logik fuer Deaktivieren der Sounds
+            }
+        }
         handleButtons(soundButton, () =>{
             if(!modalActive){
-                console.log('Sound Button wurde geklickt');
+                toggleSoundButton();
             }
 
         });
 
         //Music Button
-        //const musicButton = this.add.image(900,50, 'musicButton');
+        let musicButtonActive = true;
+        let musicButton;
 
-        const buttonImages = ['musicButton', 'noMusicBtn'];
-        let currentButtonImageIndex = 0;
+        function toggleMusicButton() {
+            musicButtonActive = !musicButtonActive;
+            if (musicButtonActive) {
+                musicButton.setTexture('musicButton');
+                console.log('Musik Button wurde geklickt');
+                // TODO Hier die Logik für das Aktivieren der Musik hinzufuegen
+            } else {
+                musicButton.setTexture('noMusicButton');
+                console.log('Ohne Musik Button wurde geklickt');
+                // TODO Hier die Logik für das Deaktivieren der Musik hinzufuegen
+            }
+        }
 
-        const musicButton = this.add.image(900, 50, buttonImages[currentButtonImageIndex]);
-
+        musicButton = this.add.image(900, 50, 'musicButton').setInteractive({ useHandCursor: true });
         handleButtons(musicButton, () =>{
             if(!modalActive){
-                // Toggle zwischen den Bildern
-                currentButtonImageIndex = (currentButtonImageIndex + 1) % buttonImages.length;
-
-                // Setze das Bild des Buttons entsprechend dem Index im Array
-                musicButton.setTexture(buttonImages[currentButtonImageIndex]);
-
-                console.log('Musik Button wurde geklickt')
+                toggleMusicButton();
             }
-
         });
 
 

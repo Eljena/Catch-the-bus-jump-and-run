@@ -27,11 +27,14 @@ class GameScene extends Phaser.Scene{
 
     // Hier wird die Logik für die Gameszene initialisiert
     create() {
+        //Fenstergroesse des Spiels
+        const width = this.sys.game.config.width;
+        const height = this.sys.game.config.width;
 
         /**Hintergrund*/
         //Hintergrund erstellen
-        this.bg = this.add.tileSprite(0, -100, 1000, 600, 'sky').setOrigin(0, 0);
-        this.trees = this.add.tileSprite(0, 140, 1000, 600, 'trees').setOrigin(0, 0);
+        this.bg = this.add.tileSprite(0, 0, width, height, 'sky').setOrigin(0, 0);
+        this.trees = this.add.tileSprite(0, 0, width, height, 'trees').setOrigin(0, 0);
 
         /**Lvl Title -> Level Nr. dynamisch*/
         this.levelNr = this.add.text(40,30, "Level 1", {fontSize: "52px", fill: "#000000", fontWeight: "bold"});
@@ -43,10 +46,14 @@ class GameScene extends Phaser.Scene{
 
         /**Spieler*/
         //Spielfigur erstellen
-        this.player = this.physics.add.sprite(100, 400, 'player');  //"player" (Name des Bildes fuer Player)
+        this.player = this.physics.add.sprite(width / 2, height, 'player');  //"player" (Name des Bildes fuer Player)
         this.player.setScale(5);   //Hier wird die Grosse des Spielers veraendert/gesetzt -> 1 = urspruengliche Groesse
         this.player.setBounce(0.2);  //sorgt dafuer, dass etwas abprallt beim Springen
         this.player.setCollideWorldBounds(true); //sorgt dafuer, dass der Spieler mit der Spielfeldgrenze kollidiert
+
+        /**Kamera*/
+        this.cameras.main.setBounds(0,0, width, height);
+        this.cameras.main.startFollow(this.player);
 
         /**Pause Button*/
         const pauseButton = this.add.image(950, 55,'pauseButton');
@@ -65,13 +72,14 @@ class GameScene extends Phaser.Scene{
 
     // Hier wird das Spiel in jedem Frame aktualisiert
     update() {
-        /**Kamera*/
-        const cam = this.cameras.main;
 
         /**Hintergrund*/
         // zum Skalieren der Geschwindigkeit des Hintergrunds
-        const skySpeed = 3;
-        const treeSpeed = 6;
+        const skySpeed = 0;  //3
+        const treeSpeed = 0;  //6
+
+        this.bg.tilePositionX += skySpeed;
+        this.trees.tilePositionX += treeSpeed;
 
         /**Steuerungselemente*/
         const cursors = this.input.keyboard.createCursorKeys();
@@ -79,8 +87,11 @@ class GameScene extends Phaser.Scene{
         const moveSpeed = 160;
         const jumpSpeed = 200;
 
-        handleCamera(cam, cursors, keyboard);
-        handlePlayerMovement(player, cursors, keyboard, moveSpeed, skySpeed, treeSpeed, jumpSpeed);
+        handlePlayerMovement(this.player, cursors, keyboard, moveSpeed, skySpeed, treeSpeed, jumpSpeed);
+
+        // Kamerabewegung entsprechend der Spielerbewegung anpassen
+        this.cameras.main.scrollX = this.player.x - this.cameras.main.width * 0.5;
+        this.cameras.main.scrollY = this.player.y - this.cameras.main.height * 0.5 - 50;
     }
 
 

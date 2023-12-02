@@ -7,7 +7,7 @@ const config = {
     width: 1000,
     height: 600,
     scene: [
-        PreloadScene, //Füge die Preloasszene hinzu
+        PreloadScene, //Füge die Preloadszene hinzu
         StartScene, // Füge die Startszene hinzu
         GameScene,  // Füge die GameScene hinzu
         LevelScene  // Füge die LevelScene hinzu
