@@ -1,3 +1,4 @@
+
 /**
  * In dieser Szene wird das Spiel dargestellt*/
 class GameScene extends Phaser.Scene{
@@ -9,27 +10,14 @@ class GameScene extends Phaser.Scene{
 
     // Hier werden die Ressourcen für die Startszene geladen
     preload() {
-        /**Hintergrund*/
-        //Sky-Bild laden
-        this.load.image('sky', 'images/sky.png');
-        //Tree-Bild laden
-        this.load.image('trees', 'images/trees.png');
-
-        /**Spieler*/
-        //Player-Bild laden
-        this.load.image('player', 'images/player.png');
-
-        /**Pause-Button*/
-        this.load.image('pauseButton', 'images/pauseBtn.png');
-
-
+        //In PreloadScene ausgelagert
     }
 
     // Hier wird die Logik für die Gameszene initialisiert
     create() {
         //Fenstergroesse des Spiels
         const width = this.sys.game.config.width;
-        const height = this.sys.game.config.width;
+        const height = this.sys.game.config.height;
 
         /**Hintergrund*/
         //Hintergrund erstellen
@@ -50,6 +38,7 @@ class GameScene extends Phaser.Scene{
         this.player.setScale(5);   //Hier wird die Grosse des Spielers veraendert/gesetzt -> 1 = urspruengliche Groesse
         this.player.setBounce(0.2);  //sorgt dafuer, dass etwas abprallt beim Springen
         this.player.setCollideWorldBounds(true); //sorgt dafuer, dass der Spieler mit der Spielfeldgrenze kollidiert
+
 
         /**Kamera*/
         this.cameras.main.setBounds(0,0, width, height);
@@ -93,6 +82,4 @@ class GameScene extends Phaser.Scene{
         this.cameras.main.scrollX = this.player.x - this.cameras.main.width * 0.5;
         this.cameras.main.scrollY = this.player.y - this.cameras.main.height * 0.5 - 50;
     }
-
-
 }

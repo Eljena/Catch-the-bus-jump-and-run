@@ -12,22 +12,12 @@ class StartScene extends Phaser.Scene{
 
     //Hier werden die Ressourcen fuer die Startszene geladen
     preload(){
-        this.load.image('background', 'images/background.png'); //Hintergrundbild laden
-        this.load.image('startButton', 'images/startBtn.png');  //StartButton laden
-        this.load.image('infoButton', 'images/infoBtn.png');
-        this.load.image('controlButton', 'images/controlBtn.png');
-        this.load.image('soundButton', 'images/soundBtn.png');
-        this.load.image('musicButton', 'images/musicBtn.png');
-        this.load.image('noMusicButton', 'images/noMusicBtn.png');
-        this.load.image('noSoundButton', 'images/noSoundBtn.png');
+        //In PreloadScene ausgelagert
 
-        this.load.image('controllerInfo', 'images/controller.png');
     }
 
     //Hier wird die Logik fuer die Startszene initiliasiert
     create(){
-        //TODO Progessbar zum Laden der Ressourcen
-
         //Hintergrundbild hinzufuegen
         const background = this.add.image(0,0, 'background').setOrigin(0,0);
 
@@ -130,10 +120,6 @@ class StartScene extends Phaser.Scene{
                 toggleMusicButton();
             }
         });
-
-
-
-
 
     }
 }
