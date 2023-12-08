@@ -11,6 +11,7 @@ class PreloadScene extends Phaser.Scene{
     preload() {
         //Alle Ressourcen laden
         /*****Assets von StartScene*****/
+        this.load.bitmapFont('RetroGaming', 'fonts/');
         this.load.image('background', 'images/background.png'); //Hintergrundbild laden
         this.load.image('startButton', 'images/startBtn.png');  //StartButton laden
         this.load.image('infoButton', 'images/infoBtn.png');
@@ -19,19 +20,23 @@ class PreloadScene extends Phaser.Scene{
         this.load.image('musicButton', 'images/musicBtn.png');
         this.load.image('noMusicButton', 'images/noMusicBtn.png');
         this.load.image('noSoundButton', 'images/noSoundBtn.png');
-
         this.load.image('controllerInfo', 'images/controller.png');
 
-        /******Assets von GameScene***
+        /******Assets von LevelScene***/
+        this.load.image('firstLvl', 'images/lvl1Btn.png');
+        this.load.image('secondLvl', 'images/lvl2Btn.png');
+        this.load.image('thirdLvl', 'images/lvl3Btn.png');
+
+        /******Assets von GameScene***/
         /**Hintergrund*/
-        //Sky-Bild laden
         this.load.image('sky', 'images/sky.png');
-        //Tree-Bild laden
         this.load.image('trees', 'images/trees.png');
-        //Player-Bild laden
         this.load.image('player', 'images/player.png');
-        //Pause-Button
         this.load.image('pauseButton', 'images/pauseBtn.png');
+        this.load.image('homeButton', 'images/homeBtn.png');
+        this.load.image('restartButton', 'images/restartBtn.png');
+        this.load.image('continueButton', 'images/continueBtn.png');
+
 
 
         const progressBar = this.add.graphics();
@@ -80,7 +85,7 @@ class PreloadScene extends Phaser.Scene{
         });
 
         this.load.on('complete', function() {
-            console.log("complete");
+            //console.log("complete");
 
             // Nach einer Verzögerung von 1000ms zur Anzeige des Ladebalkens, bevor die Szene gewechselt wird
             this.time.delayedCall(1000, function() {

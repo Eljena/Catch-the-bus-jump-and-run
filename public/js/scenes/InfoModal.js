@@ -2,7 +2,7 @@ class InfoModal extends Modal{
     constructor(scene, x, y){
         super(scene, x,y);
 
-        this.headline = scene.add.text(this.headlineX, this.headlineY, 'Game Info', {fontSize: '24px', fill: '#ffffff'});
+        this.headline = scene.add.text(this.headlineX, this.headlineY, 'Game Info', this.textStyle);
 
         // Elemente zum Container hinzufügen
         this.add(this.modalWindow);

@@ -114,3 +114,20 @@ if(cursors.left.isDown || keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A).isDo
     } else {
         player.setVelocityX(0);
     }
+
+
+
+this.load.on('complete', function() {
+            console.log("complete");
+
+            // Nach einer Verzögerung von 1000ms zur Anzeige des Ladebalkens, bevor die Szene gewechselt wird
+            this.time.delayedCall(1000, function() {
+                //progressBar.destroy();
+                //progressBox.destroy();
+                //loadingText.destroy();
+                //percentText.destroy();
+
+                // Nachdem alle Ressourcen geladen wurden, StartScene starten
+                //this.scene.start('StartScene');
+            }, [], this);
+        }, this);

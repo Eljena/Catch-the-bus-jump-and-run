@@ -29,7 +29,7 @@ class StartScene extends Phaser.Scene{
 
 
         /**Spielueberschrift*/
-        //const title = this.add.text(275, 50, "Back to school", { fontSize: '56px', fill: '#ffffff', backgroundColor: '#e85555'});
+        //this.add.text(275, 50, "Back to school", {fontFamily:'RetroGaming', fontSize: '56px', fill: '#ffffff'});
 
 
         /*****Menue Buttons ***/
@@ -39,7 +39,6 @@ class StartScene extends Phaser.Scene{
         handleButtons(startButton, () => {
             if(!modalActive){
                 this.scene.start('GameScene');
-                //switchScene('GameScene');
                 console.log('Start-button wurde geklickt');
             }
 
