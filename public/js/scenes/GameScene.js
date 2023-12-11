@@ -29,14 +29,15 @@ class GameScene extends Phaser.Scene{
         /**Timer -> dynamisch*/
         this.timer = new Timer(this, 730, 30, 60);
 
+        /**Plattform -> dynamisch erstellen***/
+        const platforms = this.physics.add.staticGroup();
+        platforms.create(800, 400, 'busstop').setScale(0.5).refreshBody();
+
         /**Spieler*/
         //Spielfigur erstellen TODO mit Player Klasse
-        //const player =
-        this.player = this.physics.add.sprite(width / 2, height, 'player');  //"player" (Name des Bildes fuer Player)
-        this.player.setScale(5);   //Hier wird die Grosse des Spielers veraendert/gesetzt -> 1 = urspruengliche Groesse
-        this.player.setBounce(0.5);  //sorgt dafuer, dass etwas abprallt beim Springen
-        this.player.setCollideWorldBounds(true); //sorgt dafuer, dass der Spieler mit der Spielfeldgrenze kollidiert
+        this.player = new Player(this, width / 2, height, 'player2');
 
+        this.physics.add.collider(this.player, platforms);
 
         /**Kamera*/
         this.cameras.main.setBounds(0,0, width, height);
@@ -81,11 +82,13 @@ class GameScene extends Phaser.Scene{
         const cursors = this.input.keyboard.createCursorKeys();
         const keyboard = this.input.keyboard;
         const moveSpeed = 160;
-        const jumpSpeed = 200;
+        const jumpSpeed = 330;
+        const slideSpeed = 100;
 
-        handlePlayerMovement(this.player, cursors, keyboard, moveSpeed, skySpeed, treeSpeed, jumpSpeed);
+        //Spielerbewegungsmethode aufrufen
+        this.player.movePlayer(cursors, keyboard, moveSpeed, jumpSpeed, slideSpeed);
 
-        // Kamerabewegung entsprechend der Spielerbewegung anpassen
+        //Kamerabewegung entsprechend der Spielerbewegung anpassen
         this.cameras.main.scrollX = this.player.x - this.cameras.main.width * 0.5;
         this.cameras.main.scrollY = this.player.y - this.cameras.main.height * 0.5 - 50;
     }

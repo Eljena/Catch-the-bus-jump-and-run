@@ -11,7 +11,8 @@ class PreloadScene extends Phaser.Scene{
     preload() {
         //Alle Ressourcen laden
         /*****Assets von StartScene*****/
-        this.load.bitmapFont('RetroGaming', 'fonts/');
+        //TODO Font hinzufügen
+        // this.load.bitmapFont('RetroGaming', 'fonts/');
         this.load.image('background', 'images/background.png'); //Hintergrundbild laden
         this.load.image('startButton', 'images/startBtn.png');  //StartButton laden
         this.load.image('infoButton', 'images/infoBtn.png');
@@ -30,8 +31,16 @@ class PreloadScene extends Phaser.Scene{
         /******Assets von GameScene***/
         /**Hintergrund*/
         this.load.image('sky', 'images/sky.png');
-        this.load.image('trees', 'images/trees.png');
-        this.load.image('player', 'images/player.png');
+        this.load.image('trees', 'images/trees.png')
+
+        //Player-Bilder laden
+        this.load.spritesheet('player1', 'images/player1.png', {frameWidth: 39, frameHeight: 56});
+        this.load.spritesheet('player2', 'images/player2.png', {frameWidth: 39, frameHeight: 58});
+
+        //Plattform laden
+        this.load.image('busstop', 'images/busstop.png');
+
+        //Buttons laden
         this.load.image('pauseButton', 'images/pauseBtn.png');
         this.load.image('homeButton', 'images/homeBtn.png');
         this.load.image('restartButton', 'images/restartBtn.png');

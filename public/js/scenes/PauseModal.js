@@ -7,6 +7,12 @@ class PauseModal extends Modal {
         this.restartButton = scene.add.image(500, 400, 'restartButton');
         this.continueButton = scene.add.image(650, 400, 'continueButton');
 
+        //Buttons skalieren
+        const scaleFactor = 0.75;
+        this.homeButton.setScale(scaleFactor);
+        this.restartButton.setScale(scaleFactor);
+        this.continueButton.setScale(scaleFactor);
+
         //Elemente zum Container hinzufügen
         this.add(this.modalWindow);
         this.add(this.closeButton);
@@ -26,7 +32,7 @@ class PauseModal extends Modal {
         if(sceneKey === 'StartScene'){
             return this.homeButton;
         } else if(sceneKey === 'GameScene'){
-            //TODO GameScene soll neu gestartet werden
+            //GameScene wird neu gestartet
             return this.restartButton;
         } //TODO GameScene soll fortfahren
 

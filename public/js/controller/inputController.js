@@ -17,33 +17,3 @@ const handleButtons = (button, onClick) =>{
     });
 }
 
-/**Tastatureingabe handeln*/
-const handlePlayerMovement = (player, cursors, keyboard) => {
-
-    const keys = {
-        left: cursors.left,
-        right: cursors.right,
-        up: cursors.up
-    };
-
-    const wasd = {
-        leftA: keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A),
-        rightD: keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D),
-        upW: keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W)
-    };
-
-    const { left, right, up } = keys;
-    const { leftA, rightD, upW } = wasd;
-
-    if (left.isDown || leftA.isDown) {
-        player.setVelocityX(-160);
-    } else if (right.isDown || rightD.isDown) {
-        player.setVelocityX(160);
-    } else {
-        player.setVelocityX(0);
-    }
-
-    if ((up.isDown || upW.isDown) && player.body.onFloor()) {
-        player.setVelocityY(-330);
-    }
-}

@@ -13,7 +13,6 @@ class StartScene extends Phaser.Scene{
     //Hier werden die Ressourcen fuer die Startszene geladen
     preload(){
         //In PreloadScene ausgelagert
-
     }
 
     //Hier wird die Logik fuer die Startszene initiliasiert
@@ -50,9 +49,14 @@ class StartScene extends Phaser.Scene{
             if(!modalActive){
                 updateModalStatus(true);
                 const infoModal = new InfoModal(this,10,10);
+
+                infoModal.setOnModalClose(() =>{
+                    updateModalStatus(false);
+                    console.log("Info-Modal wurde geschlossen");
+                });
+
                 this.add.existing(infoModal);
                 infoModal.showModal();
-
                 console.log('Info-button wurde geklickt');
             }
 
@@ -64,6 +68,12 @@ class StartScene extends Phaser.Scene{
              if(!modalActive) {
                  updateModalStatus(true);
                  const controlModal = new ControlModal(this, 10, 10);
+
+                 controlModal.setOnModalClose(() =>{
+                     updateModalStatus(false);
+                     console.log("Control-Modal wurde geschlossen");
+                 });
+
                  this.add.existing(controlModal);
                  controlModal.showModal();
 
