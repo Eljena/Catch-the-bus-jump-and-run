@@ -53,6 +53,9 @@ class PreloadScene extends Phaser.Scene{
 
         //Obstacles laden
 
+        //Booster laden (Sneaker)
+        this.load.image('sneaker','images/sneaker.png');
+
         //Buttons laden
         this.load.image('pauseButton', 'images/pauseBtn.png');
         this.load.image('homeButton', 'images/homeBtn.png');

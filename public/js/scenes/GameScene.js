@@ -34,7 +34,6 @@ class GameScene extends Phaser.Scene{
 
         /****Hintergrundobjekte erstellen***/
         const backgroundObjects = this.physics.add.staticGroup();
-
         backgroundObjects.create(50, 490, 'bush').setScale(0.7).refreshBody();
         backgroundObjects.create(500, 490, 'bush').setScale(0.7).refreshBody();
         backgroundObjects.create(650, 490, 'bush').setScale(0.7).refreshBody();
@@ -51,6 +50,8 @@ class GameScene extends Phaser.Scene{
         /****Spielobjekte erstellen***/
         //Bus erstellen
         this.bus = new Bus(this, 700, 405, 'bus');
+        //Kollision zwischen Bus und Plattform
+        this.physics.add.collider(this.bus, platforms);
 
         /**Spieler*/
         //Spielfigur erstellen
@@ -59,8 +60,18 @@ class GameScene extends Phaser.Scene{
         //Plattformen kollidieren mit Spieler
         this.physics.add.collider(this.player, platforms);
 
-        //Kollision zwischen Bus und Plattform
-        this.physics.add.collider(this.bus, platforms);
+        /**Booster (Sneaker)**/
+        //Sneaker-Gruppe erstellen
+        this.sneakerGroup = this.physics.add.group();
+
+        //Schleife, um Sneaker-Objekte zur Gruppe hinzuzufuegen
+        for(let i = 0; i < 5; i++){
+            const sneaker = new Sneaker(this, 200 + i * 150, 200, 'sneaker');
+            sneaker.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+            this.sneakerGroup.add(sneaker);
+        }
+        this.physics.add.collider(this.sneakerGroup, platforms);
+
 
         /**Kamera*/
         this.cameras.main.setBounds(0,0, width, height);
@@ -133,6 +144,17 @@ class GameScene extends Phaser.Scene{
         //Kamerabewegung entsprechend der Spielerbewegung anpassen
         this.cameras.main.scrollX = this.player.x - this.cameras.main.width * 0.5;
         this.cameras.main.scrollY = this.player.y - this.cameras.main.height * 0.5 - 50;
+
+        /**Booster aufsammeln**/
+        // Kollisionsüberprüfung zwischen Spieler und Boostern
+        this.physics.add.overlap(this.player, this.sneakerGroup, this.collectSneaker, null, this);
+
+    }
+    collectSneaker(player, sneaker){
+        //Sneaker entfernen, wenn es eingesammelt wird
+        sneaker.disableBody(true, true);
+        //soll dem Player kurzzeitig einen Boost geben
+        sneaker.applyEffect(player);
     }
 
 

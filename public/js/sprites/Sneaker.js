@@ -1,16 +1,16 @@
-class Sneaker {
-    constructor(x, y) {
-        // Initialisierung des Sneakers
-        this.x = x;
-        this.y = y;
-        // Weitere Eigenschaften und Logik für den Sneaker
+class Sneaker extends Phaser.Physics.Arcade.Sprite{
+    constructor(scene, x, y, texture) {
+        super(scene, x, y, texture);
+        scene.add.existing(this);
+        scene.physics.add.existing(this);
+        this.setScale(0.2);
+        this.setCollideWorldBounds(true);
     }
 
-    draw() {
-        // Zeichnen des Sneakers auf dem Bildschirm
-    }
+
 
     applyEffect(player) {
-        // Logik für die Auswirkungen des Sneakers auf den Spieler
+        //Hier soll der kurzzeitige boost fuer den Player implementiert werden
+        console.log("Boost");
     }
 }
