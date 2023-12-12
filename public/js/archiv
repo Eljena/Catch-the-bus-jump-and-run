@@ -163,3 +163,43 @@ const handlePlayerMovement = (player, cursors, keyboard) => {
         player.setVelocityY(-330);
     }
 }
+
+
+const pauseButton = this.add.image(950, 55,'pauseButton');
+        handleButtons(pauseButton, () =>{
+            if(!modalActive){
+                //Szene pausieren
+                this.scene.pause();
+
+                //Spielerposition vor dem Oeffnen des Modals speichern
+                this.playerPosition = { x: this.player.x, y: this.player.y };
+
+                this.timer.stopTimer();
+                updateModalStatus(true);
+
+                //PauseModal erstellen
+                const pauseModal = new PauseModal(this,10,10);
+                //Zur Szene hinzufuegen
+                this.add.existing(pauseModal);
+                //PauseModal zeigen
+                pauseModal.showModal();
+
+                //Setze die Callback-Funktion fuer das Pause-Modal, um den Timer fortzusetzen
+                pauseModal.setOnModalClose(() =>{
+                    this.scene.resume();
+                    //Timer wird fortgesetzt
+                    this.timer.resumeTimer();
+
+                    this.scene.resume('GameScene')
+
+                    //Playerposition auf gespeicherte Position setzen
+                    console.log(this.playerPosition.x, this.playerPosition.y);
+                    this.player.setPosition(this.playerPosition.x, this.playerPosition.y);
+
+                    updateModalStatus(false);
+                });
+
+                console.log("Pause Button wurde geklickt");
+            }
+
+        });

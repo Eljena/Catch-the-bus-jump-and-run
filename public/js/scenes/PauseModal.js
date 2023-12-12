@@ -1,4 +1,4 @@
-class PauseModal extends Modal {
+class PauseModal extends Modal{
     constructor(scene, x, y) {
         super(scene, x, y);
 
@@ -13,6 +13,14 @@ class PauseModal extends Modal {
         this.restartButton.setScale(scaleFactor);
         this.continueButton.setScale(scaleFactor);
 
+        this.continueButton.setInteractive({useHandCursor: true});
+        //EventHandler fuer continueButton
+        this.continueButton.on('pointerdown', () => {
+            // Modal ausblenden
+            this.hideModal();
+        });
+
+
         //Elemente zum Container hinzufügen
         this.add(this.modalWindow);
         this.add(this.closeButton);
@@ -24,7 +32,6 @@ class PauseModal extends Modal {
         //Szenenwechselhandler
         this.sceneChangeHandler('StartScene');
         this.sceneChangeHandler('GameScene');
-        //TODO Spiel fortfahren
 
     }
 
@@ -34,8 +41,7 @@ class PauseModal extends Modal {
         } else if(sceneKey === 'GameScene'){
             //GameScene wird neu gestartet
             return this.restartButton;
-        } //TODO GameScene soll fortfahren
-
+        }
     }
 
     preload(){

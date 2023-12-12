@@ -61,5 +61,6 @@ class Timer {
 
     gameOver(){
         console.log('Zeit abgelaufen');
+        //TODO LooseModal aufrufen
     }
 }

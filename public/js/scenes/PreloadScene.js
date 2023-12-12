@@ -31,14 +31,27 @@ class PreloadScene extends Phaser.Scene{
         /******Assets von GameScene***/
         /**Hintergrund*/
         this.load.image('sky', 'images/sky.png');
-        this.load.image('trees', 'images/trees.png')
+        this.load.image('tree', 'images/tree.png');
+        this.load.image('bush', 'images/bush.png');
+        this.load.image('ground', 'images/ground.png');
+
+        this.load.image('house', 'images/house.png');
+
 
         //Player-Bilder laden
-        this.load.spritesheet('player1', 'images/player1.png', {frameWidth: 39, frameHeight: 56});
-        this.load.spritesheet('player2', 'images/player2.png', {frameWidth: 39, frameHeight: 58});
+        this.load.spritesheet('player1', 'images/player1.png', {frameWidth: 45, frameHeight: 55});
+        this.load.spritesheet('player2', 'images/player2.png', {frameWidth: 42, frameHeight: 55});
 
-        //Plattform laden
+        //Plattform (Busstation) laden
         this.load.image('busstop', 'images/busstop.png');
+
+        //Busschild laden
+        this.load.image('busSign', 'images/busSign.png');
+
+        //Bus laden
+        this.load.spritesheet('bus', 'images/bus.png', {frameWidth: 1390, frameHeight: 550});
+
+        //Obstacles laden
 
         //Buttons laden
         this.load.image('pauseButton', 'images/pauseBtn.png');
