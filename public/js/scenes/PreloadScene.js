@@ -1,7 +1,10 @@
 /**
  * Diese Klasse dient zum Darstellen eines
  * Ladebalkens, sobald das Spiel gestartet wird.
- * Der Ladebalken soll das Laden der Ressourcen symbolisieren*/
+ * Der Ladebalken soll dem User einen Hinweis geben,
+ * wie viel Prozent der Ressourcen bereits geladen wurden
+ *
+ * Quelle: https://gamedevacademy.org/creating-a-preloading-screen-in-phaser-3/*/
 
 class PreloadScene extends Phaser.Scene{
     constructor() {
@@ -11,8 +14,6 @@ class PreloadScene extends Phaser.Scene{
     preload() {
         //Alle Ressourcen laden
         /*****Assets von StartScene*****/
-        //TODO Font hinzufügen
-        // this.load.bitmapFont('RetroGaming', 'fonts/');
         this.load.image('background', 'images/background.png'); //Hintergrundbild laden
         this.load.image('startButton', 'images/startBtn.png');  //StartButton laden
         this.load.image('infoButton', 'images/infoBtn.png');
@@ -22,6 +23,10 @@ class PreloadScene extends Phaser.Scene{
         this.load.image('noMusicButton', 'images/noMusicBtn.png');
         this.load.image('noSoundButton', 'images/noSoundBtn.png');
         this.load.image('controllerInfo', 'images/controller.png');
+
+        //Modalfenster Titel laden
+        this.load.image('tutorialTitle', 'images/tutorialTitle.png');
+        this.load.image('controlsTitle','images/steuerungTitle.png');
 
         /******Assets von LevelScene***/
         this.load.image('firstLvl', 'images/lvl1Btn.png');
@@ -36,7 +41,6 @@ class PreloadScene extends Phaser.Scene{
         this.load.image('ground', 'images/ground.png');
 
         this.load.image('house', 'images/house.png');
-
 
         //Player-Bilder laden
         this.load.spritesheet('player1', 'images/player1.png', {frameWidth: 45, frameHeight: 55});
@@ -62,6 +66,10 @@ class PreloadScene extends Phaser.Scene{
         this.load.image('restartButton', 'images/restartBtn.png');
         this.load.image('continueButton', 'images/continueBtn.png');
 
+        //Modalfenster Titel laden
+        this.load.image('pauseTitle', 'images/pausiertTitle.png');
+        this.load.image('winTitle', 'images/gewonnenTitle.png');
+        this.load.image('looseTitle', 'images/verlorenTitle.png');
 
 
         const progressBar = this.add.graphics();

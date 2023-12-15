@@ -1,9 +1,15 @@
+/**
+ * Bei dieser Klasse handelt es sich um eine Unterklasse von
+ * Modal.
+ *
+ */
 class PauseModal extends Modal{
     constructor(scene, x, y) {
         super(scene, x, y);
 
-        this.headline = scene.add.text(this.headlineX, this.headlineY, "Pausiert", this.textStyle);
-        this.homeButton = (scene.add.image(350, 400, 'homeButton'));
+        //Ueberschrift und Buttons hinzufuegen
+        this.headline = scene.add.image(505, 200, 'pauseTitle')
+        this.homeButton = scene.add.image(350, 400, 'homeButton');
         this.restartButton = scene.add.image(500, 400, 'restartButton');
         this.continueButton = scene.add.image(650, 400, 'continueButton');
 
@@ -18,11 +24,11 @@ class PauseModal extends Modal{
         this.continueButton.on('pointerdown', () => {
             // Modal ausblenden
             this.hideModal();
+            //Aufruf der Callback-Funktion, wenn das Modal geschlossen wird
+            this.onModalClose();
         });
 
-
-        //Elemente zum Container hinzufügen
-        this.add(this.modalWindow);
+        //Elemente zu PauseModal hinzufuegen
         this.add(this.closeButton);
         this.add(this.headline);
         this.add(this.homeButton);
@@ -42,13 +48,5 @@ class PauseModal extends Modal{
             //GameScene wird neu gestartet
             return this.restartButton;
         }
-    }
-
-    preload(){
-
-    }
-
-    create(){
-
     }
 }

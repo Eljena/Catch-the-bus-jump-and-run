@@ -1,5 +1,6 @@
 /**
- * Hier werden die Grundelemente des Spiels definiert
+ * In dieser Klasse werden die Grundelemente (config) des Spiels definiert
+ * und ein neues Phaser-Spiel erstellt
  */
 
 const config = {
@@ -7,10 +8,10 @@ const config = {
     width: 1000,
     height: 600,
     scene: [
-        PreloadScene, //Füge die Preloadszene hinzu
-        StartScene, // Füge die Startszene hinzu
-        GameScene,  // Füge die GameScene hinzu
-        LevelScene  // Füge die LevelScene hinzu
+        PreloadScene, //Fuege die PreloadSzene hinzu
+        StartScene, // Fuege die StartSzene hinzu
+        GameScene,  // Fuege die GameScene hinzu
+        LevelScene  // Fuege die LevelScene hinzu
     ],
     backgroundColor: '#898080',
     physics: {
@@ -22,20 +23,6 @@ const config = {
 }
 
 const game = new Phaser.Game(config);
-
-
-
-//Hier werden Spielressourcen geladen, z.B. Bilder & Audiodateien
-function preload(){
-
-
-}
-
-//Hier werden die Spielobjekte und -logik initialisiert
-function create(){
-
-
-}
 
 
 

@@ -6,9 +6,9 @@ class Bus extends Phaser.Physics.Arcade.Sprite {
         scene.physics.add.existing(this);
 
         this.setScale(0.5);
-        this.setCollideWorldBounds(false);   //-> false, damit Bus aus Spielfeld faehrt
+        this.setCollideWorldBounds(false);   //false, damit Bus aus Spielfeld fahren kann
 
-        //Animation fuer Bus hinzufuegen
+        //Animation fuer Bus erstellen
         this.anims.create({
             key: 'busDriveAway',
             frames: this.anims.generateFrameNumbers('bus', {start: 0, end: 3}),
@@ -17,7 +17,7 @@ class Bus extends Phaser.Physics.Arcade.Sprite {
         });
 
         setTimeout(() => {
-            // Bewegung des Busses nach einer Verzögerung von 2 Sekunden
+            //Bewegung des Busses nach einer Verzoegerung von 2 Sekunden
             this.setVelocityX(300);
             this.play('busDriveAway');
         }, 500); //Delay

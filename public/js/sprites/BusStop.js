@@ -5,7 +5,7 @@ class BusStop {
         this.y = y;
         this.width = width;
         this.height = height;
-        // Weitere Eigenschaften und Logik für die Bushaltestelle
+        //Weitere Eigenschaften und Logik für die Bushaltestelle
     }
 
     draw() {

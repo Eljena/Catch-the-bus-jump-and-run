@@ -1,6 +1,13 @@
 /**
- * Controller-Klasse fuer die Spielereingaben
+ * Controller-Klasse fuer die Nutzereingaben
  */
+//Variable zum Pruefen, ob Modalfenster geoeffnet ist
+let modalActive= false;
+
+//Methode, die modalActive auf true setzt
+const updateModalStatus = (isActive) => {
+    modalActive = isActive;
+};
 
 const handleButtons = (button, onClick) =>{
     button.setInteractive({useHandCursor: true});

@@ -1,16 +1,13 @@
-/**Eigene Schriftart einbinden*/
-@font-face {
-    font-family: 'RetroGaming';
-    src: url("../fonts/RetroGaming.ttf") format('truetype');
-
-}
-
+/**CSS-Klasse zum Stylen der HTML-Seite*/
 body{
-    font-family: 'RetroGaming', sans-serif;
     position: relative;
+    /*Inhalt zentrieren*/
     display: flex;
+    /*Vertikal zentrieren*/
     align-items: center;
+    /*Horizontal zentrieren*/
     justify-content: center;
+    /*Festlegen der Hoehe auf die gesamte Viewport-Hoehe*/
     height: 100vh;
     margin: 0;
     background-color: lightblue;

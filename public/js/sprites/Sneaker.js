@@ -7,10 +7,10 @@ class Sneaker extends Phaser.Physics.Arcade.Sprite{
         this.setCollideWorldBounds(true);
     }
 
-
-
     applyEffect(player) {
         //Hier soll der kurzzeitige boost fuer den Player implementiert werden
-        console.log("Boost");
+        player.increaseSpeed(2);
+        console.log("Boost eingesammelt");
+
     }
 }

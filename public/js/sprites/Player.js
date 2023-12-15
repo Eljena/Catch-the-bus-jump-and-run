@@ -6,8 +6,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         scene.physics.add.existing(this);
 
         this.setScale(3);
-        this.setBounce(0.2);
+        this.setBounce(0.1);
         this.setCollideWorldBounds(true);
+        //Multiplikator fuer die Geschwindigkeit des Spielers
+        this.speedMultiplier = 1.0;
 
         //Animation fuer Spieler hinzufuegen
         const player = "player1";
@@ -32,9 +34,35 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             frameRate: 10,
             repeat: -1
         });
+
+        this.anims.create({
+            key: 'slide',
+            frames: this.anims.generateFrameNumbers(player, {start: 9, end: 9}),
+            frameRate: 10,
+            repeat: -1
+        });
+    }
+
+    increaseSpeed(multiplier){
+        this.speedMultiplier *=multiplier;
+        this.isBoosted = true;
+
+        //Timer fuer den Boost starten
+        this.scene.time.delayedCall(5000, () =>{
+            this.isBoosted = false;
+            this.speedMultiplier = 1.0;
+        });
     }
 
     movePlayer(cursors, keyboard, moveSpeed, jumpSpeed, slideSpeed){
+        //finalMoveSpeed initialisieren
+        let finalMoveSpeed = moveSpeed;
+        //Pruefen, ob Spieler geboostet wird
+        if(this.isBoosted){
+            finalMoveSpeed = moveSpeed * this.speedMultiplier;
+            console.log(finalMoveSpeed);
+        }
+
         const keys = {
             left: cursors.left,
             right: cursors.right,
@@ -54,10 +82,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         //if-Abfrage fuer Links-, Rechts-Bewegung
         if (left.isDown || leftA.isDown) {
-            this.setVelocityX(-moveSpeed);
+            this.setVelocityX(-finalMoveSpeed);
             this.anims.play('left', true);
         } else if (right.isDown || rightD.isDown) {
-            this.setVelocityX(moveSpeed);
+            this.setVelocityX(finalMoveSpeed);
             this.anims.play('right', true);
         } else {
             this.setVelocityX(0);
@@ -71,7 +99,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         //if-Abfrage fuer Slide-Bewegung
         if((down.isDown || downS.isDown) && this.body.touching.down){
-            this.setVelocityY(slideSpeed);
+            this.setVelocityY(finalMoveSpeed);
             this.setVelocityX(moveSpeed);
         }
     }

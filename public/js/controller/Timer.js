@@ -1,3 +1,10 @@
+/**
+ * Diese Klasse verwaltet den Timer in der GameScene
+ * Erstellt einen Timer mit einer bestimmten initialen Zeit
+ * und aktualisiert die Anzeige alle Sekunde.
+ * Enthaelt Methoden zum Aktualisieren, Anhalten, Fortsetzen des Timers und zur Behandlung,
+ * wenn der Timer ablaeuft
+ */
 class Timer {
     constructor(scene, x, y, initialTime){
         this.scene = scene;
@@ -14,23 +21,31 @@ class Timer {
         this.timer.setShadow(0, 4, 'rgba(0, 0, 0, 0.25)', 4);
 
         this.timedEvent = this.scene.time.addEvent({
-           delay: 1000,
-           callback: this.onTimerTick,
-           callbackScope: this,
-           loop: true
+           delay: 1000,     //Legt fest, dass das Ereignis alle 1000 Milisekunden ausgeloest wird
+           callback: this.onTimerTick,  //Gibt die Methode an, die jedes Mal aufgerufen wird
+           callbackScope: this,     //Definiert den Kontext, in dem Callback-Funktion aufgerufen wird
+           loop: true   //Event laueft in einer Endlosschleife ab
         });
     }
 
+    /**
+     * Aktualisiert den Timer, verringert die verbleibende Zeit und aktualisiert die Anzeige.
+     * Ruft gameOver auf, wenn die Zeit abgelaufen ist
+     */
     onTimerTick() {
         if(this.initialTime > 0){
             this.initialTime -= 1;
         } else{
             this.gameOver();
         }
-
         this.timer.setText(this.formatTime(this.initialTime));
     }
 
+    /**
+     * Methode zum Formatieren der Minuten-Anzeige
+     * @param seconds
+     * @returns {string}
+     */
     formatTime(seconds){
         const minutes = Math.floor(seconds / 60);   //berechnet die verbleibenden Minuten
         const partInSeconds = seconds % 60; //berechnet die verbleibenden Sekunden

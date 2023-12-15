@@ -2,18 +2,17 @@ class ControlModal extends Modal{
     constructor(scene, x, y){
         super(scene, x,y);
 
-        this.headline = scene.add.text(this.headlineX, this.headlineY, 'Steuerung', this.textStyle);
+        this.headline = scene.add.image(505, 200, 'controlsTitle')
+        this.headline.setScale(0.8);
 
-        // Elemente zum Container hinzufügen
+        this.controllerImage = scene.add.image(500, 350, 'controllerInfo');
+        this.controllerImage.setScale(0.5);
+
+        //Elemente zum ControlModal hinzufuegen
         this.add(this.modalWindow);
         this.add(this.closeButton);
-
         this.add(this.headline);
-
-        this.controllerImage = scene.add.image(x + 500,y + 300, 'controllerInfo');
-        this.controllerImage.setScale(0.5);
-        this.add(this.controllerImage); // Bild zum Modal hinzufügen
-
+        this.add(this.controllerImage);
     }
 
 

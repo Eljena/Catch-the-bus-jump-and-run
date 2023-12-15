@@ -5,8 +5,6 @@
 class GameScene extends Phaser.Scene{
     constructor() {
         super({ key: 'GameScene' });
-        // Spielerposition initialisieren
-        this.playerPosition = { x: 0, y: 0 };
     }
     preload() {
         //In PreloadScene ausgelagert
@@ -39,12 +37,12 @@ class GameScene extends Phaser.Scene{
         backgroundObjects.create(650, 490, 'bush').setScale(0.7).refreshBody();
         backgroundObjects.create(550, 375, 'tree').setScale(1).refreshBody();
         backgroundObjects.create(250, 360, 'house').setScale(0.3).refreshBody();
+        backgroundObjects.create(602, 480, 'busSign').setScale(0.6).refreshBody();
 
 
         /**Plattform -> dynamisch erstellen***/
         const platforms = this.physics.add.staticGroup();
         platforms.create(800, 445, 'busstop').setScale(0.4).refreshBody();
-        platforms.create(602, 480, 'busSign').setScale(0.6).refreshBody();
         platforms.create(0, 600, 'ground').setScale(1).refreshBody();
 
         /****Spielobjekte erstellen***/
@@ -66,7 +64,7 @@ class GameScene extends Phaser.Scene{
 
         //Schleife, um Sneaker-Objekte zur Gruppe hinzuzufuegen
         for(let i = 0; i < 5; i++){
-            const sneaker = new Sneaker(this, 200 + i * 150, 200, 'sneaker');
+            const sneaker = new Sneaker(this, 300 + i * 150, 200, 'sneaker');
             sneaker.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
             this.sneakerGroup.add(sneaker);
         }
@@ -84,8 +82,6 @@ class GameScene extends Phaser.Scene{
                 //GameScene pausieren
                 //this.scene.pause();
 
-                //Spielerposition vor dem Oeffnen des Modals speichern
-                this.playerPosition = { x: this.player.x, y: this.player.y };
                 this.timer.stopTimer();
                 updateModalStatus(true);
 
@@ -96,35 +92,33 @@ class GameScene extends Phaser.Scene{
                 //PauseModal zeigen
                 pauseModal.showModal();
 
-
-
                 //Setze die Callback-Funktion fuer das Pause-Modal, um den Timer fortzusetzen
                 pauseModal.setOnModalClose(() =>{
                     //Spiel fortsetzen
                     this.resumeGame();
                 });
-
-
             }
 
         });
     }
 
-    //Funktion zum Fortsetzen des Spiels nach dem Klicken auf den ContinueButton im Modalfenster
+
+    /**
+     * Funktion zum Fortsetzen des Spiels nach dem
+     * Klicken auf den ContinueButton im Modalfenster
+     */
     resumeGame(){
         //Szene fortsetzen
         //Timer wird fortgesetzt
         this.timer.resumeTimer();
-        this.scene.resume();
-        this.player.setPosition(this.playerPosition.x, this.playerPosition.y);
         updateModalStatus(false);
     }
 
-    // Hier wird das Spiel in jedem Frame aktualisiert
+    //Hier wird das Spiel in jedem Frame aktualisiert
     update() {
 
         /**Hintergrund*/
-        // zum Skalieren der Geschwindigkeit des Hintergrunds
+        //zum Skalieren der Geschwindigkeit des Hintergrunds
         const skySpeed = 0;  //3
         const treeSpeed = 0;  //6
 
@@ -146,12 +140,12 @@ class GameScene extends Phaser.Scene{
         this.cameras.main.scrollY = this.player.y - this.cameras.main.height * 0.5 - 50;
 
         /**Booster aufsammeln**/
-        // Kollisionsüberprüfung zwischen Spieler und Boostern
+        // Kollisionsueberpruefung zwischen Spieler und Boostern
         this.physics.add.overlap(this.player, this.sneakerGroup, this.collectSneaker, null, this);
 
     }
     collectSneaker(player, sneaker){
-        //Sneaker entfernen, wenn es eingesammelt wird
+        //Sneaker entfernen, wenn er eingesammelt wird
         sneaker.disableBody(true, true);
         //soll dem Player kurzzeitig einen Boost geben
         sneaker.applyEffect(player);
