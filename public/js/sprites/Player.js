@@ -35,12 +35,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             repeat: -1
         });
 
-        this.anims.create({
-            key: 'slide',
-            frames: this.anims.generateFrameNumbers(player, {start: 9, end: 9}),
-            frameRate: 10,
-            repeat: -1
-        });
+
     }
 
     increaseSpeed(multiplier){
@@ -54,7 +49,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         });
     }
 
-    movePlayer(cursors, keyboard, moveSpeed, jumpSpeed, slideSpeed){
+    movePlayer(cursors, keyboard, moveSpeed, jumpSpeed){
         //finalMoveSpeed initialisieren
         let finalMoveSpeed = moveSpeed;
         //Pruefen, ob Spieler geboostet wird
@@ -66,19 +61,17 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         const keys = {
             left: cursors.left,
             right: cursors.right,
-            up: cursors.up,
-            down: cursors.down
+            up: cursors.up
         };
 
         const wasd = {
             leftA: keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A),
             rightD: keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D),
             upW: keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W),
-            downS: keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S)
         };
 
-        const { left, right, up, down } = keys;
-        const { leftA, rightD, upW, downS } = wasd;
+        const { left, right, up } = keys;
+        const { leftA, rightD, upW } = wasd;
 
         //if-Abfrage fuer Links-, Rechts-Bewegung
         if (left.isDown || leftA.isDown) {
@@ -97,10 +90,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.setVelocityY(-jumpSpeed);
         }
 
-        //if-Abfrage fuer Slide-Bewegung
-        if((down.isDown || downS.isDown) && this.body.touching.down){
-            this.setVelocityY(finalMoveSpeed);
-            this.setVelocityX(moveSpeed);
-        }
+
     }
 }

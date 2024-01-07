@@ -15,7 +15,7 @@ class Modal extends Phaser.GameObjects.Container {
         //Hintergrund des Modalfensters zeichnen
         this.modalBackground = this.scene.add.graphics();
         this.modalBackground.fillStyle(0x000000, 0.7);
-        this.modalBackground.fillRect(0, 0, this.scene.sys.game.config.width, this.scene.sys.game.config.height);
+        this.modalBackground.fillRect(-10, -10, this.scene.sys.game.config.width, this.scene.sys.game.config.height);
         this.modalBackground.setInteractive();
 
         //Modal-Fenster

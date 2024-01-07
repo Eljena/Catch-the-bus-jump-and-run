@@ -129,10 +129,10 @@ class GameScene extends Phaser.Scene{
         const keyboard = this.input.keyboard;
         const moveSpeed = 210;
         const jumpSpeed = 330;
-        const slideSpeed = 100;
+
 
         //Spielerbewegungsmethode aufrufen
-        this.player.movePlayer(cursors, keyboard, moveSpeed, jumpSpeed, slideSpeed);
+        this.player.movePlayer(cursors, keyboard, moveSpeed, jumpSpeed);
 
         //Kamerabewegung entsprechend der Spielerbewegung anpassen
         this.cameras.main.scrollX = this.player.x - this.cameras.main.width * 0.5;
