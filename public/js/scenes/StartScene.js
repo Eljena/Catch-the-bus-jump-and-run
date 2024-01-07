@@ -17,10 +17,19 @@ class StartScene extends Phaser.Scene{
         //Anpassen der Groesse des Hintergrundbilds auf das Game-Fenster
         background.setDisplaySize(width, height);
 
+        /**Intro Musik*/
+        // Der Audio-Manager wird verwendet, um das Audio abzuspielen
+        const introMusic = this.sound.add('introMusic', { loop: true, volume: 0.5 });
+        introMusic.play();
+
+        //Sound Button
+        const buttonClick = this.sound.add('buttonClick');
+
         /*****Menue Buttons ***/
         //Start Button
         const startButton = this.add.image(500, 300, 'startButton');
         handleButtons(startButton, () => {
+            buttonClick.play();
             if(!modalActive){
                 this.scene.start('LevelScene');
                 console.log('Start-button wurde geklickt');
@@ -31,6 +40,7 @@ class StartScene extends Phaser.Scene{
         //Info Button
         const infoButton = this.add.image(100,50, 'infoButton');
         handleButtons(infoButton, () => {
+            buttonClick.play();
             if(!modalActive){
                 modalActive = true;
                 const infoModal = new InfoModal(this,10,10);
@@ -50,7 +60,8 @@ class StartScene extends Phaser.Scene{
         //Control Button
         const controlButton = this.add.image(200,50, 'controlButton');
         handleButtons(controlButton, () =>{
-             if(!modalActive) {
+            buttonClick.play();
+            if(!modalActive) {
                  modalActive = true;
                  const controlModal = new ControlModal(this, 10, 10);
                  this.add.existing(controlModal);
@@ -72,12 +83,12 @@ class StartScene extends Phaser.Scene{
             soundButtonActive = !soundButtonActive; //kehrt den Wert um
             if(soundButtonActive){
                 soundButton.setTexture('soundButton');
-                console.log('Sound Button wurde geklickt');
-                //TODO Logik Sounds
+                //Sound aktivieren
+                buttonClick.setMute(false);
             }else{
                 soundButton.setTexture('noSoundButton');
-                console.log("Ohne Sound Button wurde geklickt");
-                //TODO Logik fuer Deaktivieren der Sounds
+                //Sound aktivieren
+                buttonClick.setMute(true);
             }
         }
         handleButtons(soundButton, () =>{
@@ -95,12 +106,12 @@ class StartScene extends Phaser.Scene{
             musicButtonActive = !musicButtonActive; //kehrt den Wert um
             if (musicButtonActive) {
                 musicButton.setTexture('musicButton');
-                console.log('Musik Button wurde geklickt');
-                //TODO Hier die Logik fuer das Aktivieren der Musik hinzufuegen
+                //Musik aktivieren
+                introMusic.setMute(false);
             } else {
                 musicButton.setTexture('noMusicButton');
-                console.log('Ohne Musik Button wurde geklickt');
-                //TODO Hier die Logik für das Deaktivieren der Musik hinzufuegen
+                //Musik deaktivieren
+                introMusic.setMute(true);
             }
         }
 

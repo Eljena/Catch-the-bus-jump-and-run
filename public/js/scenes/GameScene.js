@@ -83,7 +83,7 @@ class GameScene extends Phaser.Scene{
                 //this.scene.pause();
 
                 this.timer.stopTimer();
-                updateModalStatus(true);
+                modalActive = true;
 
                 //PauseModal erstellen
                 const pauseModal = new PauseModal(this,10,10);
@@ -111,7 +111,6 @@ class GameScene extends Phaser.Scene{
         //Szene fortsetzen
         //Timer wird fortgesetzt
         this.timer.resumeTimer();
-        updateModalStatus(false);
     }
 
     //Hier wird das Spiel in jedem Frame aktualisiert

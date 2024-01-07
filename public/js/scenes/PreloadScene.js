@@ -4,7 +4,7 @@
  * Der Ladebalken soll dem User einen Hinweis geben,
  * wie viel Prozent der Ressourcen bereits geladen wurden
  *
- * Quelle: https://gamedevacademy.org/creating-a-preloading-screen-in-phaser-3/*/
+ * Code uebernommen aus: https://gamedevacademy.org/creating-a-preloading-screen-in-phaser-3/*/
 
 class PreloadScene extends Phaser.Scene{
     constructor() {
@@ -14,62 +14,74 @@ class PreloadScene extends Phaser.Scene{
     preload() {
         //Alle Ressourcen laden
         /*****Assets von StartScene*****/
-        this.load.image('background', 'images/background.png'); //Hintergrundbild laden
-        this.load.image('startButton', 'images/startBtn.png');  //StartButton laden
-        this.load.image('infoButton', 'images/infoBtn.png');
-        this.load.image('controlButton', 'images/controlBtn.png');
-        this.load.image('soundButton', 'images/soundBtn.png');
-        this.load.image('musicButton', 'images/musicBtn.png');
-        this.load.image('noMusicButton', 'images/noMusicBtn.png');
-        this.load.image('noSoundButton', 'images/noSoundBtn.png');
-        this.load.image('controllerInfo', 'images/controller.png');
+        this.load.image('background', 'assets/images/background.png'); //Hintergrundbild laden
+        this.load.image('startButton', 'assets/images/startBtn.png');  //StartButton laden
+        this.load.image('infoButton', 'assets/images/infoBtn.png');
+        this.load.image('controlButton', 'assets/images/controlBtn.png');
+        this.load.image('soundButton', 'assets/images/soundBtn.png');
+        this.load.image('musicButton', 'assets/images/musicBtn.png');
+        this.load.image('noMusicButton', 'assets/images/noMusicBtn.png');
+        this.load.image('noSoundButton', 'assets/images/noSoundBtn.png');
+        this.load.image('controllerInfo', 'assets/images/controller.png');
+
+        //Musik
+        this.load.audio('introMusic',
+            [
+                'assets/audio/introMusic.mp3',
+                'assets/audio/introMusic.ogg'
+                ]
+        );
+
+        //Sound
+        this.load.audio('buttonClick', 'assets/audio/buttonClick.mp3');
+
 
         //Modalfenster Titel laden
-        this.load.image('tutorialTitle', 'images/tutorialTitle.png');
-        this.load.image('controlsTitle','images/steuerungTitle.png');
+        this.load.image('tutorialTitle', 'assets/images/tutorialTitle.png');
+        this.load.image('controlsTitle','assets/images/steuerungTitle.png');
 
         /******Assets von LevelScene***/
-        this.load.image('firstLvl', 'images/lvl1Btn.png');
-        this.load.image('secondLvl', 'images/lvl2Btn.png');
-        this.load.image('thirdLvl', 'images/lvl3Btn.png');
+        this.load.image('firstLvl', 'assets/images/lvl1Btn.png');
+        this.load.image('secondLvl', 'assets/images/lvl2Btn.png');
+        this.load.image('thirdLvl', 'assets/images/lvl3Btn.png');
 
         /******Assets von GameScene***/
         /**Hintergrund*/
-        this.load.image('sky', 'images/sky.png');
-        this.load.image('tree', 'images/tree.png');
-        this.load.image('bush', 'images/bush.png');
-        this.load.image('ground', 'images/ground.png');
+        this.load.image('sky', 'assets/images/sky.png');
+        this.load.image('tree', 'assets/images/tree.png');
+        this.load.image('bush', 'assets/images/bush.png');
+        this.load.image('ground', 'assets/images/ground.png');
 
-        this.load.image('house', 'images/house.png');
+        this.load.image('house', 'assets/images/house.png');
 
         //Player-Bilder laden
-        this.load.spritesheet('player1', 'images/player1.png', {frameWidth: 45, frameHeight: 55});
-        this.load.spritesheet('player2', 'images/player2.png', {frameWidth: 42, frameHeight: 55});
+        this.load.spritesheet('player1', 'assets/images/player1.png', {frameWidth: 45, frameHeight: 55});
+        this.load.spritesheet('player2', 'assets/images/player2.png', {frameWidth: 42, frameHeight: 55});
 
         //Plattform (Busstation) laden
-        this.load.image('busstop', 'images/busstop.png');
+        this.load.image('busstop', 'assets/images/busstop.png');
 
         //Busschild laden
-        this.load.image('busSign', 'images/busSign.png');
+        this.load.image('busSign', 'assets/images/busSign.png');
 
         //Bus laden
-        this.load.spritesheet('bus', 'images/bus.png', {frameWidth: 1390, frameHeight: 550});
+        this.load.spritesheet('bus', 'assets/images/bus.png', {frameWidth: 1390, frameHeight: 550});
 
         //Obstacles laden
 
         //Booster laden (Sneaker)
-        this.load.image('sneaker','images/sneaker.png');
+        this.load.image('sneaker','assets/images/sneaker.png');
 
         //Buttons laden
-        this.load.image('pauseButton', 'images/pauseBtn.png');
-        this.load.image('homeButton', 'images/homeBtn.png');
-        this.load.image('restartButton', 'images/restartBtn.png');
-        this.load.image('continueButton', 'images/continueBtn.png');
+        this.load.image('pauseButton', 'assets/images/pauseBtn.png');
+        this.load.image('homeButton', 'assets/images/homeBtn.png');
+        this.load.image('restartButton', 'assets/images/restartBtn.png');
+        this.load.image('continueButton', 'assets/images/continueBtn.png');
 
         //Modalfenster Titel laden
-        this.load.image('pauseTitle', 'images/pausiertTitle.png');
-        this.load.image('winTitle', 'images/gewonnenTitle.png');
-        this.load.image('looseTitle', 'images/verlorenTitle.png');
+        this.load.image('pauseTitle', 'assets/images/pausiertTitle.png');
+        this.load.image('winTitle', 'assets/images/gewonnenTitle.png');
+        this.load.image('looseTitle', 'assets/images/verlorenTitle.png');
 
 
         const progressBar = this.add.graphics();
