@@ -58,6 +58,19 @@ class PreloadScene extends Phaser.Scene{
         this.load.spritesheet('player1', 'assets/images/player1.png', {frameWidth: 45, frameHeight: 55});
         this.load.spritesheet('player2', 'assets/images/player2.png', {frameWidth: 42, frameHeight: 55});
 
+        //Passant-Bild laden (Hindernis)
+        this.load.spritesheet('passerby', 'assets/images/passerby.png', {frameWidth: 47, frameHeight: 50});
+
+        //Tauben-Bild laden (Hindernis)
+        this.load.spritesheet('pigeon', 'assets/images/pigeon.png', {frameWidth: 250, frameHeight: 205});
+
+        //Verkehrshuettchen-Bild laden
+        this.load.image('trafficCone', 'assets/images/trafficCone.png');
+
+        //Muellhaufen-Bild laden
+        this.load.image('garbageHeap', 'assets/images/garbageHeap.png');
+
+
         //Plattform (Busstation) laden
         this.load.image('busstop', 'assets/images/busstop.png');
 
@@ -71,6 +84,9 @@ class PreloadScene extends Phaser.Scene{
 
         //Booster laden (Sneaker)
         this.load.image('sneaker','assets/images/sneaker.png');
+
+        //Level laden
+        this.load.json('level1Data', 'assets/level1.json');
 
         //Buttons laden
         this.load.image('pauseButton', 'assets/images/pauseBtn.png');

@@ -53,7 +53,7 @@ class GameScene extends Phaser.Scene{
 
         /**Spieler*/
         //Spielfigur erstellen
-        this.player = new Player(this, 100, 460, 'player2');
+        this.player = new Player(this, 100, 460, 'player1');
 
         //Plattformen kollidieren mit Spieler
         this.physics.add.collider(this.player, platforms);
@@ -63,13 +63,33 @@ class GameScene extends Phaser.Scene{
         this.sneakerGroup = this.physics.add.group();
 
         //Schleife, um Sneaker-Objekte zur Gruppe hinzuzufuegen
-        for(let i = 0; i < 5; i++){
+        for(let i = 0; i < 2; i++){
             const sneaker = new Sneaker(this, 300 + i * 150, 200, 'sneaker');
             sneaker.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
             this.sneakerGroup.add(sneaker);
         }
         this.physics.add.collider(this.sneakerGroup, platforms);
 
+        /**Obstacle-Gruppe*/
+        this.obstacleGroup = this.physics.add.group();
+
+        /**Taube*/
+        this.pigeon = new Pigeon(this, 200, 320, 'pigeon');
+        //Kollison zwischen Taube und PLattform
+        this.physics.add.collider(this.pigeon, platforms);
+
+        /**Passant*/
+        this.passerby = new Passerby(this, 300, 460, 'passerby');
+        //Kollision zwischen Passant und Plattform
+        this.physics.add.collider(this.passerby, platforms);
+
+        /**Pylon*/
+        this.trafficCone = new TrafficCone(this, 200, 460, 'trafficCone');
+        this.physics.add.collider(this.trafficCone, platforms);
+
+        /**Muellhaufen*/
+        this.garbageHeap = new GarbageHeap(this, 400, 460, 'garbageHeap');
+        this.physics.add.collider(this.garbageHeap, platforms);
 
         /**Kamera*/
         this.cameras.main.setBounds(0,0, width, height);
@@ -139,7 +159,7 @@ class GameScene extends Phaser.Scene{
         this.cameras.main.scrollY = this.player.y - this.cameras.main.height * 0.5 - 50;
 
         /**Booster aufsammeln**/
-        // Kollisionsueberpruefung zwischen Spieler und Boostern
+        //Kollisionsueberpruefung zwischen Spieler und Boostern
         this.physics.add.overlap(this.player, this.sneakerGroup, this.collectSneaker, null, this);
 
     }
