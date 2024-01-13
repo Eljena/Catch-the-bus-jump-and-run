@@ -13,6 +13,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         //Animation fuer Spieler hinzufuegen
         const player = "player1";
+        //const player = "player2";
 
         this.anims.create({
             key: 'left',
@@ -90,6 +91,16 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.setVelocityY(-jumpSpeed);
         }
 
+    }
 
+    stopPlayer(){
+
+    }
+
+    collectSneaker(player, sneaker){
+        //Sneaker entfernen, wenn er eingesammelt wird
+        sneaker.disableBody(true, true);
+        //soll dem Player kurzzeitig einen Boost geben
+        sneaker.applyEffect(player);
     }
 }

@@ -8,16 +8,20 @@ class PauseModal extends Modal{
         super(scene, x, y);
 
         //Ueberschrift und Buttons hinzufuegen
-        this.headline = scene.add.image(505, 200, 'pauseTitle')
+        this.headline = scene.add.image(505, 200, 'pauseTitle');
         this.homeButton = scene.add.image(350, 400, 'homeButton');
         this.restartButton = scene.add.image(500, 400, 'restartButton');
         this.continueButton = scene.add.image(650, 400, 'continueButton');
 
         //Buttons skalieren
-        const scaleFactor = 0.75;
-        this.homeButton.setScale(scaleFactor);
-        this.restartButton.setScale(scaleFactor);
-        this.continueButton.setScale(scaleFactor);
+        this.homeButton.setScale(this.scaleFactorBtn);
+        this.restartButton.setScale(this.scaleFactorBtn);
+        this.continueButton.setScale(this.scaleFactorBtn);
+
+        //Stellt sicher, dass die Position der Buttons unabhaengig von der Kamerabewegung bleibt
+        this.homeButton.setScrollFactor(0);
+        this.restartButton.setScrollFactor(0);
+        this.continueButton.setScrollFactor(0);
 
         this.continueButton.setInteractive({useHandCursor: true});
         //EventHandler fuer continueButton

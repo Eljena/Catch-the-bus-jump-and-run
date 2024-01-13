@@ -11,25 +11,29 @@ class Modal extends Phaser.GameObjects.Container {
         //Default-Sichtbarkeit von Modal auf false setzen
         this.setVisible(false);
 
+        //Skalierfaktor fuer Buttons
+        this.scaleFactorBtn = 0.75;
 
-        //Hintergrund des Modalfensters zeichnen
+
+        //Hintergrund des Modal-Fensters zeichnen
         this.modalBackground = this.scene.add.graphics();
         this.modalBackground.fillStyle(0x000000, 0.7);
-        this.modalBackground.fillRect(-10, -10, this.scene.sys.game.config.width, this.scene.sys.game.config.height);
+        this.modalBackground.fillRect(0, 0, this.scene.sys.game.config.width, this.scene.sys.game.config.height);
         this.modalBackground.setInteractive();
 
         //Modal-Fenster
-        this.modalWidth = 600; //Breite des Modal-Fensters
-        this.modalX = 200; //X-Position des Modal-Fensters
         this.modalWindow = scene.add.graphics();
         this.modalWindow.fillStyle(0xFD3636, 1);    //Farbe, Transparenz
-        this.modalWindow.fillRect(this.modalX, 100, this.modalWidth, 400);
+        this.modalWindow.fillRect(200, 100, 600, 400);
 
         //Schliessen-Button erstellen und hinzufuegen
         this.closeButton = scene.add.text(750, 120, 'X', {fontSize: '24px', fill: '#ffffff'});
         this.closeButton.setInteractive({useHandCursor: true});
 
-        //Schliessen EventHandler
+        //Stellt sicher, dass die Position des Schliessen-Buttons unabhaengig von der Kamerabewegung bleibt
+        this.closeButton.setScrollFactor(0);
+
+        //Schliessen-EventHandler
         this.closeButton.on('pointerdown', () => {
             this.hideModal();
             //Aufruf der Callback-Funktion, wenn das Modal geschlossen wird

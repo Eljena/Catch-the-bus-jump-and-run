@@ -5,6 +5,8 @@
 let modalActive= false;
 
 
+
+
 const handleButtons = (button, onClick) =>{
     button.setInteractive({useHandCursor: true});
     button.setScale(0.5);

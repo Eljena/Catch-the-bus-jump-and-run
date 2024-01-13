@@ -1,3 +1,6 @@
+/**
+ * Model-Klasse fuer das Bus-Objekt
+ */
 class Bus extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, texture){
         super(scene, x, y, texture);
@@ -6,7 +9,7 @@ class Bus extends Phaser.Physics.Arcade.Sprite {
         scene.physics.add.existing(this);
 
         this.setScale(0.5);
-        this.setCollideWorldBounds(false);   //false, damit Bus aus Spielfeld fahren kann
+        this.setCollideWorldBounds(true);
 
         //Animation fuer Bus erstellen
         this.anims.create({

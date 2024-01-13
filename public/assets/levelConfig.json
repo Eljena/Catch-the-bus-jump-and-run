@@ -1,0 +1,110 @@
+{
+  "levels": {
+    "level1": {
+      "lvlNr": "1",
+      "backgroundObjects": [
+        {"type": "clouds", "x": 200, "y": 100, "scale": 0.7},
+        {"type": "clouds", "x": 1700, "y": 150, "scale": 0.7},
+        {"type": "clouds", "x": 3200, "y": 100, "scale": 0.7},
+        {"type": "clouds", "x": 4700, "y": 150, "scale": 0.7},
+        {"type": "clouds", "x": 6200, "y": 100, "scale": 0.7},
+        {"type": "clouds", "x": 7700, "y": 150, "scale": 0.7},
+        {"type": "bushes", "x": 0, "y": 500, "scale": 0.7},
+        {"type": "bushes", "x": 1000, "y": 500, "scale": 0.7},
+        {"type": "bushes", "x": 2450, "y": 500, "scale": 0.7},
+        {"type": "tree", "x": 550, "y": 375, "scale": 1},
+        {"type": "house", "x": 250, "y": 360, "scale": 0.3},
+        {"type": "busSign", "x": 602, "y": 480, "scale": 0.6},
+        {"type": "school", "x": 7700, "y": 350, "scale": 0.35}
+      ],
+      "platforms": [
+        {"type": "busstop", "x": 800, "y": 450, "scale": 0.4},
+        {"type": "ground", "x": 0, "y": 600, "scale": 1},
+        {"type": "ground", "x": 1000, "y": 600, "scale": 1},
+        {"type": "ground", "x": 2000, "y": 600, "scale": 1},
+        {"type": "ground", "x": 3000, "y": 600, "scale": 1},
+        {"type": "ground", "x": 4000, "y": 600, "scale": 1},
+        {"type": "ground", "x": 5000, "y": 600, "scale": 1},
+        {"type": "ground", "x": 6000, "y": 600, "scale": 1},
+        {"type": "ground", "x": 7000, "y": 600, "scale": 1}
+      ],
+      "gameObjects": [
+        {"type": "bus", "x": 700, "y": 405},
+        {"type": "player", "x": 100, "y": 460}
+      ],
+      "booster": {
+        "sneakers": [
+          {"x": 300, "y": 200},
+          {"x": 450, "y": 200}
+        ]
+      }
+    },
+    "level2": {
+      "lvlNr": "2",
+      "backgroundObjects": [
+        {"type": "clouds", "x": 200, "y": 100, "scale": 0.7},
+        {"type": "bush", "x": 50, "y": 490, "scale": 0.7},
+        {"type": "bush", "x": 500, "y": 490, "scale": 0.7},
+        {"type": "bush", "x": 650, "y": 490, "scale": 0.7},
+        {"type": "tree", "x": 550, "y": 375, "scale": 1},
+        {"type": "house", "x": 250, "y": 360, "scale": 0.3},
+        {"type": "busSign", "x": 602, "y": 480, "scale": 0.6}
+      ],
+      "platforms": [
+        {"type": "busstop", "x": 800, "y": 450, "scale": 0.4},
+        {"type": "ground", "x": 0, "y": 600, "scale": 1},
+        {"type": "ground", "x": 1000, "y": 600, "scale": 1},
+        {"type": "ground", "x": 2000, "y": 600, "scale": 1},
+        {"type": "ground", "x": 3000, "y": 600, "scale": 1},
+        {"type": "ground", "x": 4000, "y": 600, "scale": 1},
+        {"type": "ground", "x": 5000, "y": 600, "scale": 1},
+        {"type": "ground", "x": 6000, "y": 600, "scale": 1},
+        {"type": "ground", "x": 7000, "y": 600, "scale": 1}
+      ],
+      "gameObjects": [
+        {"type": "bus", "x": 700, "y": 405},
+        {"type": "player", "x": 100, "y": 460}
+      ],
+      "booster": {
+        "sneakers": [
+          {"x": 300, "y": 200},
+          {"x": 450, "y": 200}
+        ]
+      }
+    },
+    "level3": {
+      "lvlNr": "3",
+      "backgroundObjects": [
+        {"type": "clouds", "x": 200, "y": 100, "scale": 0.7},
+        {"type": "bush", "x": 50, "y": 490, "scale": 0.7},
+        {"type": "bush", "x": 500, "y": 490, "scale": 0.7},
+        {"type": "bush", "x": 650, "y": 490, "scale": 0.7},
+        {"type": "tree", "x": 550, "y": 375, "scale": 1},
+        {"type": "house", "x": 250, "y": 360, "scale": 0.3},
+        {"type": "busSign", "x": 602, "y": 480, "scale": 0.6}
+      ],
+      "platforms": [
+        {"type": "busstop", "x": 800, "y": 450, "scale": 0.4},
+        {"type": "ground", "x": 0, "y": 600, "scale": 1},
+        {"type": "ground", "x": 1000, "y": 600, "scale": 1},
+        {"type": "ground", "x": 2000, "y": 600, "scale": 1},
+        {"type": "ground", "x": 3000, "y": 600, "scale": 1},
+        {"type": "ground", "x": 4000, "y": 600, "scale": 1},
+        {"type": "ground", "x": 5000, "y": 600, "scale": 1},
+        {"type": "ground", "x": 6000, "y": 600, "scale": 1},
+        {"type": "ground", "x": 7000, "y": 600, "scale": 1}
+      ],
+      "gameObjects": [
+        {"type": "bus", "x": 700, "y": 405},
+        {"type": "player", "x": 100, "y": 460}
+      ],
+      "booster": {
+        "sneakers": [
+          {"x": 300, "y": 200},
+          {"x": 450, "y": 200}
+        ]
+      }
+
+    }
+  }
+}

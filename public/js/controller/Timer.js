@@ -6,9 +6,11 @@
  * wenn der Timer ablaeuft
  */
 class Timer {
-    constructor(scene, x, y, initialTime){
+    constructor(scene, x, y, initialTime, guiContainer){
         this.scene = scene;
         this.initialTime = initialTime;
+
+        this.guiContainer = guiContainer;
 
 
         this.timerStyle = {
@@ -19,6 +21,7 @@ class Timer {
 
         this.timer = this.scene.add.text(x ,y, this.formatTime(this.initialTime), this.timerStyle);
         this.timer.setShadow(0, 4, 'rgba(0, 0, 0, 0.25)', 4);
+        this.guiContainer.add(this.timer);
 
         this.timedEvent = this.scene.time.addEvent({
            delay: 1000,     //Legt fest, dass das Ereignis alle 1000 Milisekunden ausgeloest wird

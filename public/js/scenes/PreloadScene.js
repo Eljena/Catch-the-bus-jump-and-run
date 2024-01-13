@@ -14,8 +14,8 @@ class PreloadScene extends Phaser.Scene{
     preload() {
         //Alle Ressourcen laden
         /*****Assets von StartScene*****/
-        this.load.image('background', 'assets/images/background.png'); //Hintergrundbild laden
-        this.load.image('startButton', 'assets/images/startBtn.png');  //StartButton laden
+        this.load.image('startBackground', 'assets/images/startBackground.png');
+        this.load.image('startButton', 'assets/images/startBtn.png');
         this.load.image('infoButton', 'assets/images/infoBtn.png');
         this.load.image('controlButton', 'assets/images/controlBtn.png');
         this.load.image('soundButton', 'assets/images/soundBtn.png');
@@ -23,6 +23,7 @@ class PreloadScene extends Phaser.Scene{
         this.load.image('noMusicButton', 'assets/images/noMusicBtn.png');
         this.load.image('noSoundButton', 'assets/images/noSoundBtn.png');
         this.load.image('controllerInfo', 'assets/images/controller.png');
+        this.load.image('tutorialText', 'assets/images/tutorialText.png');
 
         //Musik
         this.load.audio('introMusic',
@@ -38,21 +39,24 @@ class PreloadScene extends Phaser.Scene{
 
         //Modalfenster Titel laden
         this.load.image('tutorialTitle', 'assets/images/tutorialTitle.png');
-        this.load.image('controlsTitle','assets/images/steuerungTitle.png');
+        this.load.image('controlsTitle','assets/images/controlsTitle.png');
 
         /******Assets von LevelScene***/
+        this.load.image('chooseLvl', 'assets/images/chooseLvlTitle.png');
         this.load.image('firstLvl', 'assets/images/lvl1Btn.png');
         this.load.image('secondLvl', 'assets/images/lvl2Btn.png');
         this.load.image('thirdLvl', 'assets/images/lvl3Btn.png');
 
         /******Assets von GameScene***/
         /**Hintergrund*/
-        this.load.image('sky', 'assets/images/sky.png');
+        this.load.image('gameBackground', "assets/images/gameBackground.png");
+        this.load.image('clouds', 'assets/images/clouds.png');
         this.load.image('tree', 'assets/images/tree.png');
-        this.load.image('bush', 'assets/images/bush.png');
+        this.load.image('bushes', 'assets/images/bushes.png');
         this.load.image('ground', 'assets/images/ground.png');
 
         this.load.image('house', 'assets/images/house.png');
+        this.load.image('school', 'assets/images/school.png');
 
         //Player-Bilder laden
         this.load.spritesheet('player1', 'assets/images/player1.png', {frameWidth: 45, frameHeight: 55});
@@ -86,18 +90,19 @@ class PreloadScene extends Phaser.Scene{
         this.load.image('sneaker','assets/images/sneaker.png');
 
         //Level laden
-        this.load.json('level1Data', 'assets/level1.json');
+        this.load.json('levelConfig', 'assets/levelConfig.json');
 
         //Buttons laden
         this.load.image('pauseButton', 'assets/images/pauseBtn.png');
         this.load.image('homeButton', 'assets/images/homeBtn.png');
         this.load.image('restartButton', 'assets/images/restartBtn.png');
         this.load.image('continueButton', 'assets/images/continueBtn.png');
+        this.load.image('selectLvlButton', 'assets/images/selectLvlBtn.png');
 
         //Modalfenster Titel laden
         this.load.image('pauseTitle', 'assets/images/pausiertTitle.png');
-        this.load.image('winTitle', 'assets/images/gewonnenTitle.png');
-        this.load.image('looseTitle', 'assets/images/verlorenTitle.png');
+        this.load.image('winTitle', 'assets/images/winTitle.png');
+        this.load.image('looseTitle', 'assets/images/looseTitle.png');
 
 
         const progressBar = this.add.graphics();

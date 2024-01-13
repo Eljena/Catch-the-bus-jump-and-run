@@ -10,7 +10,7 @@ class StartScene extends Phaser.Scene{
     //Hier wird die Logik fuer die Startszene initiliasiert
     create(){
         //Hintergrundbild zur Startszene hinzufuegen
-        const background = this.add.image(0,0, 'background').setOrigin(0,0);
+        const background = this.add.image(0,0, 'startBackground').setOrigin(0,0);
 
         const width = this.sys.game.config.width;
         const height = this.sys.game.config.height;
@@ -43,7 +43,7 @@ class StartScene extends Phaser.Scene{
             buttonClick.play();
             if(!modalActive){
                 modalActive = true;
-                const infoModal = new InfoModal(this,10,10);
+                const infoModal = new InfoModal(this,0,0);
 
                 //setzt Modalstatus auf false, wenn das Modalfenster geschlossen wurde
                 infoModal.setOnModalClose(() =>{
@@ -63,7 +63,7 @@ class StartScene extends Phaser.Scene{
             buttonClick.play();
             if(!modalActive) {
                  modalActive = true;
-                 const controlModal = new ControlModal(this, 10, 10);
+                 const controlModal = new ControlModal(this, 0, 0);
                  this.add.existing(controlModal);
                  controlModal.showModal();
                  console.log('Control-button wurde geklickt');
