@@ -18,6 +18,7 @@ class GameScene extends Phaser.Scene{
 
         const gameWidth = 8000;
 
+
         //Aendere die Grenzen des Spielbereichs
         this.physics.world.setBounds(0, 0, gameWidth, height);
 
@@ -98,21 +99,30 @@ class GameScene extends Phaser.Scene{
 
         this.player.movePlayer(cursors, keyboard, 0, 0);
 
-        //Spielerbewegungsmethode aufrufen
-        if(!modalActive){
-            this.player.movePlayer(cursors, keyboard, moveSpeed, jumpSpeed);
-            //Kamerabewegung entsprechend der Spielerbewegung anpassen
-            this.cameras.main.scrollX = this.player.x - this.cameras.main.width * 0.5;
-            this.cameras.main.scrollY = this.player.y - this.cameras.main.height * 0.5 - 50;
+        //Verzoegert die Spielerbewegung um 2 Sekunden (Dauer bis der Bus verschwunden ist)
+        this.time.delayedCall(2000, () => {
+            //Spielerbewegungsmethode aufrufen
+            if(!modalActive){
+                this.player.movePlayer(cursors, keyboard, moveSpeed, jumpSpeed);
+                //Kamerabewegung entsprechend der Spielerbewegung anpassen
+                this.cameras.main.scrollX = this.player.x - this.cameras.main.width * 0.5;
+                this.cameras.main.scrollY = this.player.y - this.cameras.main.height * 0.5 - 50;
+            }
+        });
 
-            /**Booster aufsammeln*/
-            //Kollisionsueberpruefung zwischen Spieler und Boostern
-            this.physics.add.overlap(this.player, this.sneakerGroup, this.player.collectSneaker, null, this);
+
+        //Wenn Spieler Ziel (Position 7600) erreicht, dann erstelle ein WinModal-Objekt)
+        if(this.player.x >= 7600){
+            //Erstelle WinModal-Objekt, je nach Level
+            if(this.level1 != null){
+                this.level1.createModal("winModal", WinModal);
+            } else if(this.level2 != null){
+                this.level3.createModal("winModal", WinModal);
+            } else if(this.level3 != null){
+                this.level3.createModal("winModal", WinModal);
+            }
         }
-        
+
     }
-
-
-
 
 }

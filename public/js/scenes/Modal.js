@@ -14,7 +14,6 @@ class Modal extends Phaser.GameObjects.Container {
         //Skalierfaktor fuer Buttons
         this.scaleFactorBtn = 0.75;
 
-
         //Hintergrund des Modal-Fensters zeichnen
         this.modalBackground = this.scene.add.graphics();
         this.modalBackground.fillStyle(0x000000, 0.7);

@@ -84,9 +84,8 @@ class PreloadScene extends Phaser.Scene{
         //Bus laden
         this.load.spritesheet('bus', 'assets/images/bus.png', {frameWidth: 1390, frameHeight: 550});
 
-        //Obstacles laden
 
-        //Booster laden (Sneaker)
+        //Booster laden (Booster)
         this.load.image('sneaker','assets/images/sneaker.png');
 
         //Level laden
@@ -103,6 +102,9 @@ class PreloadScene extends Phaser.Scene{
         this.load.image('pauseTitle', 'assets/images/pausiertTitle.png');
         this.load.image('winTitle', 'assets/images/winTitle.png');
         this.load.image('looseTitle', 'assets/images/looseTitle.png');
+
+        //WinModal Confetti laden
+        this.load.image('confetti', 'assets/images/confetti.png');
 
 
         const progressBar = this.add.graphics();

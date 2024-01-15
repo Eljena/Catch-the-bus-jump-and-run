@@ -37,6 +37,7 @@ class Level{
             const bg = this.gameScene.add.image(bgData.x, bgData.y, bgData.type).setScale(bgData.scale);
         });
 
+        const busColliderPlatforms = this.gameScene.physics.add.staticGroup();
 
         //Plattformen erstellen
         const platforms = this.gameScene.physics.add.staticGroup();
@@ -44,43 +45,74 @@ class Level{
             const platform = platforms.create(platformData.x, platformData.y, platformData.type).setScale(platformData.scale);
             platform.refreshBody();
 
+            //Wenn Boden Platform dann fuege zu busColliderPlatform platform hinzu
+            if(platformData.type === 'ground'){
+                busColliderPlatforms.add(platform);
+            }
 
         });
-        console.log("Gruppe: " + platforms);
 
-        // Spielobjekte erstellen
+        //Hindernisse erstellen
+        const obstacleGroup = this.gameScene.physics.add.staticGroup();
+        console.log(this.levelInfo.obstacles);
+        this.levelInfo.obstacles.forEach(obstacleData =>{
+            const obstacle = obstacleGroup.create(obstacleData.x, obstacleData.y, obstacleData.type).setScale(obstacleData.scale);
+
+            //Setze Hindernis als unbeweglich
+            obstacle.setImmovable(true);
+
+            //Kollidiere mit statischen Plattformen
+            this.gameScene.physics.add.collider(obstacle, platforms);
+
+            //stellt sicher, dass der Koerper des Sprites den neuen Abmessungen od. Position entspricht
+            obstacle.refreshBody();
+
+        });
+
+        //Spielobjekte erstellen
         this.levelInfo.gameObjects.forEach(gameObjectData => {
             switch(gameObjectData.type) {
                 case "player":
-                    this.player = new Player(this.gameScene, gameObjectData.x, gameObjectData.y);
+                    this.player = new Player(this.gameScene, gameObjectData.x, gameObjectData.y, 'player1');
                     this.gameScene.physics.add.collider(this.player, platforms);
+                    this.gameScene.physics.add.collider(this.player, obstacleGroup);
                     break;
                 case "bus":
-                    const bus = new Bus(this.gameScene, gameObjectData.x, gameObjectData.y);
-                    this.gameScene.physics.add.collider(bus, platforms);
+                    const bus = new Bus(this.gameScene, gameObjectData.x, gameObjectData.y, 'bus');
+                    this.gameScene.physics.add.collider(bus, busColliderPlatforms);
                     break;
+                case "pigeon":
+                    const pigeon = new Pigeon(this.gameScene, gameObjectData.x, gameObjectData.y, 'pigeon');
+                    this.gameScene.physics.add.collider(pigeon, platforms);
+                    //Wenn Spieler und Taube ueberlappen, dann rufe handelPigeonCollision
+                    this.gameScene.physics.add.overlap(this.player, pigeon, this.handlePigeonCollision, null, this);
 
+                    break;
+                case "passerby":
+                    const passerby = new Passerby(this.gameScene, gameObjectData.x, gameObjectData.y, 'passerby');
+                    this.gameScene.physics.add.collider(passerby, platforms);
+                    break;
             }
+
         });
 
-        //Booster hinzufuegen, falls vorhanden
-        /**
-        if (this.levelInfo.booster && this.levelInfo.booster.sneakers) {
-            this.levelInfo.booster.sneakers.forEach(sneakerData => {
-                const sneaker = new Sneaker(this, sneakerData.x, sneakerData.y, 'sneaker');
-                sneaker.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
-                this.boosterGroup.add(sneaker);
+
+        // Booster hinzufuegen, falls vorhanden
+        if(this.levelInfo.booster) {
+            const boosterGroup = this.gameScene.physics.add.group();
+            this.levelInfo.booster.forEach(boosterData => {
+                const boost = new Booster(this.gameScene, boosterData.x, boosterData.y, boosterData.type);
+                boosterGroup.add(boost);
             });
             this.gameScene.physics.add.collider(boosterGroup, platforms);
-        }*/
-
-
+            this.gameScene.physics.add.overlap(this.player, boosterGroup, this.player.collectBooster, null, this);
+        }
 
         console.log("Zeichne Level");
 
-
-
     }
+
+
 
     drawHeadline(){
         //Container fuer Titel, Timer und PauseButton erstellen
@@ -109,31 +141,44 @@ class Level{
         //sorgt dafuer, dass der Button an einer festen Bildschirmposition bleibt
         pauseButton.setScrollFactor(0);
         handleButtons(pauseButton, () =>{
-            if(!modalActive){
-                //stoppe Timer, wenn Modal geoeffnet
-                this.timer.stopTimer();
-                modalActive = true;
-
-                //PauseModal erstellen
-                const pauseModal = new PauseModal(this.gameScene,0,0);
-                //sorgt dafuer, dass das Modalfenster an einer festen Bildschirmposition bleibt
-                pauseModal.setScrollFactor(0);
-
-                //Zur Szene hinzufuegen
-                this.gameScene.add.existing(pauseModal);
-                //PauseModal zeigen
-                pauseModal.showModal();
-
-                //Setze die Callback-Funktion fuer das Pause-Modal, um den Timer fortzusetzen
-                pauseModal.setOnModalClose(() =>{
-                    //Spiel fortsetzen
-                    this.resumeGame();
-                });
-            }
+            this.createModal("pauseModal", PauseModal);
         });
         guiContainer.add(pauseButton);
-
     }
+
+    createModal(modalName, modalClass){
+        if(!modalActive){
+            //stoppe Timer, wenn Modal geoeffnet
+            this.timer.stopTimer();
+            //stoppe Sprites, wenn Modal geoeffnet ist
+
+            modalActive = true;
+
+            //Erstelle Modal
+            const modalName = new modalClass(this.gameScene, 0,0);
+
+            //Stellt sicher, dass Modalfenster an einer fixierten Position auf dem Bildschirm bleibt
+            modalName.setScrollFactor(0);
+
+            //Fuege Modal zur Szene hinzu
+            this.gameScene.add.existing(modalName);
+            //Zeige Modal
+            modalName.showModal();
+
+            //Setze die Callback-Funktion fuer das Pause-Modal, um den Timer fortzusetzen
+            modalName.setOnModalClose(() =>{
+               if(modalName instanceof PauseModal){
+                   //Spiel fortsetzen
+                   this.resumeGame();
+               } else if(modalName instanceof WinModal){
+                   //WinModal wurde gezeigt
+                   //this.isWinModalShown = true;
+               }
+            });
+
+        }
+    }
+
 
     /**
      * Funktion zum Fortsetzen des Spiels nach dem
@@ -145,16 +190,29 @@ class Level{
         this.timer.resumeTimer();
     }
 
+    /**
+     * Diese Methode gibt true zurück, wenn das WinModal angezeigt wurde
+     */
+    isWinModalShown() {
+        return this.winModalShown;
+    }
+
+    /**
+     * Hier wird gehandelt was passiert, wenn Spieler mit Taube kollidiert
+     *
+     */
+    handlePigeonCollision(){
+        if(!modalActive){
+            console.log("Spieler kollidiert mit Taube");
+            this.createModal("looseModal", LooseModal);
+            modalActive = true;
+        }
+
+    }
+
     /**get-Methode fuer Player*/
     getPlayer() {
         return this.player;
     }
 
-    createWinModal(){
-
-    }
-
-    createLooseModal(){
-
-    }
 }

@@ -9,7 +9,8 @@ class Bus extends Phaser.Physics.Arcade.Sprite {
         scene.physics.add.existing(this);
 
         this.setScale(0.5);
-        this.setCollideWorldBounds(true);
+        //false, damit Bus aus Spielfeld faehrt
+        this.setCollideWorldBounds(false);
 
         //Animation fuer Bus erstellen
         this.anims.create({

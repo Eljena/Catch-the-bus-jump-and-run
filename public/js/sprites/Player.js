@@ -8,6 +8,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.setScale(3);
         this.setBounce(0.1);
         this.setCollideWorldBounds(true);
+        this.setSize(35, 54);
         //Multiplikator fuer die Geschwindigkeit des Spielers
         this.speedMultiplier = 1.0;
 
@@ -56,7 +57,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         //Pruefen, ob Spieler geboostet wird
         if(this.isBoosted){
             finalMoveSpeed = moveSpeed * this.speedMultiplier;
-            console.log(finalMoveSpeed);
         }
 
         const keys = {
@@ -93,14 +93,12 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     }
 
-    stopPlayer(){
-
-    }
-
-    collectSneaker(player, sneaker){
-        //Sneaker entfernen, wenn er eingesammelt wird
-        sneaker.disableBody(true, true);
+    collectBooster(player, booster){
+        //Booster entfernen, wenn er eingesammelt wird
+        booster.disableBody(true, true);
         //soll dem Player kurzzeitig einen Boost geben
-        sneaker.applyEffect(player);
+        booster.applyEffect(player);
     }
+
+
 }

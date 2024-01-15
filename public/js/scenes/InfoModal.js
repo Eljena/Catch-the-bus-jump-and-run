@@ -8,7 +8,7 @@ class InfoModal extends Modal{
         this.tutorialText = scene.add.image(500, 350, 'tutorialText');
         this.tutorialText.setScale(0.8);
 
-        // Elemente zum Container hinzufügen
+        // Elemente zum Container hinzufuegen
         this.add(this.modalWindow);
         this.add(this.closeButton);
         this.add(this.headline);

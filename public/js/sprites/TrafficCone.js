@@ -6,7 +6,5 @@ class TrafficCone extends Obstacle{
         scene.physics.add.existing(this);
 
         this.setScale(0.1);
-
-
     }
 }

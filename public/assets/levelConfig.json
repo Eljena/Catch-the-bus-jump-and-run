@@ -10,15 +10,30 @@
         {"type": "clouds", "x": 6200, "y": 100, "scale": 0.7},
         {"type": "clouds", "x": 7700, "y": 150, "scale": 0.7},
         {"type": "bushes", "x": 0, "y": 500, "scale": 0.7},
-        {"type": "bushes", "x": 1000, "y": 500, "scale": 0.7},
-        {"type": "bushes", "x": 2450, "y": 500, "scale": 0.7},
+        {"type": "bushes", "x": 1500, "y": 500, "scale": 0.7},
+        {"type": "bushes", "x": 3000, "y": 500, "scale": 0.7},
+        {"type": "bushes", "x": 4500, "y": 500, "scale": 0.7},
+        {"type": "bushes", "x": 6000, "y": 500, "scale": 0.7},
+        {"type": "bushes", "x": 7500, "y": 500, "scale": 0.7},
         {"type": "tree", "x": 550, "y": 375, "scale": 1},
+        {"type": "tree", "x": 1550, "y": 375, "scale": 1},
+        {"type": "tree", "x": 2550, "y": 375, "scale": 1},
+        {"type": "tree", "x": 3550, "y": 375, "scale": 1},
+        {"type": "tree", "x": 4550, "y": 375, "scale": 1},
+        {"type": "tree", "x": 5550, "y": 375, "scale": 1},
+        {"type": "tree", "x": 6550, "y": 375, "scale": 1},
         {"type": "house", "x": 250, "y": 360, "scale": 0.3},
         {"type": "busSign", "x": 602, "y": 480, "scale": 0.6},
+        {"type": "busSign", "x": 2602, "y": 480, "scale": 0.6},
+        {"type": "busSign", "x": 4602, "y": 480, "scale": 0.6},
+        {"type": "busSign", "x": 6602, "y": 480, "scale": 0.6},
         {"type": "school", "x": 7700, "y": 350, "scale": 0.35}
       ],
       "platforms": [
         {"type": "busstop", "x": 800, "y": 450, "scale": 0.4},
+        {"type": "busstop", "x": 2800, "y": 450, "scale": 0.4},
+        {"type": "busstop", "x": 4800, "y": 450, "scale": 0.4},
+        {"type": "busstop", "x": 6800, "y": 450, "scale": 0.4},
         {"type": "ground", "x": 0, "y": 600, "scale": 1},
         {"type": "ground", "x": 1000, "y": 600, "scale": 1},
         {"type": "ground", "x": 2000, "y": 600, "scale": 1},
@@ -28,17 +43,31 @@
         {"type": "ground", "x": 6000, "y": 600, "scale": 1},
         {"type": "ground", "x": 7000, "y": 600, "scale": 1}
       ],
-      "gameObjects": [
-        {"type": "bus", "x": 700, "y": 405},
-        {"type": "player", "x": 100, "y": 460}
+      "obstacles": [
+        {"type":  "trafficCone", "x":  500, "y":  515, "scale":  0.1},
+        {"type":  "trafficCone", "x":  2100, "y":  515, "scale":  0.1},
+        {"type":  "trafficCone", "x":  2500, "y":  515, "scale":  0.1},
+        {"type":  "trafficCone", "x":  3500, "y":  515, "scale":  0.1},
+        {"type":  "trafficCone", "x":  4500, "y":  515, "scale":  0.1},
+        {"type":  "trafficCone", "x":  6500, "y":  515, "scale":  0.1},
+        {"type":  "garbageHeap", "x":  4300, "y":  480, "scale":  0.5},
+        {"type":  "garbageHeap", "x":  6000, "y":  480, "scale":  0.5}
       ],
-      "booster": {
-        "sneakers": [
-          {"x": 300, "y": 200},
-          {"x": 450, "y": 200}
-        ]
-      }
+      "gameObjects": [
+        {"type": "bus", "x": 700, "y": 410},
+        {"type": "player", "x": 100, "y": 465},
+        {"type": "pigeon", "x":  1900, "y": 320},
+        {"type": "passerby", "x":  1000, "y": 460}
+      ],
+      "booster": [
+        {"type":  "sneaker", "x":  1400, "y":  530},
+        {"type":  "sneaker", "x":  3600, "y":  530}
+      ]
     },
+
+
+
+
     "level2": {
       "lvlNr": "2",
       "backgroundObjects": [
@@ -67,8 +96,8 @@
       ],
       "booster": {
         "sneakers": [
-          {"x": 300, "y": 200},
-          {"x": 450, "y": 200}
+          {"x": 300, "y": 550},
+          {"x": 450, "y": 550}
         ]
       }
     },
