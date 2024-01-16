@@ -1,3 +1,8 @@
+//Globale Variable, um auf intromusic ausserhalb von StartScene zuzugreifen
+let introMusic;
+let gameplayMusic;
+let winSound;
+let looseSound;
 class StartScene extends Phaser.Scene{
     constructor() {
         super({key: 'StartScene'});
@@ -19,11 +24,21 @@ class StartScene extends Phaser.Scene{
 
         /**Intro Musik*/
         // Der Audio-Manager wird verwendet, um das Audio abzuspielen
-        const introMusic = this.sound.add('introMusic', { loop: true, volume: 0.5 });
+        introMusic = this.sound.add('introMusic', { loop: true, volume: 0.5 });
         introMusic.play();
+
+        /**Gameplay Musik -> wird waehrend des Spiels abgespielt*/
+        gameplayMusic = this.sound.add('gameplayMusic', { loop: true, volume: 0.5 });
 
         //Sound Button
         const buttonClick = this.sound.add('buttonClick');
+
+        /**Gameplay Sound*/
+        //Win Sound
+        winSound = this.sound.add('winSound');
+
+        //Loose Sound
+        looseSound = this.sound.add('looseSound');
 
         /*****Menue Buttons ***/
         //Start Button

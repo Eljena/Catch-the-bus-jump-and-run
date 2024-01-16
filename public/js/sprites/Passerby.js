@@ -7,9 +7,16 @@ class Passerby extends Obstacle{
 
         this.setScale(3);
         this.setBounce(0.1);
+        //Kollisionsbox-Groesse einstellen
+        this.setSize(37,50);
+        //Verschiebung der Kollisionsbox
+        this.setOffset(10,0);
 
-        // Multiplikator fuer die Geschwindigkeit
-        this.speedMultiplier = 1.0;
+
+        //Geschwindigkeit fuer Passerby
+        this.movementSpeed = 2000;
+        //Laufbreite fuer Passerby
+        this.movementWidth = 100;
 
         // Animation fuer Passanten hinzufuegen
         const passerbyFrames = "passerby"
@@ -31,52 +38,55 @@ class Passerby extends Obstacle{
         });
 
         //Starte die 'left' Animation fuer Passanten
-        this.play('left');
+        this.play('right');
 
         //Bewegung starten
-        this.toggleMovement();
+        this.leftAndRightMovement();
 
 
     }
 
-    toggleMovement() {
-        this.rightToLeftMovement();
-        setTimeout(() => {
+    leftAndRightMovement() {
+        //Callback-Funktion wird aufgerufen, wenn die aktuelle Bewegung (Tween) abgeschlossen ist
+        const onCompleteCallback = () => {
+            //Animation wechseln, wenn die Tween abgeschlossen ist
             this.changeAnimation();
-            this.leftToRightMovement();
-            setTimeout(() => {
-                this.changeAnimation();
-                this.rightToLeftMovement();
-                this.toggleMovement();
-            }, 2000); //2 Sekunden nach rechts
-        }, 2000); //2 Sekunden nach links
-    }
 
-    leftToRightMovement() {
-        const initialX = this.x;
+            //Neue Tween für die entgegengesetzte Richtung starten
+            this.scene.tweens.add({
+                targets: this,
+                x: this.x + (this.movementWidth * (this.flipDirection ? -1 : 1)),
+                ease: 'Sine.easeInOut',
+                duration: this.movementSpeed,
+                onComplete: onCompleteCallback  //Aufruf, wenn Bewegung abgeschlossen ist
+            });
+
+            //Die Richtung umkehren
+            this.flipDirection = !this.flipDirection;
+        };
+
+        //Starte die erste Tween mit der aktuellen X-Position
         this.scene.tweens.add({
             targets: this,
-            x: initialX + 100, //Horizontale Bewegung nach rechts
-            ease: 'Linear',
-            duration: 2000, //Dauer für die Bewegung
+            x: this.x + (this.movementWidth * (this.flipDirection ? -1 : 1)),
+            ease: 'Sine.easeInOut',
+            duration: this.movementSpeed,
+            onComplete: onCompleteCallback
         });
-    }
 
-    rightToLeftMovement() {
-        const initialX = this.x;
-        this.scene.tweens.add({
-            targets: this,
-            x: initialX - 100, //Horizontale Bewegung nach links
-            ease: 'Linear',
-            duration: 2000, //Dauer für die Bewegung
-        });
+        //Initialisiere die Richtung (true für Rechtsbewegung, false fuer Linksbewegung)
+        this.flipDirection = true;
     }
 
     changeAnimation() {
-        if (this.anims.currentAnim.key === 'left') {
-            this.play('right');
-        } else if (this.anims.currentAnim.key === 'right') {
-            this.play('left');
+        //prueft, ob currentAnim definiert ist, bevor auf seine Schluesseleignschaft
+        if (this.anims.currentAnim && this.anims.currentAnim.key) {
+            if (this.anims.currentAnim.key === 'left') {
+                this.play('right');
+            } else if (this.anims.currentAnim.key === 'right') {
+                this.play('left');
+            }
         }
     }
+
 }

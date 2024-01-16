@@ -6,11 +6,13 @@
  * wenn der Timer ablaeuft
  */
 class Timer {
-    constructor(scene, x, y, initialTime, guiContainer){
+    constructor(scene, x, y, initialTime, guiContainer, onTimeExpiredCallback){
         this.scene = scene;
         this.initialTime = initialTime;
 
         this.guiContainer = guiContainer;
+
+        this.onTimeExpiredCallback = onTimeExpiredCallback;
 
 
         this.timerStyle = {
@@ -39,7 +41,7 @@ class Timer {
         if(this.initialTime > 0){
             this.initialTime -= 1;
         } else{
-            this.gameOver();
+            this.timeExpired();
         }
         this.timer.setText(this.formatTime(this.initialTime));
     }
@@ -77,8 +79,11 @@ class Timer {
         });
     }
 
-    gameOver(){
+    timeExpired(){
         console.log('Zeit abgelaufen');
-        //TODO LooseModal aufrufen
+        //Rufe das Callback auf, um die Level-Klasse zu informieren
+        if (this.onTimeExpiredCallback) {
+            this.onTimeExpiredCallback();
+        }
     }
 }

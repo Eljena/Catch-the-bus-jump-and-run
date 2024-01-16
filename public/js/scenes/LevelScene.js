@@ -1,3 +1,5 @@
+//Globale Variable, um den Spielfortschritt zu verfolgen
+let playerProgress = 1;
 /**
  * Diese Klasse dient zum Darstellen der Levelauswahlszene.
  */
@@ -27,27 +29,49 @@ class LevelScene extends Phaser.Scene {
         chooseLvlTitle.setScale(0.5);
 
 
-        /**Level-Buttons*/
+        /**Level-Buttons Handling*/
         const lvl1Button = this.add.image(300, 300, 'firstLvl');
         handleButtons(lvl1Button, () => {
-            // Hier die Logik einfügen, die beim Klicken des Buttons ausgeführt werden soll
+            //hier wird playerProgress nicht geprueft, da das erste Level immer freigeschaltet ist
             console.log('Level 1 wird geladen');
+            introMusic.stop();
             this.scene.start('GameScene', { level: 1 });
         });
 
         const lvl2Button = this.add.image(500, 300, 'secondLvl');
         handleButtons(lvl2Button, () => {
-            // Hier die Logik einfügen, die beim Klicken des Buttons ausgeführt werden soll
-            console.log('Level 2 wird geladen');
-            this.scene.start('GameScene', { level: 2 });
+            //prueft, ob das erste Level durchgespielt wurde
+            if(playerProgress >= 2){
+                console.log('Level 2 wird geladen');
+                introMusic.stop();
+                this.scene.start('GameScene', { level: 2 });
+            }
+
         });
 
         const lvl3Button = this.add.image(700, 300, 'thirdLvl');
         handleButtons(lvl3Button, () => {
-            // Hier die Logik einfügen, die beim Klicken des Buttons ausgeführt werden soll
-            console.log('Level 3 wird geladen');
-            this.scene.start('GameScene', { level: 3 });
+            //prueft, ob das zweite Level durchgespielt wurde
+            if(playerProgress >= 3){
+                console.log('Level 3 wird geladen');
+                introMusic.stop();
+                this.scene.start('GameScene', { level: 3 });
+            }
+
         });
+
+        /**Level-Buttons Styling, wenn das Level blockiert ist*/
+        if (playerProgress < 2) {
+            //Interaktion deaktivieren
+            lvl2Button.disableInteractive();
+            //Aendere die Transparenz des Buttons
+            lvl2Button.setAlpha(0.5);
+        }
+
+        if(playerProgress < 3) {
+            lvl3Button.disableInteractive();
+            lvl3Button.setAlpha(0.5);
+        }
 
 
 

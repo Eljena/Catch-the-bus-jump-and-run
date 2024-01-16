@@ -27,6 +27,7 @@ class Level{
      * Dieses Level dient zum Zeichnen des Levels in der GameScene
      */
     drawLevel(){
+        gameplayMusic.play();
         //Zum debuggen
         if (!this.levelInfo) {
             console.error("Levelinfo nicht geladen!");
@@ -85,17 +86,18 @@ class Level{
                     const pigeon = new Pigeon(this.gameScene, gameObjectData.x, gameObjectData.y, 'pigeon');
                     this.gameScene.physics.add.collider(pigeon, platforms);
                     //Wenn Spieler und Taube ueberlappen, dann rufe handelPigeonCollision
-                    this.gameScene.physics.add.overlap(this.player, pigeon, this.handlePigeonCollision, null, this);
+                    this.gameScene.physics.add.overlap(this.player, pigeon, this.handleEnemyCollision, null, this);
 
                     break;
                 case "passerby":
                     const passerby = new Passerby(this.gameScene, gameObjectData.x, gameObjectData.y, 'passerby');
                     this.gameScene.physics.add.collider(passerby, platforms);
+                    //Wenn Spieler und Taube ueberlappen, dann rufe handelPigeonCollision
+                    this.gameScene.physics.add.overlap(this.player, passerby, this.handleEnemyCollision, null, this);
                     break;
             }
 
         });
-
 
         // Booster hinzufuegen, falls vorhanden
         if(this.levelInfo.booster) {
@@ -107,6 +109,7 @@ class Level{
             this.gameScene.physics.add.collider(boosterGroup, platforms);
             this.gameScene.physics.add.overlap(this.player, boosterGroup, this.player.collectBooster, null, this);
         }
+
 
         console.log("Zeichne Level");
 
@@ -134,7 +137,7 @@ class Level{
         guiContainer.add(levelNrText);
 
         /**Timer -> dynamisch*/
-        this.timer = new Timer(this.gameScene, 700, 0, 60, guiContainer);
+        this.timer = new Timer(this.gameScene, 700, 0, 60, guiContainer, this.handleTimeExpired.bind(this));
 
         /**Pause-Button*/
         const pauseButton = this.gameScene.add.image(900, 25,'pauseButton');
@@ -190,27 +193,29 @@ class Level{
         this.timer.resumeTimer();
     }
 
-    /**
-     * Diese Methode gibt true zurück, wenn das WinModal angezeigt wurde
-     */
-    isWinModalShown() {
-        return this.winModalShown;
+    handleTimeExpired() {
+        gameplayMusic.stop();
+        looseSound.play();
+        //looseModal erstellen, wenn Timer abgelaufen ist
+        this.createModal("looseModal", LooseModal);
     }
 
     /**
      * Hier wird gehandelt was passiert, wenn Spieler mit Taube kollidiert
      *
      */
-    handlePigeonCollision(){
+    handleEnemyCollision(){
         if(!modalActive){
-            console.log("Spieler kollidiert mit Taube");
+            console.log("Spieler kollidiert mit Enemy");
+            gameplayMusic.stop();
+            looseSound.play();
             this.createModal("looseModal", LooseModal);
             modalActive = true;
         }
 
     }
 
-    /**get-Methode fuer Player*/
+    /**get-Methode fuer Player -> wird fuer update-Methode in GameScene gebraucht*/
     getPlayer() {
         return this.player;
     }

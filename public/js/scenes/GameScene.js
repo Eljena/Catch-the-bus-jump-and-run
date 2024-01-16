@@ -113,13 +113,33 @@ class GameScene extends Phaser.Scene{
 
         //Wenn Spieler Ziel (Position 7600) erreicht, dann erstelle ein WinModal-Objekt)
         if(this.player.x >= 7600){
+            gameplayMusic.stop();
             //Erstelle WinModal-Objekt, je nach Level
             if(this.level1 != null){
+                winSound.play();
                 this.level1.createModal("winModal", WinModal);
+                //Nur wenn playerProgress kleiner als 2, setze playerProgress gleich 2
+                // -> notwendig damit beim erneuten Spiel des ersten Levels alle zuvor gespielten Level freigeschaltet bleiben
+                if(playerProgress < 2){
+                    //Setzt playerProgress auf 2, anhanddessen wird in LevelScene geprueft, ob das naechste Level in LevelScene freigeschaltet werden kann
+                    playerProgress = 2;
+                }
+                console.log(playerProgress);
+                //this.level1 auf null setzen, um anzuzeigen, dass das Level abgeschlossen ist
+                this.level1 = null;
             } else if(this.level2 != null){
-                this.level3.createModal("winModal", WinModal);
+                winSound.play();
+                this.level2.createModal("winModal", WinModal);
+                if(playerProgress < 3){
+                    //Spielerfortschritt auf 3 setzen
+                    playerProgress = 3;
+                }
+
+                this.level2 = null;
             } else if(this.level3 != null){
+                winSound.play();
                 this.level3.createModal("winModal", WinModal);
+                this.level3 = null;
             }
         }
 

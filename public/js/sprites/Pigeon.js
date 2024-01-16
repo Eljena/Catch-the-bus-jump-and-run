@@ -9,8 +9,10 @@ class Pigeon extends Obstacle {
         this.setBounce(0.1);
         this.setSize(240, 150);
 
-        //Multiplikator fuer die Geschwindigkeit der Taube
-        this.speedMultiplier = 1.0;
+        //Geschwindigkeit fuer Pigeon
+        this.movementSpeed = 2500;
+        //Flughoehe fuer Pigeon
+        this.movementHeight = 70
 
         //Animation fuer Taube hinzufuegen
         const pigeonFrames = scene.anims.generateFrameNumbers(texture, { start: 1, end: 5 });
@@ -34,17 +36,11 @@ class Pigeon extends Obstacle {
     }
 
     upAndDownMovement() {
-        //Hoehe der Bewegung
-        const movementHeight = 70;
-        //Geschwindigkeit der Bewegung
-        const movementSpeed = 2500;
-
-
-        const pigeonTween = this.scene.tweens.add({
+        this.scene.tweens.add({
             targets: this,
-            y: this.y + movementHeight, //Vertikalbewegung
+            y: this.y + this.movementHeight, //Vertikalbewegung
             ease: 'Sine.easeInOut',
-            duration: movementSpeed,
+            duration: this.movementSpeed,
             yoyo: true,
             repeat: -1 //infinity-loop
         });

@@ -25,7 +25,7 @@ class PreloadScene extends Phaser.Scene{
         this.load.image('controllerInfo', 'assets/images/controller.png');
         this.load.image('tutorialText', 'assets/images/tutorialText.png');
 
-        //Musik
+        //Musik Startszene und Levelszene
         this.load.audio('introMusic',
             [
                 'assets/audio/introMusic.mp3',
@@ -48,6 +48,21 @@ class PreloadScene extends Phaser.Scene{
         this.load.image('thirdLvl', 'assets/images/lvl3Btn.png');
 
         /******Assets von GameScene***/
+        //Musik GameScene
+        this.load.audio('gameplayMusic',
+            [
+                'assets/audio/gameplay.mp3',
+                'assets/audio/gameplay.ogg'
+            ]
+        );
+
+        //Win Sound
+        this.load.audio('winSound', 'assets/audio/winSound.mp3');
+
+        //Loose Sound
+        this.load.audio('looseSound', 'assets/audio/looseSound.mp3');
+
+
         /**Hintergrund*/
         this.load.image('gameBackground', "assets/images/gameBackground.png");
         this.load.image('clouds', 'assets/images/clouds.png');

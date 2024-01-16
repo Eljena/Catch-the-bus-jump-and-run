@@ -8,7 +8,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.setScale(3);
         this.setBounce(0.1);
         this.setCollideWorldBounds(true);
-        this.setSize(35, 54);
+        //Kollisionsbox-Groesse einstellen
+        this.setSize(35, 52);
+        //Verschiebung der Kollisionsbox
+        this.setOffset(5,2);
+
         //Multiplikator fuer die Geschwindigkeit des Spielers
         this.speedMultiplier = 1.0;
 
