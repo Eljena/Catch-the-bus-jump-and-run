@@ -11,14 +11,15 @@ const config = {
         PreloadScene, //Fuege die PreloadSzene hinzu
         StartScene, // Fuege die StartSzene hinzu
         GameScene,  // Fuege die GameScene hinzu
-        LevelScene  // Fuege die LevelScene hinzu
+        LevelScene,  // Fuege die LevelScene hinzu
+        ChooseCharacterScene
 
     ],
     backgroundColor: '#898080',
     physics: {
         default: 'arcade',
         arcade: {
-            debug: true,
+            //debug: true,
             gravity: { y: 350 }
         }
     }

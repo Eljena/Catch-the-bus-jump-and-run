@@ -16,9 +16,14 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         //Multiplikator fuer die Geschwindigkeit des Spielers
         this.speedMultiplier = 1.0;
 
+        //Standard-Charakter beim Initialisieren setzen
+        this.currentCharacter = selectedCharacter;
+        this.setupAnimation();
+    }
+
+    setupAnimation(){
         //Animation fuer Spieler hinzufuegen
-        const player = "player1";
-        //const player = "player2";
+        const player = this.currentCharacter;
 
         this.anims.create({
             key: 'left',
@@ -40,8 +45,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             frameRate: 10,
             repeat: -1
         });
-
-
     }
 
     increaseSpeed(multiplier){
@@ -102,6 +105,15 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         booster.disableBody(true, true);
         //soll dem Player kurzzeitig einen Boost geben
         booster.applyEffect(player);
+    }
+
+    setCharacter(character){
+        this.currentCharacter = character;
+        this.setupAnimation();
+    }
+
+    getCharacter(){
+        return this.currentCharacter;
     }
 
 

@@ -1,8 +1,9 @@
-//Globale Variable, um auf intromusic ausserhalb von StartScene zuzugreifen
+//Globale Variable, um auf Musik und Sound ausserhalb von StartScene zuzugreifen
 let introMusic;
 let gameplayMusic;
 let winSound;
 let looseSound;
+let buttonClick;
 class StartScene extends Phaser.Scene{
     constructor() {
         super({key: 'StartScene'});
@@ -25,13 +26,16 @@ class StartScene extends Phaser.Scene{
         /**Intro Musik*/
         // Der Audio-Manager wird verwendet, um das Audio abzuspielen
         introMusic = this.sound.add('introMusic', { loop: true, volume: 0.5 });
-        introMusic.play();
+        if(!introMusic.isPlaying) {
+            //Starte introMusic
+            introMusic.play();
+        }
 
         /**Gameplay Musik -> wird waehrend des Spiels abgespielt*/
         gameplayMusic = this.sound.add('gameplayMusic', { loop: true, volume: 0.5 });
 
         //Sound Button
-        const buttonClick = this.sound.add('buttonClick');
+        buttonClick = this.sound.add('buttonClick');
 
         /**Gameplay Sound*/
         //Win Sound
@@ -46,8 +50,7 @@ class StartScene extends Phaser.Scene{
         handleButtons(startButton, () => {
             buttonClick.play();
             if(!modalActive){
-                this.scene.start('LevelScene');
-                console.log('Start-button wurde geklickt');
+                this.scene.start('ChooseCharacterScene');
             }
 
         });
@@ -63,12 +66,10 @@ class StartScene extends Phaser.Scene{
                 //setzt Modalstatus auf false, wenn das Modalfenster geschlossen wurde
                 infoModal.setOnModalClose(() =>{
                     modalActive = false;
-                    console.log("Info-Modal wurde geschlossen");
                 });
 
                 this.add.existing(infoModal);
                 infoModal.showModal();
-                console.log('Info-button wurde geklickt');
             }
         });
 
@@ -81,11 +82,9 @@ class StartScene extends Phaser.Scene{
                  const controlModal = new ControlModal(this, 0, 0);
                  this.add.existing(controlModal);
                  controlModal.showModal();
-                 console.log('Control-button wurde geklickt');
 
                  controlModal.setOnModalClose(() =>{
                      modalActive = false;
-                     console.log("Control-Modal wurde geschlossen");
                  });
              }
         });
@@ -100,10 +99,14 @@ class StartScene extends Phaser.Scene{
                 soundButton.setTexture('soundButton');
                 //Sound aktivieren
                 buttonClick.setMute(false);
+                winSound.setMute(false);
+                looseSound.setMute(false);
             }else{
                 soundButton.setTexture('noSoundButton');
                 //Sound aktivieren
                 buttonClick.setMute(true);
+                winSound.setMute(true);
+                looseSound.setMute(true);
             }
         }
         handleButtons(soundButton, () =>{
@@ -123,10 +126,12 @@ class StartScene extends Phaser.Scene{
                 musicButton.setTexture('musicButton');
                 //Musik aktivieren
                 introMusic.setMute(false);
+                gameplayMusic.setMute(false);
             } else {
                 musicButton.setTexture('noMusicButton');
                 //Musik deaktivieren
                 introMusic.setMute(true);
+                gameplayMusic.setMute(true);
             }
         }
 

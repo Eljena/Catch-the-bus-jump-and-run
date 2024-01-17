@@ -8,9 +8,7 @@ class Passerby extends Obstacle{
         this.setScale(3);
         this.setBounce(0.1);
         //Kollisionsbox-Groesse einstellen
-        this.setSize(37,50);
-        //Verschiebung der Kollisionsbox
-        this.setOffset(10,0);
+        this.setSize(38,52);
 
 
         //Geschwindigkeit fuer Passerby

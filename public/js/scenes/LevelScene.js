@@ -13,7 +13,7 @@ class LevelScene extends Phaser.Scene {
     }
 
     create(){
-        // Anpassen der Bildgroesse, um auf das Game-Fenster zu passen
+        //Breite und Hoehe des Games in width und height speichern
         const width = this.sys.game.config.width;
         const height = this.sys.game.config.height;
 
@@ -29,20 +29,27 @@ class LevelScene extends Phaser.Scene {
         chooseLvlTitle.setScale(0.5);
 
 
+        /**Zurueck-Button Handling*/
+        const backBtn = this.add.image(100, 50, 'backBtn');
+        handleButtons(backBtn, () =>{
+            buttonClick.play();
+            this.scene.start('ChooseCharacterScene');
+        });
+
         /**Level-Buttons Handling*/
         const lvl1Button = this.add.image(300, 300, 'firstLvl');
         handleButtons(lvl1Button, () => {
             //hier wird playerProgress nicht geprueft, da das erste Level immer freigeschaltet ist
-            console.log('Level 1 wird geladen');
+            buttonClick.play();
             introMusic.stop();
             this.scene.start('GameScene', { level: 1 });
         });
 
         const lvl2Button = this.add.image(500, 300, 'secondLvl');
         handleButtons(lvl2Button, () => {
+            buttonClick.play();
             //prueft, ob das erste Level durchgespielt wurde
             if(playerProgress >= 2){
-                console.log('Level 2 wird geladen');
                 introMusic.stop();
                 this.scene.start('GameScene', { level: 2 });
             }
@@ -51,9 +58,9 @@ class LevelScene extends Phaser.Scene {
 
         const lvl3Button = this.add.image(700, 300, 'thirdLvl');
         handleButtons(lvl3Button, () => {
+            buttonClick.play();
             //prueft, ob das zweite Level durchgespielt wurde
             if(playerProgress >= 3){
-                console.log('Level 3 wird geladen');
                 introMusic.stop();
                 this.scene.start('GameScene', { level: 3 });
             }
@@ -71,6 +78,12 @@ class LevelScene extends Phaser.Scene {
         if(playerProgress < 3) {
             lvl3Button.disableInteractive();
             lvl3Button.setAlpha(0.5);
+        }
+
+        //Pruefe, ob introMusic abgespielt wird
+        if (!introMusic.isPlaying) {
+            //Starte introMusic
+            introMusic.play();
         }
 
 

@@ -46,6 +46,15 @@ class PreloadScene extends Phaser.Scene{
         this.load.image('firstLvl', 'assets/images/lvl1Btn.png');
         this.load.image('secondLvl', 'assets/images/lvl2Btn.png');
         this.load.image('thirdLvl', 'assets/images/lvl3Btn.png');
+        this.load.image('backBtn', 'assets/images/backBtn.png');
+
+        /*******Assets von ChooseCharacterScene*****/
+        this.load.image('chooseCharacterTitle', 'assets/images/chooseCharacterTitle.png');
+        this.load.image('characterName1', 'assets/images/characterName1.png');
+        this.load.image('characterName2', 'assets/images/characterName2.png');
+
+        this.load.image('player1Card', 'assets/images/player1Card.png');
+        this.load.image('player2Card', 'assets/images/player2Card.png');
 
         /******Assets von GameScene***/
         //Musik GameScene
@@ -75,10 +84,10 @@ class PreloadScene extends Phaser.Scene{
 
         //Player-Bilder laden
         this.load.spritesheet('player1', 'assets/images/player1.png', {frameWidth: 45, frameHeight: 55});
-        this.load.spritesheet('player2', 'assets/images/player2.png', {frameWidth: 42, frameHeight: 55});
+        this.load.spritesheet('player2', 'assets/images/player2.png', {frameWidth: 45, frameHeight: 55});
 
         //Passant-Bild laden (Hindernis)
-        this.load.spritesheet('passerby', 'assets/images/passerby.png', {frameWidth: 47, frameHeight: 50});
+        this.load.spritesheet('passerby', 'assets/images/passerby.png', {frameWidth: 45, frameHeight: 52});
 
         //Tauben-Bild laden (Hindernis)
         this.load.spritesheet('pigeon', 'assets/images/pigeon.png', {frameWidth: 250, frameHeight: 205});

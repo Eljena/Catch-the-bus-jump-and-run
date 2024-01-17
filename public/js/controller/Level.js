@@ -16,11 +16,22 @@ class Level{
      * @param lvlNumber
      */
     loadLevel(){
-        const levelConfig = this.gameScene.cache.json.get('levelConfig');
-        //insbesondere auf Bezeichnung in levelConfig achten -> statt nur this.lvlNr in currentLevel zu speichern, muss der "level" ebenso uebergeben werden
-        const currentLevel = "level" + this.lvlNr;
-        this.levelInfo = levelConfig.levels[currentLevel];
-        return this.levelInfo;
+        try {
+            const levelConfig = this.gameScene.cache.json.get('levelConfig');
+            //insbesondere auf Bezeichnung in levelConfig achten -> statt nur this.lvlNr in currentLevel zu speichern, muss der "level" ebenso uebergeben werden
+            const currentLevel = "level" + this.lvlNr;
+
+            if(!levelConfig || !levelConfig.levels || !levelConfig.levels[currentLevel]){
+                throw new Error("Ungültige Levelkonfiguration oder Level nicht gefunden.")
+            }
+
+            this.levelInfo = levelConfig.levels[currentLevel];
+            return this.levelInfo;
+        } catch (error){
+            console.error("Error beim Laden des Levels: ", error.message);
+            return null;
+        }
+
     }
 
     /**
@@ -35,7 +46,7 @@ class Level{
         }
         //Hintergrundobjekte erstellen
         this.levelInfo.backgroundObjects.forEach(bgData => {
-            const bg = this.gameScene.add.image(bgData.x, bgData.y, bgData.type).setScale(bgData.scale);
+            this.gameScene.add.image(bgData.x, bgData.y, bgData.type).setScale(bgData.scale);
         });
 
         const busColliderPlatforms = this.gameScene.physics.add.staticGroup();
@@ -55,7 +66,6 @@ class Level{
 
         //Hindernisse erstellen
         const obstacleGroup = this.gameScene.physics.add.staticGroup();
-        console.log(this.levelInfo.obstacles);
         this.levelInfo.obstacles.forEach(obstacleData =>{
             const obstacle = obstacleGroup.create(obstacleData.x, obstacleData.y, obstacleData.type).setScale(obstacleData.scale);
 
@@ -74,7 +84,7 @@ class Level{
         this.levelInfo.gameObjects.forEach(gameObjectData => {
             switch(gameObjectData.type) {
                 case "player":
-                    this.player = new Player(this.gameScene, gameObjectData.x, gameObjectData.y, 'player1');
+                    this.player = new Player(this.gameScene, gameObjectData.x, gameObjectData.y, selectedCharacter);
                     this.gameScene.physics.add.collider(this.player, platforms);
                     this.gameScene.physics.add.collider(this.player, obstacleGroup);
                     break;
@@ -109,10 +119,6 @@ class Level{
             this.gameScene.physics.add.collider(boosterGroup, platforms);
             this.gameScene.physics.add.overlap(this.player, boosterGroup, this.player.collectBooster, null, this);
         }
-
-
-        console.log("Zeichne Level");
-
     }
 
 
@@ -136,8 +142,10 @@ class Level{
         levelNrText.setShadow(0, 4, 'rgba(0, 0, 0, 0.25)', 4);
         guiContainer.add(levelNrText);
 
-        /**Timer -> dynamisch*/
+        /**Timer*/
         this.timer = new Timer(this.gameScene, 700, 0, 60, guiContainer, this.handleTimeExpired.bind(this));
+
+
 
         /**Pause-Button*/
         const pauseButton = this.gameScene.add.image(900, 25,'pauseButton');
@@ -189,6 +197,8 @@ class Level{
      */
     resumeGame(){
         //Szene fortsetzen
+        //gameplayMusic fortsetzen
+        gameplayMusic.play();
         //Timer wird fortgesetzt
         this.timer.resumeTimer();
     }
@@ -206,7 +216,6 @@ class Level{
      */
     handleEnemyCollision(){
         if(!modalActive){
-            console.log("Spieler kollidiert mit Enemy");
             gameplayMusic.stop();
             looseSound.play();
             this.createModal("looseModal", LooseModal);
