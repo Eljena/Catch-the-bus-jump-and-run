@@ -24,10 +24,14 @@ class StartScene extends Phaser.Scene{
         background.setDisplaySize(width, height);
 
         /**Intro Musik*/
-        // Der Audio-Manager wird verwendet, um das Audio abzuspielen
-        introMusic = this.sound.add('introMusic', { loop: true, volume: 0.5 });
+        //sorgt dafuer, dass introMusic nur erstellt wird, wenn es bisher noch nicht erstellt wurde
+        //wichtig, damit introMusic nicht erneut erstellt (abgespielt) wird, wenn Nutzer von der ChooseCharacterScene in die StartScene wechselt
+        if(introMusic === undefined){
+            introMusic = this.sound.add('introMusic', { loop: true, volume: 0.5 }); 
+        }
         if(!introMusic.isPlaying) {
             //Starte introMusic
+            console.log("play");
             introMusic.play();
         }
 

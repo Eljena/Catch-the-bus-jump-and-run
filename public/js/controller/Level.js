@@ -13,7 +13,6 @@ class Level{
 
     /**
      * Diese Methode dient zum Laden der JSON Leveldatei
-     * @param lvlNumber
      */
     loadLevel(){
         try {
@@ -22,7 +21,7 @@ class Level{
             const currentLevel = "level" + this.lvlNr;
 
             if(!levelConfig || !levelConfig.levels || !levelConfig.levels[currentLevel]){
-                throw new Error("Ungültige Levelkonfiguration oder Level nicht gefunden.")
+                throw new Error("Ungültige Levelkonfiguration oder Level nicht gefunden.");
             }
 
             this.levelInfo = levelConfig.levels[currentLevel];
@@ -72,11 +71,17 @@ class Level{
             //Setze Hindernis als unbeweglich
             obstacle.setImmovable(true);
 
+
             //Kollidiere mit statischen Plattformen
             this.gameScene.physics.add.collider(obstacle, platforms);
 
             //stellt sicher, dass der Koerper des Sprites den neuen Abmessungen od. Position entspricht
             obstacle.refreshBody();
+
+            //hier wird die Kollisionsbox von garbageHeap eingestellt
+            if(obstacleData.type === "garbageHeap"){
+                obstacle.setSize(200, 150, true);
+            }
 
         });
 
@@ -181,12 +186,8 @@ class Level{
                if(modalName instanceof PauseModal){
                    //Spiel fortsetzen
                    this.resumeGame();
-               } else if(modalName instanceof WinModal){
-                   //WinModal wurde gezeigt
-                   //this.isWinModalShown = true;
                }
             });
-
         }
     }
 

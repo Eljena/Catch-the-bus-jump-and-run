@@ -50,12 +50,12 @@
         {"type":  "trafficCone", "x":  3500, "y":  515, "scale":  0.1},
         {"type":  "trafficCone", "x":  4500, "y":  515, "scale":  0.1},
         {"type":  "trafficCone", "x":  6500, "y":  515, "scale":  0.1},
-        {"type":  "garbageHeap", "x":  4300, "y":  480, "scale":  0.5},
-        {"type":  "garbageHeap", "x":  6000, "y":  480, "scale":  0.5}
+        {"type":  "garbageHeap", "x":  4300, "y":  485, "scale":  0.5},
+        {"type":  "garbageHeap", "x":  6000, "y":  485, "scale":  0.5}
       ],
       "gameObjects": [
         {"type": "bus", "x": 700, "y": 410},
-        {"type": "player", "x": 100, "y": 465},
+        {"type": "player", "x": 7400, "y": 465},
         {"type": "pigeon", "x":  1900, "y": 320},
         {"type": "passerby", "x":  1000, "y": 460}
       ],
@@ -115,8 +115,8 @@
         {"type":  "trafficCone", "x":  3500, "y":  515, "scale":  0.1},
         {"type":  "trafficCone", "x":  4500, "y":  515, "scale":  0.1},
         {"type":  "trafficCone", "x":  6500, "y":  515, "scale":  0.1},
-        {"type":  "garbageHeap", "x":  4300, "y":  480, "scale":  0.5},
-        {"type":  "garbageHeap", "x":  6000, "y":  480, "scale":  0.5}
+        {"type":  "garbageHeap", "x":  4300, "y":  485, "scale":  0.5},
+        {"type":  "garbageHeap", "x":  6000, "y":  485, "scale":  0.5}
       ],
       "gameObjects": [
         {"type": "bus", "x": 700, "y": 410},
@@ -179,8 +179,8 @@
         {"type":  "trafficCone", "x":  3500, "y":  515, "scale":  0.1},
         {"type":  "trafficCone", "x":  4500, "y":  515, "scale":  0.1},
         {"type":  "trafficCone", "x":  6500, "y":  515, "scale":  0.1},
-        {"type":  "garbageHeap", "x":  4300, "y":  480, "scale":  0.5},
-        {"type":  "garbageHeap", "x":  6000, "y":  480, "scale":  0.5}
+        {"type":  "garbageHeap", "x":  4300, "y":  485, "scale":  0.5},
+        {"type":  "garbageHeap", "x":  6000, "y":  485, "scale":  0.5}
       ],
       "gameObjects": [
         {"type": "bus", "x": 700, "y": 410},

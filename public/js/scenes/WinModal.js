@@ -8,7 +8,6 @@ class WinModal extends Modal{
         this.selectLvlButton = scene.add.image(550, 400, 'selectLvlButton');
         this.confetti = scene.add.image(0, 0, 'confetti').setOrigin(0, 0).setDisplaySize(this.scene.sys.game.config.width, this.scene.sys.game.config.height);
 
-
         //Buttons skalieren
         this.homeButton.setScale(this.scaleFactorBtn);
         this.selectLvlButton.setScale(0.7);
@@ -22,7 +21,6 @@ class WinModal extends Modal{
         this.add(this.headline);
         this.add(this.homeButton);
         this.add(this.selectLvlButton);
-
 
         //Szenenwechselhandler
         this.sceneChangeHandler('StartScene');

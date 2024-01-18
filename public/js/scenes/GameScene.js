@@ -1,4 +1,3 @@
-
 /**
  * In dieser Szene wird das Spiel dargestellt*/
 
@@ -124,7 +123,6 @@ class GameScene extends Phaser.Scene{
                     //Setzt playerProgress auf 2, anhanddessen wird in LevelScene geprueft, ob das naechste Level in LevelScene freigeschaltet werden kann
                     playerProgress = 2;
                 }
-                console.log(playerProgress);
                 //this.level1 auf null setzen, um anzuzeigen, dass das Level abgeschlossen ist
                 this.level1 = null;
             } else if(this.level2 != null){
@@ -134,7 +132,6 @@ class GameScene extends Phaser.Scene{
                     //Spielerfortschritt auf 3 setzen
                     playerProgress = 3;
                 }
-
                 this.level2 = null;
             } else if(this.level3 != null){
                 winSound.play();
