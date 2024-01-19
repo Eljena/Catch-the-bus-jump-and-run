@@ -1,5 +1,5 @@
 /**
- * Model-Klasse fuer das Bus-Objekt
+ * Die Bus-Klasse repraesentiert ein Spielobjekt, der einen Bus auf dem Spielfeld darstellt.
  */
 class Bus extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, texture){
@@ -9,10 +9,10 @@ class Bus extends Phaser.Physics.Arcade.Sprite {
         scene.physics.add.existing(this);
 
         this.setScale(0.5);
-        //false, damit Bus aus Spielfeld faehrt
+        //Setze auf false, damit der Bus aus dem Spielfeld fahren kann
         this.setCollideWorldBounds(false);
 
-        //Animation fuer Bus erstellen
+        //Animation fuer den Bus erstellen
         this.anims.create({
             key: 'busDriveAway',
             frames: this.anims.generateFrameNumbers('bus', {start: 0, end: 3}),
@@ -21,10 +21,10 @@ class Bus extends Phaser.Physics.Arcade.Sprite {
         });
 
         setTimeout(() => {
-            //Bewegung des Busses nach einer Verzoegerung von 2 Sekunden
+            //Bewegung des Busses nach einer Verzoegerung von 0.5 Sekunden
             this.setVelocityX(300);
             this.play('busDriveAway');
-        }, 500); //Delay
+        }, 500);
     }
 
 }

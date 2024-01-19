@@ -1,3 +1,7 @@
+/**
+ * Die Booster-Klasse repraesentiert ein Spielobjekt, das dem Spieler einen kurzzeitigen Boost verleiht.
+ * Der Booster wird auf dem Spielfeld platztiert, um vom Spieler gesammelt zu werden
+ */
 class Booster extends Phaser.Physics.Arcade.Sprite{
     constructor(scene, x, y, texture) {
         super(scene, x, y, texture);
@@ -7,10 +11,13 @@ class Booster extends Phaser.Physics.Arcade.Sprite{
         this.setCollideWorldBounds(true);
     }
 
+    /**
+     * Wendet den Booster-Effekt auf den Spieler an, indem dessen Geschwindigkeit kurzzeitig erhoeht wird
+     * @param player    Der Spieler, der den Booster eingesammelt hat
+     */
     applyEffect(player) {
         //Hier soll der kurzzeitige boost fuer den Player implementiert werden
         player.increaseSpeed(2);
         console.log("Boost eingesammelt");
-
     }
 }

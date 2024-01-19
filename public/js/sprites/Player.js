@@ -1,3 +1,6 @@
+/**
+ * Sprite-Klasse fuer den Player
+ */
 class Player extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, texture) {
         super(scene, x, y, texture);
@@ -105,15 +108,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         booster.disableBody(true, true);
         //soll dem Player kurzzeitig einen Boost geben
         booster.applyEffect(player);
-    }
-
-    setCharacter(character){
-        this.currentCharacter = character;
-        this.setupAnimation();
-    }
-
-    getCharacter(){
-        return this.currentCharacter;
     }
 
 

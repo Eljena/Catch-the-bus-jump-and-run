@@ -3,7 +3,6 @@ let selectedCharacter;
  * Diese Klasse dient zum Darstellen der Charakterauswahlszene.
  */
 class ChooseCharacterScene extends Phaser.Scene{
-
     constructor(){
         super({key: 'ChooseCharacterScene'});
     }
@@ -13,7 +12,6 @@ class ChooseCharacterScene extends Phaser.Scene{
     }
 
     create(){
-        //Breite und Hoehe des Games in width und height speichern
         const width = this.sys.game.config.width;
         const height = this.sys.game.config.height;
 

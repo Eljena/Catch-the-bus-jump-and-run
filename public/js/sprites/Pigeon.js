@@ -2,12 +2,9 @@ class Pigeon extends Obstacle {
     constructor(scene, x, y, texture) {
         super(scene, x, y, texture);
 
-        scene.add.existing(this);
-        scene.physics.add.existing(this);
-
         this.setScale(0.5);
         this.setBounce(0.1);
-        this.setSize(240, 150);
+        this.setSize(230, 150);
 
         //Geschwindigkeit fuer Pigeon
         this.movementSpeed = 2500;

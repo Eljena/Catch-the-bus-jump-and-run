@@ -1,5 +1,7 @@
 /**
- * In dieser Szene wird das Spiel dargestellt*/
+ * In dieser Szene wird das Spiel dargestellt
+ * Hierbei werden Methoden zum Laden und Zeichnen des Levels aus dem LevelController aufgerufen
+ */
 
 class GameScene extends Phaser.Scene{
     constructor() {
@@ -9,19 +11,16 @@ class GameScene extends Phaser.Scene{
         //In PreloadScene ausgelagert
     }
 
-    // Hier wird die Logik für die Gameszene initialisiert
+    //Hier wird die Logik für die Gameszene initialisiert
     create(data) {
-        //Fenstergroesse des Spiels
         const width = this.sys.game.config.width;
-        const height = this.sys.game.config.height;
-
         const gameWidth = 8000;
-
+        const height = this.sys.game.config.height;
 
         //Aendere die Grenzen des Spielbereichs
         this.physics.world.setBounds(0, 0, gameWidth, height);
 
-        //Zugriff auf das uebergebene Level-Objekt
+        //Zugriff auf das uebergebene LevelController-Objekt
         const level = data.level;
 
 
@@ -42,48 +41,48 @@ class GameScene extends Phaser.Scene{
         // Positioniere den Hintergrund an die Kamera background.width * scale
         this.cameras.main.setBounds(0, 0, gameWidth, background.height * scale);
 
-        //Je nachdem welches Level in LevelScene ausgewaehlt wurde, wird ein Level Objekt erstellt
+        //Je nachdem welches LevelController in LevelScene ausgewaehlt wurde, wird ein LevelController Objekt erstellt
         switch(level){
             case 1:
-                this.level1 = new Level(level, this);
-                //Zeichne Levelnummer,Timer und PauseButton
+                this.level1 = new LevelController(level, this);
+                //Lade Level aus levelConfig.json
                 this.level1.loadLevel();
+                //Zeichne Levelobjekte
                 this.level1.drawLevel();
+                //Zeichne Levelnummer, Timer und PauseButton
                 this.level1.drawHeadline();
-                //Spieler aus Levelklasse holen
-                this.player = this.level1.getPlayer();
+                //Spieler aus LevelController-Klasse holen
+                this.player = this.level1.player;
                 break;
             case 2:
-                this.level2 = new Level(level, this);
+                this.level2 = new LevelController(level, this);
                 this.level2.loadLevel();
                 this.level2.drawLevel();
                 this.level2.drawHeadline();
-                this.player = this.level2.getPlayer();
+                this.player = this.level2.player;
                 break;
             case 3:
-                this.level3 = new Level(level, this);
+                this.level3 = new LevelController(level, this);
                 this.level3.loadLevel();
                 this.level3.drawLevel();
                 this.level3.drawHeadline();
-                this.player = this.level3.getPlayer();
+                this.player = this.level3.player;
                 break;
         }
 
-
-
-        //this.physics.add.collider(this.player, platforms);
-
-
         /**Kamera -> verfolgt den Spieler*/
-        //Kamera der Szene folgt dem Spieler
-        if(this.player != null){
-            this.cameras.main.startFollow(this.player);
-            this.cameras.main.setFollowOffset(0, 0);
-        }else {
-            console.error("Player nicht geladen");
+        //Kamera der Szene folgt dem Spieler, wenn Spieler vorhanden
+        //Exception-Handling
+        try{
+            if(this.player != null){
+                this.cameras.main.startFollow(this.player);
+                this.cameras.main.setFollowOffset(0, 0);
+            }else {
+                throw new Error("Player nicht geladen");
+            }
+        } catch(error){
+            console.error("Fehler beim Folgen des Spielers", error.message);
         }
-
-
 
 
     }
@@ -96,11 +95,13 @@ class GameScene extends Phaser.Scene{
         const moveSpeed = 210;
         const jumpSpeed = 330;
 
+        //Default: Player bewegt sich nicht fort, relevant fuer das Handling, wenn Modal aktiv ist
         this.player.movePlayer(cursors, keyboard, 0, 0);
 
         //Verzoegert die Spielerbewegung um 2 Sekunden (Dauer bis der Bus verschwunden ist)
         this.time.delayedCall(2000, () => {
-            //Spielerbewegungsmethode aufrufen
+            //Spielerbewegungsmethode aufrufen, wenn Modal deaktiviert ist
+            // -> Spieler erhaelt nun moveSpeed > 0, jumpSpeed > 0, um sich bewegen zu koennen
             if(!modalActive){
                 this.player.movePlayer(cursors, keyboard, moveSpeed, jumpSpeed);
                 //Kamerabewegung entsprechend der Spielerbewegung anpassen
@@ -110,13 +111,11 @@ class GameScene extends Phaser.Scene{
         });
 
 
-        //Wenn Spieler Ziel (Position 7600) erreicht, dann erstelle ein WinModal-Objekt)
+        //Wenn Spieler Ziel (Position 7600) erreicht, dann rufe handleWin auf)
         if(this.player.x >= 7600){
-            gameplayMusic.stop();
-            //Erstelle WinModal-Objekt, je nach Level
+            //Erstelle WinModal-Objekt, je nach LevelController-Objekt
             if(this.level1 != null){
-                winSound.play();
-                this.level1.createModal("winModal", WinModal);
+                this.level1.handleWin();
                 //Nur wenn playerProgress kleiner als 2, setze playerProgress gleich 2
                 // -> notwendig damit beim erneuten Spiel des ersten Levels alle zuvor gespielten Level freigeschaltet bleiben
                 if(playerProgress < 2){
@@ -126,16 +125,14 @@ class GameScene extends Phaser.Scene{
                 //this.level1 auf null setzen, um anzuzeigen, dass das Level abgeschlossen ist
                 this.level1 = null;
             } else if(this.level2 != null){
-                winSound.play();
-                this.level2.createModal("winModal", WinModal);
+                this.level2.handleWin();
                 if(playerProgress < 3){
                     //Spielerfortschritt auf 3 setzen
                     playerProgress = 3;
                 }
                 this.level2 = null;
             } else if(this.level3 != null){
-                winSound.play();
-                this.level3.createModal("winModal", WinModal);
+                this.level3.handleWin();
                 this.level3 = null;
             }
         }

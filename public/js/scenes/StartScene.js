@@ -1,12 +1,7 @@
-//Globale Variable, um auf Musik und Sound ausserhalb von StartScene zuzugreifen
-let introMusic;
-let gameplayMusic;
-let winSound;
-let looseSound;
-let buttonClick;
 class StartScene extends Phaser.Scene{
     constructor() {
         super({key: 'StartScene'});
+        this.modalController = new ModalController();
     }
 
     preload(){
@@ -18,10 +13,8 @@ class StartScene extends Phaser.Scene{
         //Hintergrundbild zur Startszene hinzufuegen
         const background = this.add.image(0,0, 'startBackground').setOrigin(0,0);
 
-        const width = this.sys.game.config.width;
-        const height = this.sys.game.config.height;
         //Anpassen der Groesse des Hintergrundbilds auf das Game-Fenster
-        background.setDisplaySize(width, height);
+        background.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
         /**Intro Musik*/
         //sorgt dafuer, dass introMusic nur erstellt wird, wenn es bisher noch nicht erstellt wurde
@@ -31,7 +24,6 @@ class StartScene extends Phaser.Scene{
         }
         if(!introMusic.isPlaying) {
             //Starte introMusic
-            console.log("play");
             introMusic.play();
         }
 
@@ -53,7 +45,7 @@ class StartScene extends Phaser.Scene{
         const startButton = this.add.image(500, 300, 'startButton');
         handleButtons(startButton, () => {
             buttonClick.play();
-            if(!modalActive){
+            if(!this.modalController.isModalActive()){
                 this.scene.start('ChooseCharacterScene');
             }
 
@@ -63,34 +55,14 @@ class StartScene extends Phaser.Scene{
         const infoButton = this.add.image(100,50, 'infoButton');
         handleButtons(infoButton, () => {
             buttonClick.play();
-            if(!modalActive){
-                modalActive = true;
-                const infoModal = new InfoModal(this,0,0);
-
-                //setzt Modalstatus auf false, wenn das Modalfenster geschlossen wurde
-                infoModal.setOnModalClose(() =>{
-                    modalActive = false;
-                });
-
-                this.add.existing(infoModal);
-                infoModal.showModal();
-            }
+            this.modalController.createModal(this, InfoModal, 0,0, null);
         });
 
         //Control Button
         const controlButton = this.add.image(200,50, 'controlButton');
         handleButtons(controlButton, () =>{
             buttonClick.play();
-            if(!modalActive) {
-                 modalActive = true;
-                 const controlModal = new ControlModal(this, 0, 0);
-                 this.add.existing(controlModal);
-                 controlModal.showModal();
-
-                 controlModal.setOnModalClose(() =>{
-                     modalActive = false;
-                 });
-             }
+            this.modalController.createModal(this, ControlModal, 0,0, null);
         });
 
         //Sound Button
@@ -114,7 +86,7 @@ class StartScene extends Phaser.Scene{
             }
         }
         handleButtons(soundButton, () =>{
-            if(!modalActive){
+            if(!this.modalController.isModalActive()){
                 toggleSoundButton();
             }
 
@@ -140,11 +112,13 @@ class StartScene extends Phaser.Scene{
         }
 
         handleButtons(musicButton, () =>{
-            if(!modalActive){
+            if(!this.modalController.isModalActive()){
                 toggleMusicButton();
             }
         });
 
     }
+
+
 }
 

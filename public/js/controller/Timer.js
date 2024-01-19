@@ -1,7 +1,7 @@
 /**
  * Diese Klasse verwaltet den Timer in der GameScene
  * Erstellt einen Timer mit einer bestimmten initialen Zeit
- * und aktualisiert die Anzeige alle Sekunde.
+ * und aktualisiert die Anzeige jede Sekunde.
  * Enthaelt Methoden zum Aktualisieren, Anhalten, Fortsetzen des Timers und zur Behandlung,
  * wenn der Timer ablaeuft
  */
@@ -80,8 +80,7 @@ class Timer {
     }
 
     timeExpired(){
-        console.log('Zeit abgelaufen');
-        //Rufe das Callback auf, um die Level-Klasse zu informieren
+        //Rufe das Callback auf, um die LevelController-Klasse zu informieren, dass die Zeit abgelaufen ist
         if (this.onTimeExpiredCallback) {
             this.onTimeExpiredCallback();
         }

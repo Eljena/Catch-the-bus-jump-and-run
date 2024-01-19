@@ -2,13 +2,10 @@ class Passerby extends Obstacle{
     constructor(scene, x, y, texture) {
         super(scene, x, y, texture);
 
-        scene.add.existing(this);
-        scene.physics.add.existing(this);
-
         this.setScale(3);
         this.setBounce(0.1);
         //Kollisionsbox-Groesse einstellen
-        this.setSize(38,52);
+        this.setSize(38,50);
 
 
         //Geschwindigkeit fuer Passerby

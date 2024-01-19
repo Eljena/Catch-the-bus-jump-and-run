@@ -7,6 +7,9 @@ const config = {
     type: Phaser.AUTO,
     width: 1000,
     height: 600,
+    dom: {
+        createContainer: true
+    },
     scene: [
         PreloadScene, //Fuege die PreloadSzene hinzu
         StartScene, // Fuege die StartSzene hinzu
@@ -20,7 +23,7 @@ const config = {
         default: 'arcade',
         arcade: {
             //debug: true,
-            gravity: { y: 350 }
+            gravity: { y: 300 }
         }
     }
 }

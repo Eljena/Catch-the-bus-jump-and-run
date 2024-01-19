@@ -45,6 +45,7 @@
       ],
       "obstacles": [
         {"type":  "trafficCone", "x":  500, "y":  515, "scale":  0.1},
+        {"type":  "trafficCone", "x":  1000, "y":  515, "scale":  0.1},
         {"type":  "trafficCone", "x":  2100, "y":  515, "scale":  0.1},
         {"type":  "trafficCone", "x":  2500, "y":  515, "scale":  0.1},
         {"type":  "trafficCone", "x":  3500, "y":  515, "scale":  0.1},
@@ -55,18 +56,21 @@
       ],
       "gameObjects": [
         {"type": "bus", "x": 700, "y": 410},
-        {"type": "player", "x": 7400, "y": 465},
+        {"type": "player", "x": 100, "y": 470},
         {"type": "pigeon", "x":  1900, "y": 320},
-        {"type": "passerby", "x":  1000, "y": 460}
+        {"type": "pigeon", "x":  3000, "y": 320},
+        {"type": "passerby", "x":  1100, "y": 472},
+        {"type": "passerby", "x":  5100, "y": 472}
       ],
       "booster": [
         {"type":  "sneaker", "x":  1400, "y":  530},
-        {"type":  "sneaker", "x":  3600, "y":  530}
+        {"type":  "sneaker", "x":  3600, "y":  530},
+        {"type":  "sneaker", "x":  4830, "y":  300}
       ]
     },
 
     "level2": {
-      "lvlNr": "1",
+      "lvlNr": "2",
       "backgroundObjects": [
         {"type": "clouds", "x": 200, "y": 100, "scale": 0.7},
         {"type": "clouds", "x": 1700, "y": 150, "scale": 0.7},
@@ -114,23 +118,28 @@
         {"type":  "trafficCone", "x":  2500, "y":  515, "scale":  0.1},
         {"type":  "trafficCone", "x":  3500, "y":  515, "scale":  0.1},
         {"type":  "trafficCone", "x":  4500, "y":  515, "scale":  0.1},
+        {"type":  "trafficCone", "x":  5300, "y":  515, "scale":  0.1},
         {"type":  "trafficCone", "x":  6500, "y":  515, "scale":  0.1},
         {"type":  "garbageHeap", "x":  4300, "y":  485, "scale":  0.5},
         {"type":  "garbageHeap", "x":  6000, "y":  485, "scale":  0.5}
       ],
       "gameObjects": [
         {"type": "bus", "x": 700, "y": 410},
-        {"type": "player", "x": 7400, "y": 465},
-        {"type": "pigeon", "x":  1900, "y": 320},
-        {"type": "passerby", "x":  1000, "y": 460}
+        {"type": "player", "x": 100, "y": 470},
+        {"type": "pigeon", "x":  600, "y": 400},
+        {"type": "pigeon", "x":  4200, "y": 120},
+        {"type": "pigeon", "x":  6900, "y": 120},
+        {"type": "passerby", "x":  1000, "y": 472},
+        {"type": "passerby", "x":  2300, "y": 472},
+        {"type": "passerby", "x":  5500, "y": 472}
       ],
       "booster": [
         {"type":  "sneaker", "x":  1400, "y":  530},
-        {"type":  "sneaker", "x":  3600, "y":  530}
+        {"type":  "sneaker", "x":  3400, "y":  530}
       ]
     },
     "level3": {
-      "lvlNr": "1",
+      "lvlNr": "3",
       "backgroundObjects": [
         {"type": "clouds", "x": 200, "y": 100, "scale": 0.7},
         {"type": "clouds", "x": 1700, "y": 150, "scale": 0.7},
@@ -173,24 +182,27 @@
         {"type": "ground", "x": 7000, "y": 600, "scale": 1}
       ],
       "obstacles": [
+        {"type":  "trafficCone", "x":  300, "y":  515, "scale":  0.1},
         {"type":  "trafficCone", "x":  500, "y":  515, "scale":  0.1},
         {"type":  "trafficCone", "x":  2100, "y":  515, "scale":  0.1},
         {"type":  "trafficCone", "x":  2500, "y":  515, "scale":  0.1},
         {"type":  "trafficCone", "x":  3500, "y":  515, "scale":  0.1},
-        {"type":  "trafficCone", "x":  4500, "y":  515, "scale":  0.1},
         {"type":  "trafficCone", "x":  6500, "y":  515, "scale":  0.1},
+        {"type":  "garbageHeap", "x":  1400, "y":  485, "scale":  0.5},
         {"type":  "garbageHeap", "x":  4300, "y":  485, "scale":  0.5},
         {"type":  "garbageHeap", "x":  6000, "y":  485, "scale":  0.5}
       ],
       "gameObjects": [
         {"type": "bus", "x": 700, "y": 410},
-        {"type": "player", "x": 7400, "y": 465},
-        {"type": "pigeon", "x":  1900, "y": 320},
-        {"type": "passerby", "x":  1000, "y": 460}
+        {"type": "player", "x": 100, "y": 465},
+        {"type": "pigeon", "x":  400, "y": 390},
+        {"type": "pigeon", "x":  3000, "y": 190},
+        {"type": "passerby", "x":  1050, "y": 460},
+        {"type": "passerby", "x":  4800, "y": 200}
       ],
       "booster": [
-        {"type":  "sneaker", "x":  1400, "y":  530},
-        {"type":  "sneaker", "x":  3600, "y":  530}
+        {"type":  "sneaker", "x":  1250, "y":  530},
+        {"type":  "sneaker", "x":  4730, "y":  200}
       ]
     }
   }

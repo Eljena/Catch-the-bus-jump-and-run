@@ -13,7 +13,6 @@ class LevelScene extends Phaser.Scene {
     }
 
     create(){
-        //Breite und Hoehe des Games in width und height speichern
         const width = this.sys.game.config.width;
         const height = this.sys.game.config.height;
 
@@ -24,7 +23,7 @@ class LevelScene extends Phaser.Scene {
         levelBgOverlay.fillStyle(0x000000, 0.7);
         levelBgOverlay.fillRect(0,0, width, height);
 
-        /**Level-Ueberschrift */
+        /**LevelController-Ueberschrift */
         const chooseLvlTitle = this.add.image(width / 2,150, 'chooseLvl');
         chooseLvlTitle.setScale(0.5);
 
@@ -36,10 +35,10 @@ class LevelScene extends Phaser.Scene {
             this.scene.start('ChooseCharacterScene');
         });
 
-        /**Level-Buttons Handling*/
+        /**LevelController-Buttons Handling*/
         const lvl1Button = this.add.image(300, 300, 'firstLvl');
         handleButtons(lvl1Button, () => {
-            //hier wird playerProgress nicht geprueft, da das erste Level immer freigeschaltet ist
+            //hier wird playerProgress nicht geprueft, da das erste LevelController immer freigeschaltet ist
             buttonClick.play();
             introMusic.stop();
             this.scene.start('GameScene', { level: 1 });
@@ -48,7 +47,7 @@ class LevelScene extends Phaser.Scene {
         const lvl2Button = this.add.image(500, 300, 'secondLvl');
         handleButtons(lvl2Button, () => {
             buttonClick.play();
-            //prueft, ob das erste Level durchgespielt wurde
+            //prueft, ob das erste LevelController durchgespielt wurde
             if(playerProgress >= 2){
                 introMusic.stop();
                 this.scene.start('GameScene', { level: 2 });
@@ -59,7 +58,7 @@ class LevelScene extends Phaser.Scene {
         const lvl3Button = this.add.image(700, 300, 'thirdLvl');
         handleButtons(lvl3Button, () => {
             buttonClick.play();
-            //prueft, ob das zweite Level durchgespielt wurde
+            //prueft, ob das zweite LevelController durchgespielt wurde
             if(playerProgress >= 3){
                 introMusic.stop();
                 this.scene.start('GameScene', { level: 3 });
@@ -67,7 +66,7 @@ class LevelScene extends Phaser.Scene {
 
         });
 
-        /**Level-Buttons Styling, wenn das Level blockiert ist*/
+        /**LevelController-Buttons Styling, wenn das LevelController blockiert ist*/
         if (playerProgress < 2) {
             //Interaktion deaktivieren
             lvl2Button.disableInteractive();
