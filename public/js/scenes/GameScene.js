@@ -72,16 +72,11 @@ class GameScene extends Phaser.Scene{
 
         /**Kamera -> verfolgt den Spieler*/
         //Kamera der Szene folgt dem Spieler, wenn Spieler vorhanden
-        //Exception-Handling
-        try{
-            if(this.player != null){
-                this.cameras.main.startFollow(this.player);
-                this.cameras.main.setFollowOffset(0, 0);
-            }else {
-                throw new Error("Player nicht geladen");
-            }
-        } catch(error){
-            console.error("Fehler beim Folgen des Spielers", error.message);
+        if (this.player !== null) {
+            this.cameras.main.startFollow(this.player);
+            this.cameras.main.setFollowOffset(0, 0);
+        } else {
+            console.error("Fehler: Player nicht geladen");
         }
 
 

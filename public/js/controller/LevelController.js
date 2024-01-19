@@ -16,22 +16,17 @@ class LevelController {
      * Diese Methode dient zum Laden der JSON Leveldatei
      */
     loadLevel(){
-        try {
-            const levelConfig = this.gameScene.cache.json.get('levelConfig');
-            //insbesondere auf Bezeichnung in levelConfig achten -> statt nur this.lvlNr in currentLevel zu speichern, muss der "level" ebenso uebergeben werden
-            const currentLevel = "level" + this.lvlNr;
+        const levelConfig = this.gameScene.cache.json.get('levelConfig');
+        //insbesondere auf Bezeichnung in levelConfig achten -> statt nur this.lvlNr in currentLevel zu speichern, muss der "level" ebenso uebergeben werden
+        const currentLevel = "level" + this.lvlNr;
 
-            if(!levelConfig || !levelConfig.levels || !levelConfig.levels[currentLevel]){
-                throw new Error("Ungültige Levelkonfiguration oder Level nicht gefunden.");
-            }
-
-            this.levelInfo = levelConfig.levels[currentLevel];
-            return this.levelInfo;
-        } catch (error){
-            console.error("Error beim Laden des Levels: ", error.message);
+        if(!levelConfig || !levelConfig.levels || !levelConfig.levels[currentLevel]){
+            console.error("Ungültige Levelkonfiguration oder Level nicht gefunden.");
             return null;
         }
 
+        this.levelInfo = levelConfig.levels[currentLevel];
+        return this.levelInfo;
     }
 
     /**
