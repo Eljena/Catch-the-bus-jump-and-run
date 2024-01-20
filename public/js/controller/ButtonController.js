@@ -1,7 +1,6 @@
 /**
- * Button-Controller fuer das handlen der Buttons
+ * Der Button-Controller behandelt Ereignisse, bei denen Buttons geklickt werden.
  */
-
 const handleButtons = (button, onClick) =>{
     button.setInteractive({useHandCursor: true});
     button.setScale(0.5);

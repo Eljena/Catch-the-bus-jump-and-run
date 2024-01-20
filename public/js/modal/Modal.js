@@ -71,7 +71,6 @@ class Modal extends Phaser.GameObjects.Container {
         if(button){
             button.setInteractive({useHandCursor: true});
             button.on('pointerdown', () => {
-                modalActive = false;
                 this.scene.scene.start(sceneKey);
             });
         }
@@ -90,7 +89,6 @@ class Modal extends Phaser.GameObjects.Container {
      */
     showModal(){
         this.setVisible(true);
-        modalActive = true;
     }
 
     /**
@@ -99,7 +97,6 @@ class Modal extends Phaser.GameObjects.Container {
      */
     hideModal(){
         this.setVisible(false);
-        modalActive = false;
     }
 
     //Callback-Funktion

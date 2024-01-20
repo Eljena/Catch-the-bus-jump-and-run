@@ -2,12 +2,14 @@
  * Diese Klasse dient zum Laden des Levels aus der JSON-Datei und zum
  * Zeichnen der Levels in der GameScene. Ausserdem werden Spielerkollisionen mit anderen Objekten behandelt.
  */
-class LevelController {
-    constructor(lvlNr, gameScene) {
+class LevelController{
+    constructor(lvlNr, gameScene, selectedCharacter,soundController){
         this.lvlNr = lvlNr;
         this.gameScene = gameScene;
         this.levelInfo = null;
         this.player = null;
+        this.soundController = soundController;
+        this.selectedCharacter = selectedCharacter;
 
         this.modalController = new ModalController();
     }
@@ -33,8 +35,14 @@ class LevelController {
      * Diese Methode dient zum Zeichnen des Levels in der GameScene
      */
     drawLevel(){
-        gameplayMusic.play();
-        //Zum debuggen
+        //Stoppe Intromusik
+        this.soundController.stopIntroMusic();
+        //Spiele Gameplaymusik ab
+        this.soundController.playGameplayMusic();
+        //Status von looseSoundPlayed zuruecksetzen
+        this.soundController.resetLooseSoundStatus();
+
+        //prueft, ob Levelinfo null ist
         if (!this.levelInfo) {
             console.error("Levelinfo nicht geladen!");
             return;
@@ -85,7 +93,7 @@ class LevelController {
         this.levelInfo.gameObjects.forEach(gameObjectData => {
             switch(gameObjectData.type) {
                 case "player":
-                    this.player = new Player(this.gameScene, gameObjectData.x, gameObjectData.y, selectedCharacter);
+                    this.player = new Player(this.gameScene, gameObjectData.x, gameObjectData.y, this.selectedCharacter);
                     this.gameScene.physics.add.collider(this.player, platforms);
                     this.gameScene.physics.add.collider(this.player, obstacleGroup);
                     break;
@@ -150,24 +158,31 @@ class LevelController {
         //sorgt dafuer, dass der Button an einer festen Bildschirmposition bleibt
         pauseButton.setScrollFactor(0);
         handleButtons(pauseButton, () =>{
-            this.timer.stopTimer();
-            this.modalController.createModal(
-                this.gameScene,
-                PauseModal,
-                0,
-                0,
-                () => this.resumeGame());
+            if(!this.modalController.isModalActive()){
+                this.soundController.playButtonClick();
+                this.pauseGame();
+                this.modalController.createModal(
+                    this.gameScene,
+                    PauseModal,
+                    0,
+                    0,
+                    () => this.resumeGame());
+            }
         });
         guiContainer.add(pauseButton);
+    }
+
+    pauseGame(){
+        this.soundController.stopGameplayMusic();
+        this.timer.stopTimer();
     }
 
     /**
      * Funktion zum Fortsetzen des Spiels nach dem Klicken auf den Continue-Button im Modalfenster
      */
     resumeGame(){
-        //Szene fortsetzen
         //gameplayMusic fortsetzen
-        gameplayMusic.play();
+        this.soundController.playGameplayMusic();
         //Timer wird fortgesetzt
         this.timer.resumeTimer();
     }
@@ -176,15 +191,18 @@ class LevelController {
      * Verarbeitet das Ereignis, wenn die Zeit abgelaufen ist.
      */
     handleTimeExpired() {
+        this.soundController.stopGameplayMusic();
+        this.soundController.playLooseSound();
         //Erstellt ein LooseModal und stoppt den Timer
         this.modalController.createModal(this.gameScene, LooseModal, 0, 0, null);
-        //this.createModal("looseModal", LooseModal);
     }
 
     /**
      * Verarbeitet, was passiert, wenn der Spieler mit einer Taube oder einem Hindernis kollidiert.
      */
     handleEnemyCollision(){
+        this.soundController.stopGameplayMusic();
+        this.soundController.playLooseSound();
         this.modalController.createModal(this.gameScene, LooseModal, 0, 0, () => this.timer.stopTimer());
     }
 
@@ -192,6 +210,8 @@ class LevelController {
      * Verarbeitet, was passiert, wenn der Spieler das Ziel erreicht.
      */
     handleWin(){
+        this.soundController.stopGameplayMusic();
+        this.soundController.playWinSound();
         this.modalController.createModal(this.gameScene, WinModal, 0,0, () => this.timer.stopTimer());
     }
 

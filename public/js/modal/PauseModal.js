@@ -7,8 +7,6 @@ class PauseModal extends Modal{
     constructor(scene, x, y) {
         super(scene, x, y);
 
-        gameplayMusic.stop();
-
         //Ueberschrift und Buttons hinzufuegen
         this.headline = scene.add.image(505, 200, 'pauseTitle');
         this.homeButton = scene.add.image(350, 400, 'homeButton');

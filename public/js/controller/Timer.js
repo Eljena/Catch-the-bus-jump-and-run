@@ -9,11 +9,8 @@ class Timer {
     constructor(scene, x, y, initialTime, guiContainer, onTimeExpiredCallback){
         this.scene = scene;
         this.initialTime = initialTime;
-
         this.guiContainer = guiContainer;
-
         this.onTimeExpiredCallback = onTimeExpiredCallback;
-
 
         this.timerStyle = {
             fontSize: "52px",
@@ -49,7 +46,7 @@ class Timer {
     /**
      * Methode zum Formatieren der Minuten-Anzeige
      * @param seconds
-     * @returns {string}
+     * @returns {string}    Zeit als Zeichenkette
      */
     formatTime(seconds){
         const minutes = Math.floor(seconds / 60);   //berechnet die verbleibenden Minuten
@@ -79,6 +76,9 @@ class Timer {
         });
     }
 
+    /**
+     * Methode, um den LevelController zu informieren, wenn die Zeit abgelaufen ist
+     */
     timeExpired(){
         //Rufe das Callback auf, um die LevelController-Klasse zu informieren, dass die Zeit abgelaufen ist
         if (this.onTimeExpiredCallback) {

@@ -20,7 +20,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.speedMultiplier = 1.0;
 
         //Standard-Charakter beim Initialisieren setzen
-        this.currentCharacter = selectedCharacter;
+        this.currentCharacter = texture;
         this.setupAnimation();
     }
 

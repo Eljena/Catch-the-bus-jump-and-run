@@ -2,13 +2,18 @@
  * In dieser Szene wird das Spiel dargestellt
  * Hierbei werden Methoden zum Laden und Zeichnen des Levels aus dem LevelController aufgerufen
  */
-
 class GameScene extends Phaser.Scene{
     constructor() {
         super({ key: 'GameScene' });
     }
     preload() {
         //In PreloadScene ausgelagert
+    }
+
+    init(data) {
+        //uebergebene SoundController-Instanz
+        this.soundController = data.soundController;
+        this.selectedCharacter = data.selectedCharacter;
     }
 
     //Hier wird die Logik für die Gameszene initialisiert
@@ -22,7 +27,6 @@ class GameScene extends Phaser.Scene{
 
         //Zugriff auf das uebergebene LevelController-Objekt
         const level = data.level;
-
 
         /**Hintergrund*/
         //Hintergrund erstellen
@@ -38,13 +42,13 @@ class GameScene extends Phaser.Scene{
 
         background.setScale(1);
 
-        // Positioniere den Hintergrund an die Kamera background.width * scale
+        //Positioniere den Hintergrund an die Kamera background.width * scale
         this.cameras.main.setBounds(0, 0, gameWidth, background.height * scale);
 
         //Je nachdem welches LevelController in LevelScene ausgewaehlt wurde, wird ein LevelController Objekt erstellt
         switch(level){
             case 1:
-                this.level1 = new LevelController(level, this);
+                this.level1 = new LevelController(level, this, this.selectedCharacter,this.soundController);
                 //Lade Level aus levelConfig.json
                 this.level1.loadLevel();
                 //Zeichne Levelobjekte
@@ -55,14 +59,14 @@ class GameScene extends Phaser.Scene{
                 this.player = this.level1.player;
                 break;
             case 2:
-                this.level2 = new LevelController(level, this);
+                this.level2 = new LevelController(level, this, this.selectedCharacter,this.soundController);
                 this.level2.loadLevel();
                 this.level2.drawLevel();
                 this.level2.drawHeadline();
                 this.player = this.level2.player;
                 break;
             case 3:
-                this.level3 = new LevelController(level, this);
+                this.level3 = new LevelController(level, this, this.selectedCharacter,this.soundController);
                 this.level3.loadLevel();
                 this.level3.drawLevel();
                 this.level3.drawHeadline();
@@ -90,19 +94,20 @@ class GameScene extends Phaser.Scene{
         const moveSpeed = 210;
         const jumpSpeed = 330;
 
-        //Default: Player bewegt sich nicht fort, relevant fuer das Handling, wenn Modal aktiv ist
+        //Default: Player bewegt sich nicht fort, wichtig fuer das Handling, wenn Modal aktiv ist
         this.player.movePlayer(cursors, keyboard, 0, 0);
 
         //Verzoegert die Spielerbewegung um 2 Sekunden (Dauer bis der Bus verschwunden ist)
         this.time.delayedCall(2000, () => {
-            //Spielerbewegungsmethode aufrufen, wenn Modal deaktiviert ist
-            // -> Spieler erhaelt nun moveSpeed > 0, jumpSpeed > 0, um sich bewegen zu koennen
-            if(!modalActive){
-                this.player.movePlayer(cursors, keyboard, moveSpeed, jumpSpeed);
-                //Kamerabewegung entsprechend der Spielerbewegung anpassen
-                this.cameras.main.scrollX = this.player.x - this.cameras.main.width * 0.5;
-                this.cameras.main.scrollY = this.player.y - this.cameras.main.height * 0.5 - 50;
+            //Spielerbewegungsmethode aufrufen, wenn Modal deaktiviert ist -> Spieler erhaelt nun moveSpeed > 0, jumpSpeed > 0, um sich bewegen zu koennen
+            if(this.level1 != null && !this.level1.modalController.isModalActive()){
+                this.moveCameraAndPlayer(cursors, keyboard, moveSpeed, jumpSpeed);
+            } else if(this.level2 != null && !this.level2.modalController.isModalActive()){
+                this.moveCameraAndPlayer(cursors, keyboard, moveSpeed, jumpSpeed);
+            } else if(this.level3 != null && !this.level3.modalController.isModalActive()){
+                this.moveCameraAndPlayer(cursors, keyboard, moveSpeed, jumpSpeed);
             }
+
         });
 
 
@@ -131,6 +136,14 @@ class GameScene extends Phaser.Scene{
                 this.level3 = null;
             }
         }
+
+    }
+
+    moveCameraAndPlayer(cursors, keyboard, moveSpeed, jumpSpeed){
+        this.player.movePlayer(cursors, keyboard, moveSpeed, jumpSpeed);
+        //Kamerabewegung entsprechend der Spielerbewegung anpassen
+        this.cameras.main.scrollX = this.player.x - this.cameras.main.width * 0.5;
+        this.cameras.main.scrollY = this.player.y - this.cameras.main.height * 0.5 - 50;
 
     }
 

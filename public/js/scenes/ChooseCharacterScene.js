@@ -1,4 +1,3 @@
-let selectedCharacter;
 /**
  * Diese Klasse dient zum Darstellen der Charakterauswahlszene.
  */
@@ -9,6 +8,11 @@ class ChooseCharacterScene extends Phaser.Scene{
 
     preload(){
         //in Preload Scene ausgelagert
+    }
+
+    init(data) {
+        //uebergebene SoundController-Instanz
+        this.soundController = data.soundController;
     }
 
     create(){
@@ -22,6 +26,8 @@ class ChooseCharacterScene extends Phaser.Scene{
         levelBgOverlay.fillStyle(0x000000, 0.7);
         levelBgOverlay.fillRect(0,0, width, height);
 
+
+
         /**ChooseCharacter-Ueberschrift */
         const chooseCharacterTitle = this.add.image(width / 2,150, 'chooseCharacterTitle');
         chooseCharacterTitle.setScale(0.5);
@@ -29,7 +35,7 @@ class ChooseCharacterScene extends Phaser.Scene{
         /**Zurueck-Button Handling*/
         const backBtn = this.add.image(100, 50, 'backBtn');
         handleButtons(backBtn, () =>{
-            buttonClick.play();
+            this.soundController.playButtonClick();
             this.scene.start('StartScene');
         });
 
@@ -38,24 +44,17 @@ class ChooseCharacterScene extends Phaser.Scene{
         const characterName1 = this.add.image(350,490, 'characterName1');
         characterName1.setScale(0.5);
         handleButtons(player1Card, () =>{
-            buttonClick.play();
-            selectedCharacter = 'player1';
-            this.scene.start('LevelScene');
+            this.soundController.playButtonClick();
+            this.scene.start('LevelScene',{ selectedCharacter: 'player1', soundController: this.soundController });
         });
 
         const player2Card = this.add.image(650, 350, 'player2Card');
         const characterName2 = this.add.image(650,490, 'characterName2');
         characterName2.setScale(0.5);
         handleButtons(player2Card, () =>{
-            buttonClick.play();
-            selectedCharacter = 'player2';
-            this.scene.start('LevelScene');
+            this.soundController.playButtonClick();
+            this.scene.start('LevelScene',{ selectedCharacter: 'player2',soundController: this.soundController });
         });
-
-        if (!introMusic.isPlaying) {
-            //Starte introMusic
-            introMusic.play();
-        }
 
     }
 }
