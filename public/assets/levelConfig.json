@@ -196,7 +196,7 @@
         {"type": "bus", "x": 700, "y": 410},
         {"type": "player", "x": 100, "y": 465},
         {"type": "pigeon", "x":  400, "y": 390},
-        {"type": "pigeon", "x":  3000, "y": 190},
+        {"type": "pigeon", "x":  3000, "y": 200},
         {"type": "passerby", "x":  1050, "y": 460},
         {"type": "passerby", "x":  4800, "y": 200}
       ],
