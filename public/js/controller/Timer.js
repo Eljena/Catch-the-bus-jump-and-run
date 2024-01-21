@@ -1,7 +1,6 @@
 /**
- * Diese Klasse verwaltet den Timer in der GameScene
- * Erstellt einen Timer mit einer bestimmten initialen Zeit
- * und aktualisiert die Anzeige jede Sekunde.
+ * Diese Klasse verwaltet den Timer in der GameScene.
+ * Erstellt einen Timer mit einer bestimmten initialen Zeit und aktualisiert die Anzeige jede Sekunde.
  * Enthaelt Methoden zum Aktualisieren, Anhalten, Fortsetzen des Timers und zur Behandlung,
  * wenn der Timer ablaeuft
  */

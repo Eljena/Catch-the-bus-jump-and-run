@@ -138,6 +138,7 @@ class LevelController{
         //Kamera einrichten fuer Headline-Objekte
         this.gameScene.cameras.main.startFollow(guiContainer);
 
+        //Container an statische Position platzieren
         guiContainer.setScrollFactor(0);
         guiContainer.setPosition(40, 30);
 
@@ -172,8 +173,13 @@ class LevelController{
         guiContainer.add(pauseButton);
     }
 
+    /**
+     * Funktion zum Pausieren des Spiels nach dem Klicken auf den Pause-Button im Modalfenster
+     */
     pauseGame(){
+        //Musik wird gestoppt
         this.soundController.stopGameplayMusic();
+        //Timer wird gestoppt
         this.timer.stopTimer();
     }
 

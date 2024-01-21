@@ -24,6 +24,10 @@ class SoundController{
         SoundController.instance = this;
     }
 
+    /**
+     * Initialisiert die Audiodateien und erstellt Sound-Objekte fuer die Szene.
+     * @param scene     Die Szene, fuer die die Sounds initialisiert werden.
+     */
     initializeSounds(scene){
         //Intro Musik
         if(!this.introMusic){
@@ -38,18 +42,27 @@ class SoundController{
 
     }
 
+    /**
+     * Methode zum Abspielen von buttonClick
+     */
     playButtonClick() {
         if(this.buttonClick) {
             this.buttonClick.play();
         }
     }
 
+    /**
+     * Methode zum Abspielen von winSound
+     */
     playWinSound(){
         if(this.winSound) {
             this.winSound.play();
         }
     }
 
+    /**
+     * Methode zum Abspielen von looseSound
+     */
     playLooseSound(){
         if(this.looseSound && !this.looseSoundPlayed) {
             this.looseSound.play();

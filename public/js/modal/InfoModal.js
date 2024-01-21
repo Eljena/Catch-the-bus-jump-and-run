@@ -1,6 +1,5 @@
 /**
- * Bei dieser Klasse handelt es sich um eine Unterklasse von
- * Modal.
+ * Bei dieser Klasse handelt es sich um eine Unterklasse von Modal.
  * Stellt das Modal zur Spielinfo dar.
  */
 class InfoModal extends Modal{
@@ -17,9 +16,6 @@ class InfoModal extends Modal{
         this.add(this.closeButton);
         this.add(this.headline);
         this.add(this.tutorialText);
-
-
-
 
     }
 }

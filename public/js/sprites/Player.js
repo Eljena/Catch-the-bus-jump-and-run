@@ -24,6 +24,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.setupAnimation();
     }
 
+    /**
+     * Setzt die Animationen fuer den Spieler.
+     */
     setupAnimation(){
         //Animation fuer Spieler hinzufuegen
         const player = this.currentCharacter;
@@ -50,6 +53,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         });
     }
 
+    /**
+     * Erhoeht die Geschwindigkeit des Spielers fuer einen kurzen Zeitraum.
+     * @param multiplier    Der Multiplikator für die Geschwindigkeit.
+     */
     increaseSpeed(multiplier){
         this.speedMultiplier *=multiplier;
         this.isBoosted = true;
@@ -103,6 +110,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     }
 
+    /**
+     * Behandelt das Einsammeln eines Boosters durch den Spieler.
+     * @param player   Der Spieler, der den Booster eingesammelt hat.
+     * @param booster   Der eingesammelte Booster.
+     */
     collectBooster(player, booster){
         //Booster entfernen, wenn er eingesammelt wird
         booster.disableBody(true, true);

@@ -1,6 +1,5 @@
 /**
- * Bei dieser Klasse handelt es sich um eine Unterklasse von
- * Modal.
+ * Bei dieser Klasse handelt es sich um eine Unterklasse von Modal.
  * Stellt das Modal fuer die Steuerunginfos dar.
  */
 class ControlModal extends Modal{

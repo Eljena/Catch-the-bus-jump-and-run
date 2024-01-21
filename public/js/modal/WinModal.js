@@ -1,6 +1,5 @@
 /**
- * Bei dieser Klasse handelt es sich um eine Unterklasse von
- * Modal.
+ * Bei dieser Klasse handelt es sich um eine Unterklasse von Modal.
  * Stellt das Modal, wenn der Spieler gewonnen hat, dar.
  */
 class WinModal extends Modal{

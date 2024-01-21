@@ -1,3 +1,7 @@
+/**
+ * Bei dieser Klasse handelt es sich um eine Unterklasse von Obstacle.
+ * Stellt das Obstacle Passerby (Passant) dar.
+ */
 class Passerby extends Obstacle{
     constructor(scene, x, y, texture) {
         super(scene, x, y, texture);

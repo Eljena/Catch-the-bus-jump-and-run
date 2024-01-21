@@ -10,6 +10,10 @@ class ChooseCharacterScene extends Phaser.Scene{
         //in Preload Scene ausgelagert
     }
 
+    /**
+     * Initialisiert die Szene mit den uebergebenen Daten.
+     * @param data      Daten, die fuer die Initialisierung der Szene benoetigt werden.
+     */
     init(data) {
         //uebergebene SoundController-Instanz
         this.soundController = data.soundController;

@@ -1,10 +1,9 @@
 /**
- * Diese Klasse dient zum Darstellen eines
- * Ladebalkens, sobald das Spiel gestartet wird.
+ * Diese Klasse dient zum Darstellen eines Ladebalkens, sobald das Spiel gestartet wird.
  * Der Ladebalken soll dem User einen Hinweis geben,
  * wie viel Prozent der Ressourcen bereits geladen wurden
  *
- * Code uebernommen aus: https://gamedevacademy.org/creating-a-preloading-screen-in-phaser-3/*/
+ * Code entnommen aus: https://gamedevacademy.org/creating-a-preloading-screen-in-phaser-3/*/
 
 class PreloadScene extends Phaser.Scene{
     constructor() {

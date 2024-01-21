@@ -11,11 +11,11 @@ const config = {
         createContainer: true
     },
     scene: [
-        PreloadScene, //Fuege die PreloadSzene hinzu
-        StartScene, // Fuege die StartSzene hinzu
-        GameScene,  // Fuege die GameScene hinzu
-        LevelScene,  // Fuege die LevelScene hinzu
-        ChooseCharacterScene
+        PreloadScene,           //Fuege die PreloadSzene hinzu
+        StartScene,             //Fuege die StartSzene hinzu
+        GameScene,              //Fuege die GameScene hinzu
+        LevelScene,             //Fuege die LevelScene hinzu
+        ChooseCharacterScene    //Fuege die ChooseCharacterScene hinzu
 
     ],
     backgroundColor: '#898080',

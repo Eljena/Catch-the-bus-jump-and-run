@@ -1,5 +1,5 @@
 /**
- * In dieser Szene wird das Spiel dargestellt
+ * In dieser Szene wird das Spiel dargestellt.
  * Hierbei werden Methoden zum Laden und Zeichnen des Levels aus dem LevelController aufgerufen
  */
 class GameScene extends Phaser.Scene{
@@ -10,23 +10,25 @@ class GameScene extends Phaser.Scene{
         //In PreloadScene ausgelagert
     }
 
+    /**
+     * Initialisiert die Szene mit den uebergebenen Daten.
+     * @param data      Daten, die fuer die Initialisierung der Szene benoetigt werden.
+     */
     init(data) {
         //uebergebene SoundController-Instanz
+        this.level = data.level;
         this.soundController = data.soundController;
         this.selectedCharacter = data.selectedCharacter;
     }
 
     //Hier wird die Logik für die Gameszene initialisiert
-    create(data) {
+    create() {
         const width = this.sys.game.config.width;
         const gameWidth = 8000;
         const height = this.sys.game.config.height;
 
         //Aendere die Grenzen des Spielbereichs
         this.physics.world.setBounds(0, 0, gameWidth, height);
-
-        //Zugriff auf das uebergebene LevelController-Objekt
-        const level = data.level;
 
         /**Hintergrund*/
         //Hintergrund erstellen
@@ -46,9 +48,9 @@ class GameScene extends Phaser.Scene{
         this.cameras.main.setBounds(0, 0, gameWidth, background.height * scale);
 
         //Je nachdem welches LevelController in LevelScene ausgewaehlt wurde, wird ein LevelController Objekt erstellt
-        switch(level){
+        switch(this.level){
             case 1:
-                this.level1 = new LevelController(level, this, this.selectedCharacter,this.soundController);
+                this.level1 = new LevelController(this.level, this, this.selectedCharacter,this.soundController);
                 //Lade Level aus levelConfig.json
                 this.level1.loadLevel();
                 //Zeichne Levelobjekte
@@ -59,14 +61,14 @@ class GameScene extends Phaser.Scene{
                 this.player = this.level1.player;
                 break;
             case 2:
-                this.level2 = new LevelController(level, this, this.selectedCharacter,this.soundController);
+                this.level2 = new LevelController(this.level, this, this.selectedCharacter,this.soundController);
                 this.level2.loadLevel();
                 this.level2.drawLevel();
                 this.level2.drawHeadline();
                 this.player = this.level2.player;
                 break;
             case 3:
-                this.level3 = new LevelController(level, this, this.selectedCharacter,this.soundController);
+                this.level3 = new LevelController(this.level, this, this.selectedCharacter,this.soundController);
                 this.level3.loadLevel();
                 this.level3.drawLevel();
                 this.level3.drawHeadline();

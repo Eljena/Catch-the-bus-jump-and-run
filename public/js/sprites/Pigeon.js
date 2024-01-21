@@ -1,3 +1,7 @@
+/**
+ * Bei dieser Klasse handelt es sich um eine Unterklasse von Obstacle.
+ * Stellt das Obstacle Pigeon (Taube) dar.
+ */
 class Pigeon extends Obstacle {
     constructor(scene, x, y, texture) {
         super(scene, x, y, texture);

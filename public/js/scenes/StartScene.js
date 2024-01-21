@@ -1,3 +1,6 @@
+/**
+ * In dieser Szene wird das Hauptmenue (Startszene) dargestellt.
+ */
 class StartScene extends Phaser.Scene{
     constructor() {
         super({key: 'StartScene'});

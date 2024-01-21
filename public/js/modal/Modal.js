@@ -1,6 +1,5 @@
 /**
- * Bei dieser Klasse handelt es sich um die Oberklasse
- * der Modalfenster.
+ * Bei dieser Klasse handelt es sich um die Oberklasse der Modalfenster.
  *
  * Vererbt weiter an InfoModal, ControlModal, PauseModal, LooseModal, WinModal.
  */
