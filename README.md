@@ -33,6 +33,18 @@ Im Spiel verpasst die Spielfigur den Bus und muss zur Schule sprinten. Dabei mü
 * Arbeit mit Kollisionserkennung und Animationen
 * Strukturierung eines interaktiven Browsergames
 
+## Screenshots
+<label>Startscreen:</label>
+<p align="center">
+  <img width="500" alt="Startscreen" src="https://github.com/user-attachments/assets/6e287960-febe-49ff-a409-86182919a20e" />
+</p>
+
+<label>Gameplay:</label>
+<p align="center">
+  <img width="500" alt="Gameplay" src="https://github.com/user-attachments/assets/b2a8f19d-955a-423f-a3bc-e840960b2e7e" />
+</p>
+
+
 ## Entwicklerin
 
 Eljena Trüschel
