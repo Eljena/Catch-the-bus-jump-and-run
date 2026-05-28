@@ -48,5 +48,6 @@ Im Spiel verpasst die Spielfigur den Bus und muss zur Schule sprinten. Dabei mü
 
 ## Entwicklerin
 
-Eljena Trüschel
-B.Sc. Medieninformatik – TH Lübeck
+**Eljena Trüschel**  
+B.Sc. Medieninformatik – TH Lübeck  
+Frontend Development · Full-Stack · UI/UX Design
