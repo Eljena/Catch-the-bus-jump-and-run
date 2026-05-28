@@ -19,6 +19,7 @@ Im Spiel verpasst die Spielfigur den Bus und muss zur Schule sprinten. Dabei mü
 ## Features
 
 * 2D-Jump-and-Run-Gameplay
+* Spielfigurauswahl
 * Steuerung der Spielfigur
 * Hindernisse und Kollisionserkennung
 * Sammelobjekte (Booster)
